@@ -1,22 +1,19 @@
 package User;
 
 public class Customer extends User {
-    private String name;
-    private String address;
-    private String phone;
+    private double balance;
 
-    public Customer(){
-
-    }
-    public Customer(int id, String name, String address, String phone) {
-        super(id);
-        this.name = name;
-        this.address = address;
-        this.phone = phone;
+    public Customer(int id, String name, String email, String phone, double balance) {
+        super(id, name, email, phone);
+        this.balance = balance;
     }
 
-    public void infoUser() {
-        System.out.println("Customer: " + name + " " + address + " " + phone);
+    @Override
+    public void showProfile() {
+        System.out.println("Your Profile");
+        System.out.println("Name   : " + super.getName());
+        System.out.println("Email  : " + super.getEmail());
+        System.out.println("Phone  : " + super.getPhone());
+        System.out.println("Balance: " + this.balance);
     }
-    
 }

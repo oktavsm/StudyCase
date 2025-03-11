@@ -1,22 +1,37 @@
 package User;
 
+import Vehicle.Vehicle;
+
 public class Driver extends User {
-    private String name;
-    private String address;
-    private String phone;
+    private Vehicle vehicle;
+    private boolean isAvailable = true;
+    private double rating = 0.0;
+    private int orderCount = 0;
 
-    public Driver(){
-
-    }
-    public Driver(int id, String name, String address, String phone) {
-        super(id);
-        this.name = name;
-        this.address = address;
-        this.phone = phone;
+    public Driver(int id, String name, String email, String phone, Vehicle vehicle) {
+        super(id, name, email, phone);
+        this.vehicle = vehicle;
     }
 
-    public void infoUser() {
-        System.out.println("Driver: " + name + " " + address + " " + phone);
+    public Driver(int id, String name, String email, String phone, Vehicle vehicle, double rating, int orderCount) {
+        super(id, name, email, phone);
+        this.vehicle = vehicle;
+        this.rating = rating;
+        this.orderCount = orderCount;
     }
-    
+
+    public boolean getAvailability() {
+        return this.isAvailable;
+    }
+
+    @Override
+    public void showProfile() {
+        System.out.println("Your Profile");
+        System.out.println("Name       : " + super.getName());
+        System.out.println("Email      : " + super.getEmail());
+        System.out.println("Phone      : " + super.getPhone());
+        System.out.println("Vehicle    : " + this.vehicle);
+        System.out.println("Rating     : " + this.rating);
+        System.out.println("Order Count: " + this.orderCount);
+    }
 }
