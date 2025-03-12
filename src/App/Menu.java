@@ -105,7 +105,6 @@ public class Menu {
                     driver.showProfile();
                     break;
                 case 2:
-                    System.out.println("Order Details");
                     driver.showOrder();
                     System.out.println("1. Chat Customer");
                     System.out.println("2. Finish Order");
@@ -174,7 +173,6 @@ public class Menu {
                 case 3:
                     if(customer.getOrder()!=null){
                         order = customer.getOrder();
-                        System.out.println("Order Details");
                         order.showOrder();
                         System.out.println("1. Chat Driver");
                         System.out.println("2. Payment");
