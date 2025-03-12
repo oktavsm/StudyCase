@@ -5,12 +5,17 @@ import java.util.Scanner;
 public class Customer extends User {
     private double balance;
     private Scanner sc = new Scanner(System.in);
-
+    private Order nowOrder;
+    private boolean isOrdering=false;
     public Customer(int id, String name, String email, String phone, double balance, Application app) {
         super(id, name, email, phone, app);
         this.balance = balance;
     }
     public Order newOrder(){
+        if(isOrdering){
+            System.out.println("You still have an active order");
+            return null;
+        }
         System.out.print("Choose your vehicle type (1. Motocycle, 2. Car): ");
         int choice = sc.nextInt();
         sc.nextLine();
@@ -20,6 +25,7 @@ public class Customer extends User {
             System.out.println("No driver available at the moment");
             return null;
         }
+        isOrdering = true;
         System.out.println("Enter your location: ");
         String location = sc.nextLine();
         System.out.println("Enter your destination: ");
@@ -27,7 +33,28 @@ public class Customer extends User {
         System.out.println("Enter the distance: ");
         int distance = sc.nextInt();
         sc.nextLine();
-        return new Order(this,driver,location,destination,distance);
+        nowOrder = new Order(this,driver,location,destination,distance);
+        return nowOrder;
+    }
+    public void pay(Order order,double amount){
+        if(this.balance<amount){
+            System.out.println("Insufficient balance");
+            return;
+        }
+        this.balance-=amount;
+    }
+    public Order getOrder(){
+        return this.nowOrder;
+    }
+    public void finishOrder(){
+        this.nowOrder = null;
+        isOrdering = false;
+    }
+    public void showPayment(Order order){
+        System.out.println("Payment Details");
+        System.out.println("Customer: " + this.getName());
+        System.out.println("Driver  : " + order.getDriver().getName());
+        System.out.println("Amount  : " + order.getPayment());
     }
     @Override
     public void showProfile() {

@@ -1,22 +1,20 @@
 package App;
 import java.util.ArrayList;
 import java.util.Scanner;
-
+import Interface.*;
 import Order.Order;
 import User.*;
 import Vehicle.*;
 
-public class Application {
+public class Application{
     ArrayList<Vehicle> vehicles = new ArrayList<>();
     ArrayList<User> users = new ArrayList<>();
     ArrayList<Order> orders = new ArrayList<>();
     Scanner scanner = new Scanner(System.in);
     Menu menu = new Menu(this);
-
     public void showMenu(){
         menu.mainMenu();
     }
-
     // Tambah Customer
     void tambahCustomer() {
         System.out.print("Masukkan ID Customer: ");

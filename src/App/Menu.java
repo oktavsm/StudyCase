@@ -47,47 +47,7 @@ public class Menu {
 
     
 
-    // Menu Driver
-    void menuDriver() {
-        System.out.println("=== Login Driver ===");
-        System.out.print("Masukkan ID Driver: ");
-        int id = scanner.nextInt();
-        scanner.nextLine();
-        Driver driver = (Driver) app.findUserById(id, "Driver");
-
-        if (driver == null) {
-            System.out.println("Driver tidak ditemukan.");
-            return;
-        }
-
-        while (true) {
-            System.out.println("\n=== Menu Driver ===");
-            System.out.println("1. Lihat Profil");
-            System.out.println("2. Cek Pesanan Masuk");
-            System.out.println("3. Chat dengan Customer");
-            System.out.println("4. Logout");
-            System.out.print("Pilih: ");
-            int pilihan = scanner.nextInt();
-            scanner.nextLine();
-
-            switch (pilihan) {
-                case 1:
-                    driver.showProfile();
-                    break;
-                case 2:
-                    System.out.println("Fitur cek pesanan belum tersedia.");
-                    break;
-                case 3:
-                    System.out.println("Fitur chat belum tersedia.");
-                    break;
-                case 4:
-                    return;
-                default:
-                    System.out.println("Pilihan tidak valid.");
-            }
-        }
-    }
-
+    
     // Menu Admin
     void menuAdmin() {
         while (true) {
@@ -112,6 +72,65 @@ public class Menu {
                     break;
                 case 4:
                     return;
+                    default:
+                    System.out.println("Pilihan tidak valid.");
+            }
+        }
+    }
+    
+    // Menu Driver
+    void menuDriver() {
+        System.out.println("=== Login Driver ===");
+        System.out.print("Masukkan ID Driver: ");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+        Driver driver = (Driver) app.findUserById(id, "Driver");
+
+        if (driver == null) {
+            System.out.println("Driver tidak ditemukan.");
+            return;
+        }
+
+        while (true) {
+            System.out.println("\n=== Menu Driver ===");
+            System.out.println("1. Lihat Profil");
+            System.out.println("2. Cek Pesanan Masuk");
+            System.out.println("3. Logout");
+            System.out.print("Pilih: ");
+            int pilihan = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (pilihan) {
+                case 1:
+                    driver.showProfile();
+                    break;
+                case 2:
+                    System.out.println("Order Details");
+                    driver.showOrder();
+                    System.out.println("1. Chat Customer");
+                    System.out.println("2. Finish Order");
+                    System.out.print("Pilih: ");
+                    int choice = scanner.nextInt();
+                    scanner.nextLine();
+                    if (choice == 1) {
+                        driver.getOrder().showChat();
+                        System.out.print("Tulis pesan: ");
+                        String message = scanner.nextLine();
+                        driver.getOrder().sendChat(driver,message);
+                    } else if (choice == 2) {
+                        if(driver.getOrder().getPaymentStatus()==false){
+                            System.out.println("Payment not yet done");
+                            break;
+                        }
+                        System.out.println("Order Success");
+                        driver.getOrder().finishOrder();
+                        driver.showProfile();
+                    } else {
+                        System.out.println("Pilihan tidak valid.");
+                    }
+                    break;
+                case 3:
+                    return;
                 default:
                     System.out.println("Pilihan tidak valid.");
             }
@@ -134,30 +153,55 @@ public class Menu {
             System.out.println("\n=== Menu Customer ===");
             System.out.println("1. Lihat Profil");
             System.out.println("2. Pesan Kendaraan");
-            System.out.println("3. Chat dengan Driver");
-            System.out.println("4. Beri Rating ke Driver");
-            System.out.println("5. Logout");
+            System.out.println("3. Cek Pesanan");
+            System.out.println("4. Logout");
             System.out.print("Pilih: ");
             int pilihan = scanner.nextInt();
             scanner.nextLine();
-
             switch (pilihan) {
                 case 1:
                     customer.showProfile();
                     break;
                 case 2:
-                    Order order = customer.newOrder();
+                Order order = customer.newOrder();
                     if(order==null){
                         break;
                     }
+                    order.processOrder();
+                    System.out.println("Order Success");
+                    order.showOrder();
                     break;
                 case 3:
-                    System.out.println("Fitur chat belum tersedia.");
-                    break;
+                    if(customer.getOrder()!=null){
+                        order = customer.getOrder();
+                        System.out.println("Order Details");
+                        order.showOrder();
+                        System.out.println("1. Chat Driver");
+                        System.out.println("2. Payment");
+                        System.out.print("Pilih: ");
+                        int choice = scanner.nextInt();
+                        scanner.nextLine();
+                        if (choice == 1) {
+                            order.showChat();
+                            System.out.print("Tulis pesan: ");
+                            String message = scanner.nextLine();
+                            order.sendChat(customer,message);
+                        } else if (choice == 2) {
+                            order.pay(order.getPayment());
+                            order.showPayment();
+                            System.out.println("Order Success");
+                            System.out.print("Give Review (1-5) :");
+                            double review = scanner.nextInt();
+                            order.giveReview(review);
+                        } else {
+                            System.out.println("Pilihan tidak valid.");
+                        }
+                } else{
+                    
+                }
+                
+                break;
                 case 4:
-                    System.out.println("Fitur rating belum tersedia.");
-                    break;
-                case 5:
                     return;
                 default:
                     System.out.println("Pilihan tidak valid.");
