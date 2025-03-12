@@ -1,9 +1,11 @@
+package App;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
 import Interface.*;
 import User.*;
 import Vehicle.*;
+import Order.*;
 
 public class Menu {
     Application app;
@@ -144,7 +146,10 @@ public class Menu {
                     customer.showProfile();
                     break;
                 case 2:
-                    System.out.println("Fitur pesan kendaraan belum tersedia.");
+                    Order order = customer.newOrder();
+                    if(order==null){
+                        break;
+                    }
                     break;
                 case 3:
                     System.out.println("Fitur chat belum tersedia.");

@@ -5,7 +5,9 @@ public class Motocycle extends Vehicle {
     public Motocycle(String plateNumber, String color, String brand, int baseRate) {
         super(plateNumber, color, brand, baseRate);
     }
-
+    public String getType(){
+        return "Motocycle";
+    }
     @Override
     public int calculateRate(int distance) {
         return baseRate * distance;

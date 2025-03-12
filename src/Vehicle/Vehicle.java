@@ -28,7 +28,7 @@ public abstract class Vehicle {
     public int getBaseRate() {
         return baseRate;
     }
-
+    public abstract String getType();
     public abstract int calculateRate(int distance);
     public abstract void showVehicle();
 }

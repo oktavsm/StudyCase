@@ -1,3 +1,4 @@
+package App;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,7 +13,7 @@ public class Application {
     Scanner scanner = new Scanner(System.in);
     Menu menu = new Menu(this);
 
-    void showMenu(){
+    public void showMenu(){
         menu.mainMenu();
     }
 
@@ -27,7 +28,7 @@ public class Application {
         String email = scanner.nextLine();
         System.out.print("Masukkan Nomor HP: ");
         String nomorHP = scanner.nextLine();
-        users.add(new Customer(id, nama, email, nomorHP, 100000));
+        users.add(new Customer(id, nama, email, nomorHP, 100000,this));
         System.out.println("Customer berhasil ditambahkan!");
     }
 
@@ -43,7 +44,7 @@ public class Application {
         System.out.print("Masukkan Nomor HP: ");
         String nomorHP = scanner.nextLine();
         Vehicle kendaraan = tambahKendaraan();
-        users.add(new Driver(id,nama,email, nomorHP, kendaraan));
+        users.add(new Driver(id,nama,email, nomorHP, kendaraan,this));
         System.out.println("Driver berhasil ditambahkan!");
     }
 
@@ -93,6 +94,19 @@ public class Application {
         for (User user : users) {
             if (user.getId() == id && user.getClass().getSimpleName().equals(type)) {
                 return user;
+            }
+        }
+        return null;
+    }
+
+    //Search available driver
+    public Driver findAvailableDriver(String type) {
+        for (User user : users) {
+            if (user instanceof Driver ) {
+                Driver driver = (Driver) user;
+                if (driver.getAvailability() && driver.getVehicle().getType().equals(type)) {
+                    return driver;
+                }
             }
         }
         return null;

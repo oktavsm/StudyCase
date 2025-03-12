@@ -7,19 +7,15 @@ public class Order {
     String destination;
     int distance;
     int rate;
-    public Order(Driver driver, Customer customer) {
+    public Order(Customer customer,Driver driver,String location,String destination,int distance) {
         this.driver = driver;
         this.customer = customer;
-    }
-    public void setDestination(String destination) {
-        this.destination = destination;
-    }
-    public void setLocation(String location) {
         this.location = location;
-    }
-    public void setDistance(int distance) {
+        this.destination = destination;
         this.distance = distance;
+        this.rate = driver.getVehicle().calculateRate(distance);
     }
+   
 
     public void showOrder() {
         System.out.println("Order Details");
