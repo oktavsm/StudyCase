@@ -10,7 +10,8 @@ public class Customer extends User {
 
     @Override
     public void showProfile() {
-        System.out.println("Your Profile");
+        System.out.println("--- Customer Profile ---");
+        System.out.println("ID     : " + super.getId());
         System.out.println("Name   : " + super.getName());
         System.out.println("Email  : " + super.getEmail());
         System.out.println("Phone  : " + super.getPhone());
