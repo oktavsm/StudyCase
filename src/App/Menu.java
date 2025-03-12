@@ -105,6 +105,10 @@ public class Menu {
                     driver.showProfile();
                     break;
                 case 2:
+                if(driver.getOrder()==null){
+                    System.out.println("No order");
+                    break;
+                }
                     driver.showOrder();
                     System.out.println("1. Chat Customer");
                     System.out.println("2. Finish Order");
@@ -185,6 +189,10 @@ public class Menu {
                             String message = scanner.nextLine();
                             order.sendChat(customer,message);
                         } else if (choice == 2) {
+                            if(order.getPaymentStatus()){
+                                System.out.println("Payment Success");
+                            break;
+                            }
                             order.pay(order.getPayment());
                             order.showPayment();
                             System.out.println("Order Success");
@@ -195,7 +203,7 @@ public class Menu {
                             System.out.println("Pilihan tidak valid.");
                         }
                 } else{
-                    
+                    System.out.println("No order");
                 }
                 
                 break;

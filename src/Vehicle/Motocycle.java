@@ -8,6 +8,7 @@ public class Motocycle extends Vehicle {
     public String getType(){
         return "Motocycle";
     }
+    
     @Override
     public int calculateRate(int distance) {
         return baseRate * distance;

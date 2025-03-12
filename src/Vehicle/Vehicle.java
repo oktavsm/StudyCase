@@ -28,6 +28,9 @@ public abstract class Vehicle {
     public int getBaseRate() {
         return baseRate;
     }
+    public String getName(){
+        return brand;
+    }
     public abstract String getType();
     public abstract int calculateRate(int distance);
     public abstract void showVehicle();

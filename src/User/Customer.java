@@ -26,9 +26,9 @@ public class Customer extends User {
             return null;
         }
         isOrdering = true;
-        System.out.println("Enter your location: ");
+        System.out.print("Enter your location: ");
         String location = sc.nextLine();
-        System.out.println("Enter your destination: ");
+        System.out.print("Enter your destination: ");
         String destination = sc.nextLine();
         System.out.println("Enter the distance: ");
         int distance = sc.nextInt();
