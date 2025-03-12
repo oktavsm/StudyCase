@@ -30,4 +30,5 @@ public abstract class Vehicle {
     }
 
     public abstract int calculateRate(int distance);
+    public abstract void showVehicle();
 }

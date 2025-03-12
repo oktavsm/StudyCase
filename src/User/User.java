@@ -29,5 +29,5 @@ public abstract class User {
         return this.phone;
     }
 
-    abstract void showProfile();
+    abstract public void showProfile();
 }
