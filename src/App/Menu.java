@@ -170,7 +170,6 @@ public class Menu {
                     if (order == null) {
                         break;
                     }
-
                     order.processOrder();
                     System.out.println("Order Success");
                     order.showOrder();
@@ -196,13 +195,13 @@ public class Menu {
                                 System.out.println("Payment Success");
                                 break;
                             }
-
+                            
                             order.pay(order.getPayment());
                             order.showPayment();
 
                             System.out.println("Order Success");
                             System.out.print("Give Review (1-5) :");
-                            double review = in.nextInt();
+                            double review = in.nextDouble();
                             in.nextLine();
                             order.giveReview(review);
                         } else {

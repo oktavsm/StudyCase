@@ -150,11 +150,13 @@ public class Application implements Topup {
             System.out.print("Transfer to following virtual account: " + virtualAccount);
             System.out.print("\nEnter topup amount: ");
             amount = in.nextDouble();
+            in.nextLine();
         } else {
             String virtualAccount = "002" + customer.getPhone();
             System.out.print("Transfer to following virtual account: " + virtualAccount);
             System.out.print("\n Enter topup amount: ");
             amount = in.nextDouble();
+            in.nextLine();
         }
 
         return amount;
