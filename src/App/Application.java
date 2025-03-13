@@ -1,8 +1,6 @@
 package App;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.UUID;
+import java.util.*;
 import Interface.Topup;
 import Order.Order;
 import User.*;
@@ -121,6 +119,7 @@ public class Application implements Topup {
         System.out.println("2. Bank BRI");
         System.out.print("Pilih: " );
         int choice = in.nextInt();
+        in.nextLine();
         double amount = createPayment(choice, customer);
 
         customer.setBalance(balance += amount);

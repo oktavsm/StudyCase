@@ -1,10 +1,7 @@
 package App;
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.List;
-import Interface.*;
+
+import java.util.*;
 import User.*;
-import Vehicle.*;
 import Order.*;
 
 public class Menu {

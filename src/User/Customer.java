@@ -2,7 +2,7 @@ package User;
 
 import Order.Order;
 import App.Application;
-import java.util.Scanner;
+import java.util.*;
 
 public class Customer extends User {
     private double balance;

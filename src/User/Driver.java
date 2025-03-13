@@ -1,8 +1,8 @@
 package User;
 
-import Vehicle.Vehicle;
+import Vehicle.*;
 import Order.Order;
-import java.util.ArrayList;
+import java.util.*;
 import App.Application;
 
 public class Driver extends User {
