@@ -10,7 +10,7 @@ public class Car extends Vehicle {
     }
 
     @Override
-    public int calculateRate(int distance) {
+    public double calculateRate(double distance) {
         return baseRate * distance;
     }
 

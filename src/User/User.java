@@ -1,21 +1,23 @@
 package User;
+
 import App.Application;
+
 public abstract class User {
     Application app;
-    private int id;
+    private String id;
     private String name;
     private String email;
     private String phone;
 
-    public User(int id, String name, String email, String phone, Application app) {
-        this.id = id;
+    public User(String name, String email, String phone, Application app) {
+        this.id = app.generateRandomId();
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.app = app;
     }
 
-    public int getId() {
+    public String getId() {
         return this.id;
     }
 

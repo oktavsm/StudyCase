@@ -14,8 +14,8 @@ public class Driver extends User {
     private int orderCount = 0;
     private double balance = 0.0;
 
-    public Driver(int id, String name, String email, String phone, Vehicle vehicle, Application app) {
-        super(id, name, email, phone, app);
+    public Driver(String name, String email, String phone, Vehicle vehicle, Application app) {
+        super(name, email, phone, app);
         this.vehicle = vehicle;
     }
 
@@ -55,8 +55,8 @@ public class Driver extends User {
         this.orderCount++;
     }
 
-    public Driver(int id, String name, String email, String phone, Vehicle vehicle, double rating, int orderCount, Application app) {
-        super(id, name, email, phone, app);
+    public Driver(String name, String email, String phone, Vehicle vehicle, double rating, int orderCount, Application app) {
+        super(name, email, phone, app);
         this.vehicle = vehicle;
         this.rating = rating;
         this.orderCount = orderCount;

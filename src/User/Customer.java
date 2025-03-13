@@ -1,4 +1,5 @@
 package User;
+
 import Order.Order;
 import App.Application;
 import java.util.Scanner;
@@ -9,22 +10,22 @@ public class Customer extends User {
     private Order nowOrder;
     private boolean isOrdering = false;
 
-    public Customer(int id, String name, String email, String phone, double balance, Application app) {
-        super(id, name, email, phone, app);
+    public Customer(String name, String email, String phone, double balance, Application app) {
+        super(name, email, phone, app);
         this.balance = balance;
     }
 
     public Order newOrder() {
-        if(isOrdering) {
+        if (isOrdering) {
             System.out.println("You still have an active order");
             return null;
         }
 
-        System.out.print("Choose your vehicle type (1. Motocycle, 2. Car): ");
+        System.out.print("Choose your vehicle type (1. Motorcycle, 2. Car): ");
         int choice = in.nextInt();
         in.nextLine();
 
-        String type = (choice == 1) ? "Motocycle" : "Car";
+        String type = (choice == 1) ? "Motorcycle" : "Car";
 
         Driver driver = app.findAvailableDriver(type);
         if(driver == null){
@@ -39,8 +40,8 @@ public class Customer extends User {
         System.out.print("Enter your destination: ");
         String destination = in.nextLine();
 
-        System.out.println("Enter the distance: ");
-        int distance = in.nextInt();
+        System.out.print("Enter the distance: ");
+        double distance = in.nextDouble();
         in.nextLine();
 
         nowOrder = new Order(this, driver, location, destination, distance);
@@ -58,6 +59,14 @@ public class Customer extends User {
 
     public Order getOrder() {
         return this.nowOrder;
+    }
+
+    public double getBalance() {
+        return this.balance;
+    }
+
+    public void setBalance(double amount) {
+        this.balance = amount;
     }
 
     public void finishOrder() {

@@ -1,22 +1,22 @@
 package Vehicle;
 
-public class Motocycle extends Vehicle {
-    public Motocycle(String plateNumber, String color, String brand, int baseRate) {
+public class Motorcycle extends Vehicle {
+    public Motorcycle(String plateNumber, String color, String brand, int baseRate) {
         super(plateNumber, color, brand, baseRate);
     }
 
     public String getType() {
-        return "Motocycle";
+        return "Motorcycle";
     }
 
     @Override
-    public int calculateRate(int distance) {
+    public double calculateRate(double distance) {
         return baseRate * distance;
     }
 
     @Override
     public void showVehicle() {
-        System.out.println("Vehicle Type: Motocycle");
+        System.out.println("Vehicle Type: Motorcycle");
         System.out.println("Plate Number  : " + plateNumber);
         System.out.println("Color         : " + color);
         System.out.println("Brand         : " + brand);

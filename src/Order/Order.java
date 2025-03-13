@@ -1,4 +1,5 @@
 package Order;
+
 import java.util.ArrayList;
 import Interface.*;
 import User.*;
@@ -9,15 +10,15 @@ public class Order implements Chat, Payment, Review {
     Customer customer;
     String location;
     String destination;
-    int distance;
-    int rate;
+    double distance;
+    double rate;
     boolean donePayment = false;
 
     public void giveReview(double rating) {
         this.driver.giveReview(rating);
     }
 
-    public Order(Customer customer, Driver driver, String location, String destination, int distance) {
+    public Order(Customer customer, Driver driver, String location, String destination, double distance) {
         this.driver = driver;
         this.customer = customer;
         this.location = location;

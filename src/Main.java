@@ -1,10 +1,5 @@
 import java.util.Scanner;
 import App.Application;
-import java.util.ArrayList;
-import java.util.List;
-import Interface.*;
-import User.*;
-import Vehicle.*;
 
 public class Main {
     static Scanner in = new Scanner(System.in);

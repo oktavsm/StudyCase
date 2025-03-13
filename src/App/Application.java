@@ -1,12 +1,14 @@
 package App;
+
 import java.util.ArrayList;
 import java.util.Scanner;
-import Interface.*;
+import java.util.UUID;
+import Interface.Topup;
 import Order.Order;
 import User.*;
 import Vehicle.*;
 
-public class Application{
+public class Application implements Topup {
     ArrayList<Vehicle> vehicles = new ArrayList<>();
     ArrayList<User> users = new ArrayList<>();
     ArrayList<Order> orders = new ArrayList<>();
@@ -17,36 +19,30 @@ public class Application{
         menu.mainMenu();
     }
 
-    void tambahCustomer() {
-        System.out.print("Masukkan ID Customer: ");
-        int id = in.nextInt();
-        in.nextLine();
+    public void tambahCustomer() {
         System.out.print("Masukkan Nama Customer: ");
         String nama = in.nextLine();
         System.out.print("Masukkan Email Customer: ");
         String email = in.nextLine();
         System.out.print("Masukkan Nomor HP: ");
         String nomorHP = in.nextLine();
-        users.add(new Customer(id, nama, email, nomorHP, 100000, this));
-        System.out.println("Customer berhasil ditambahkan!");
+        users.add(new Customer(nama, email, nomorHP, 0, this));
+        System.out.println("Register berhasil!");
     }
 
-    void tambahDriver() {
+    public void tambahDriver() {
         System.out.print("Masukkan Nama Driver: ");
         String nama = in.nextLine();
-        System.out.print("Masukkan ID Driver: ");
-        int id = in.nextInt();
-        in.nextLine();
         System.out.print("Masukkan Email: ");
         String email = in.nextLine();
         System.out.print("Masukkan Nomor HP: ");
         String nomorHP = in.nextLine();
         Vehicle kendaraan = tambahKendaraan();
-        users.add(new Driver(id, nama, email, nomorHP, kendaraan, this));
-        System.out.println("Driver berhasil ditambahkan!");
+        users.add(new Driver(nama, email, nomorHP, kendaraan, this));
+        System.out.println("Register berhasil!");
     }
 
-    Vehicle tambahKendaraan() {
+    public Vehicle tambahKendaraan() {
         System.out.print("Masukkan Jenis Kendaraan (Motor/Mobil): ");
         String jenis = in.nextLine();
         System.out.print("Masukkan Plat Nomor: ");
@@ -68,8 +64,7 @@ public class Application{
         }
     }
 
-    // Lihat Semua User
-    void lihatSemuaUser() {
+    public void lihatSemuaUser() {
         System.out.println("=== List Customer ===");
         for (User user : users) {
             if(user instanceof Customer) {
@@ -84,19 +79,19 @@ public class Application{
         }
     }
 
- 
+    public String generateRandomId() {
+        return UUID.randomUUID().toString();
+    }
 
-    // Mencari User berdasarkan ID
-    User findUserById(int id, String type) {
+    public User findUserByEmail(String email, String type) {
         for (User user : users) {
-            if (user.getId() == id && user.getClass().getSimpleName().equals(type)) {
+            if (user.getEmail().equals(email) && user.getClass().getSimpleName().equals(type)) {
                 return user;
             }
         }
         return null;
     }
 
-    //Search available driver
     public Driver findAvailableDriver(String type) {
         for (User user : users) {
             if (user instanceof Driver ) {
@@ -107,5 +102,51 @@ public class Application{
             }
         }
         return null;
+    }
+
+    public void registerCustomer() {
+        tambahCustomer();
+    }
+
+    public void registerDriver() {
+        tambahDriver();
+    }
+
+    public String topupBalance(Customer customer) {
+        double balance = customer.getBalance();
+        boolean status = true;
+
+        System.out.println("Pilih metode pembayaran");
+        System.out.println("1. Bank Jatim");
+        System.out.println("2. Bank BRI");
+        System.out.print("Pilih: " );
+        int choice = in.nextInt();
+        double amount = createPayment(choice, customer);
+
+        customer.setBalance(balance += amount);
+
+        if (choice != 1 && choice != 2) {
+            status = false;
+        }
+
+        return (status ? "Topup saldo berhasil" : "Topup gagal"); 
+    }
+
+    private double createPayment(int choice, Customer customer) {
+        double amount = 0;
+
+        if (choice == 1) {
+            String virtualAccount = "114" + customer.getPhone();
+            System.out.print("Transfer ke nomor virtual account berikut: " + virtualAccount);
+            System.out.print("\nMasukkan nominal topup: ");
+            amount = in.nextDouble();
+        } else {
+            String virtualAccount = "002" + customer.getPhone();
+            System.out.print("Transfer ke nomor virtual account berikut: " + virtualAccount);
+            System.out.print("\nMasukkan nominal topup: ");
+            amount = in.nextDouble();
+        }
+
+        return amount;
     }
 }

@@ -18,25 +18,33 @@ public class Menu {
     void mainMenu() {
         while (true) {
             System.out.println("\n=== Transportasi Online ===");
-            System.out.println("1. Login sebagai Customer");
-            System.out.println("2. Login sebagai Driver");
-            System.out.println("3. Login sebagai Admin");
-            System.out.println("4. Keluar Aplikasi");
+            System.out.println("1. Register sebagai Customer");
+            System.out.println("2. Register sebagai Driver");
+            System.out.println("3. Login sebagai Customer");
+            System.out.println("4. Login sebagai Driver");
+            System.out.println("5. Login sebagai Admin");
+            System.out.println("6. Keluar Aplikasi");
             System.out.print("Pilih: ");
             int pilihan = in.nextInt();
             in.nextLine();
 
             switch (pilihan) {
                 case 1:
-                    menuCustomer();
+                    app.registerCustomer();
                     break;
                 case 2:
-                    menuDriver();
+                    app.registerDriver();
                     break;
                 case 3:
-                    menuAdmin();
+                    menuCustomer();
                     break;
                 case 4:
+                    menuDriver();
+                    break;
+                case 5:
+                    menuAdmin();
+                    break;
+                case 6:
                     System.out.println("Terima kasih telah menggunakan aplikasi!");
                     return;
                 default:
@@ -45,10 +53,6 @@ public class Menu {
         }
     }
 
-    
-
-    
-    // Menu Admin
     void menuAdmin() {
         while (true) {
             System.out.println("\n=== Menu Admin ===");
@@ -72,19 +76,17 @@ public class Menu {
                     break;
                 case 4:
                     return;
-                    default:
+                default:
                     System.out.println("Pilihan tidak valid.");
             }
         }
     }
-    
-    // Menu Driver
+
     void menuDriver() {
         System.out.println("=== Login Driver ===");
-        System.out.print("Masukkan ID Driver: ");
-        int id = in.nextInt();
-        in.nextLine();
-        Driver driver = (Driver) app.findUserById(id, "Driver");
+        System.out.print("Masukkan Email Driver: ");
+        String email = in.nextLine();
+        Driver driver = (Driver) app.findUserByEmail(email, "Driver");
 
         if (driver == null) {
             System.out.println("Driver tidak ditemukan.");
@@ -139,13 +141,12 @@ public class Menu {
             }
         }
     }
-    // Menu Customer
+
     void menuCustomer() {
         System.out.println("=== Login Customer ===");
-        System.out.print("Masukkan ID Customer: ");
-        int id = in.nextInt();
-        in.nextLine();
-        Customer customer = (Customer) app.findUserById(id, "Customer");
+        System.out.print("Masukkan Email Customer: ");
+        String email = in.nextLine();
+        Customer customer = (Customer) app.findUserByEmail(email, "Customer");
 
         if (customer == null) {
             System.out.println("Customer tidak ditemukan.");
@@ -157,44 +158,51 @@ public class Menu {
             System.out.println("1. Lihat Profil");
             System.out.println("2. Pesan Kendaraan");
             System.out.println("3. Cek Pesanan");
-            System.out.println("4. Logout");
+            System.out.println("4. Topup Saldo");
+            System.out.println("5. Logout");
             System.out.print("Pilih: ");
             int pilihan = in.nextInt();
             in.nextLine();
+
             switch (pilihan) {
                 case 1:
                     customer.showProfile();
                     break;
                 case 2:
-                Order order = customer.newOrder();
-                    if(order==null){
+                    Order order = customer.newOrder();
+                    if (order == null) {
                         break;
                     }
+
                     order.processOrder();
                     System.out.println("Order Success");
                     order.showOrder();
                     break;
                 case 3:
-                    if(customer.getOrder()!=null){
+                    if (customer.getOrder() != null){
                         order = customer.getOrder();
                         order.showOrder();
+
                         System.out.println("1. Chat Driver");
                         System.out.println("2. Payment");
                         System.out.print("Pilih: ");
                         int choice = in.nextInt();
                         in.nextLine();
+
                         if (choice == 1) {
                             order.showChat();
                             System.out.print("Tulis pesan: ");
                             String message = in.nextLine();
-                            order.sendChat(customer,message);
+                            order.sendChat(customer, message);
                         } else if (choice == 2) {
                             if(order.getPaymentStatus()){
                                 System.out.println("Payment Success");
-                            break;
+                                break;
                             }
+
                             order.pay(order.getPayment());
                             order.showPayment();
+
                             System.out.println("Order Success");
                             System.out.print("Give Review (1-5) :");
                             double review = in.nextInt();
@@ -202,12 +210,15 @@ public class Menu {
                         } else {
                             System.out.println("Pilihan tidak valid.");
                         }
-                } else{
-                    System.out.println("No order");
-                }
-                
-                break;
+                    } else{
+                        System.out.println("No order");
+                    }
+                    break;
                 case 4:
+                    String message = app.topupBalance(customer);
+                    System.out.println(message);
+                    break;
+                case 5:
                     return;
                 default:
                     System.out.println("Pilihan tidak valid.");
