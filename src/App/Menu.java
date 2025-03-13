@@ -203,6 +203,7 @@ public class Menu {
                             System.out.println("Order Success");
                             System.out.print("Give Review (1-5) :");
                             double review = in.nextInt();
+                            in.nextLine();
                             order.giveReview(review);
                         } else {
                             System.out.println("Pilihan tidak valid.");
