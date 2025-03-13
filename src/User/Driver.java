@@ -55,8 +55,7 @@ public class Driver extends User {
         this.orderCount++;
     }
 
-    public Driver(int id, String name, String email, String phone, Vehicle vehicle, double rating, int orderCount,
-            Application app) {
+    public Driver(int id, String name, String email, String phone, Vehicle vehicle, double rating, int orderCount, Application app) {
         super(id, name, email, phone, app);
         this.vehicle = vehicle;
         this.rating = rating;
@@ -74,8 +73,9 @@ public class Driver extends User {
     public void setAvailability(boolean availability) {
         this.isAvailable = availability;
     }
-    public void showOrderHistory(){
-        for(Order order: this.ordersHistory){
+
+    public void showOrderHistory() {
+        for(Order order: this.ordersHistory) {
             order.showOrder();
         }
     }
@@ -83,15 +83,15 @@ public class Driver extends User {
     @Override
     public void showProfile() {
         System.out.println("--- Driver Profile ---");
-        System.out.println("ID         : " + super.getId());
-        System.out.println("Name       : " + super.getName());
-        System.out.println("Email      : " + super.getEmail());
-        System.out.println("Phone      : " + super.getPhone());
-        System.out.println("Vehicle    : ");
+        System.out.println("ID          : " + super.getId());
+        System.out.println("Name        : " + super.getName());
+        System.out.println("Email       : " + super.getEmail());
+        System.out.println("Phone       : " + super.getPhone());
+        System.out.println("Vehicle   : ");
         this.vehicle.showVehicle();
         System.out.println("Availability: " + this.isAvailable);
-        System.out.println("Rating     : " + this.rating);
-        System.out.println("Order Count: " + this.orderCount);
-        System.out.println("Balance    : " + this.balance);
+        System.out.println("Rating      : " + this.rating);
+        System.out.println("Order Count : " + this.orderCount);
+        System.out.println("Balance     : " + this.balance);
     }
 }

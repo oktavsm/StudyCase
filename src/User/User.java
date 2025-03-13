@@ -12,7 +12,7 @@ public abstract class User {
         this.name = name;
         this.email = email;
         this.phone = phone;
-        this.app=app;
+        this.app = app;
     }
 
     public int getId() {

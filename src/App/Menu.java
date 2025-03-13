@@ -9,7 +9,7 @@ import Order.*;
 
 public class Menu {
     Application app;
-    Scanner scanner = new Scanner(System.in);
+    Scanner in = new Scanner(System.in);
 
     Menu(Application app) {
         this.app = app;
@@ -23,8 +23,8 @@ public class Menu {
             System.out.println("3. Login sebagai Admin");
             System.out.println("4. Keluar Aplikasi");
             System.out.print("Pilih: ");
-            int pilihan = scanner.nextInt();
-            scanner.nextLine();
+            int pilihan = in.nextInt();
+            in.nextLine();
 
             switch (pilihan) {
                 case 1:
@@ -57,8 +57,8 @@ public class Menu {
             System.out.println("3. Lihat Semua User");
             System.out.println("4. Logout");
             System.out.print("Pilih: ");
-            int pilihan = scanner.nextInt();
-            scanner.nextLine();
+            int pilihan = in.nextInt();
+            in.nextLine();
 
             switch (pilihan) {
                 case 1:
@@ -82,8 +82,8 @@ public class Menu {
     void menuDriver() {
         System.out.println("=== Login Driver ===");
         System.out.print("Masukkan ID Driver: ");
-        int id = scanner.nextInt();
-        scanner.nextLine();
+        int id = in.nextInt();
+        in.nextLine();
         Driver driver = (Driver) app.findUserById(id, "Driver");
 
         if (driver == null) {
@@ -97,8 +97,8 @@ public class Menu {
             System.out.println("2. Cek Pesanan Masuk");
             System.out.println("3. Logout");
             System.out.print("Pilih: ");
-            int pilihan = scanner.nextInt();
-            scanner.nextLine();
+            int pilihan = in.nextInt();
+            in.nextLine();
 
             switch (pilihan) {
                 case 1:
@@ -113,12 +113,12 @@ public class Menu {
                     System.out.println("1. Chat Customer");
                     System.out.println("2. Finish Order");
                     System.out.print("Pilih: ");
-                    int choice = scanner.nextInt();
-                    scanner.nextLine();
+                    int choice = in.nextInt();
+                    in.nextLine();
                     if (choice == 1) {
                         driver.getOrder().showChat();
                         System.out.print("Tulis pesan: ");
-                        String message = scanner.nextLine();
+                        String message = in.nextLine();
                         driver.getOrder().sendChat(driver,message);
                     } else if (choice == 2) {
                         if(driver.getOrder().getPaymentStatus()==false){
@@ -143,8 +143,8 @@ public class Menu {
     void menuCustomer() {
         System.out.println("=== Login Customer ===");
         System.out.print("Masukkan ID Customer: ");
-        int id = scanner.nextInt();
-        scanner.nextLine();
+        int id = in.nextInt();
+        in.nextLine();
         Customer customer = (Customer) app.findUserById(id, "Customer");
 
         if (customer == null) {
@@ -159,8 +159,8 @@ public class Menu {
             System.out.println("3. Cek Pesanan");
             System.out.println("4. Logout");
             System.out.print("Pilih: ");
-            int pilihan = scanner.nextInt();
-            scanner.nextLine();
+            int pilihan = in.nextInt();
+            in.nextLine();
             switch (pilihan) {
                 case 1:
                     customer.showProfile();
@@ -181,12 +181,12 @@ public class Menu {
                         System.out.println("1. Chat Driver");
                         System.out.println("2. Payment");
                         System.out.print("Pilih: ");
-                        int choice = scanner.nextInt();
-                        scanner.nextLine();
+                        int choice = in.nextInt();
+                        in.nextLine();
                         if (choice == 1) {
                             order.showChat();
                             System.out.print("Tulis pesan: ");
-                            String message = scanner.nextLine();
+                            String message = in.nextLine();
                             order.sendChat(customer,message);
                         } else if (choice == 2) {
                             if(order.getPaymentStatus()){
@@ -197,7 +197,7 @@ public class Menu {
                             order.showPayment();
                             System.out.println("Order Success");
                             System.out.print("Give Review (1-5) :");
-                            double review = scanner.nextInt();
+                            double review = in.nextInt();
                             order.giveReview(review);
                         } else {
                             System.out.println("Pilihan tidak valid.");
