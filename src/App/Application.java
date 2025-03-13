@@ -53,8 +53,8 @@ public class Application implements Topup {
         String brand = in.nextLine();
 
         if (jenis.equalsIgnoreCase("Motor")) {
-            vehicles.add(new Motocycle(platNomor, warna, brand, 4000));
-            return new Motocycle(platNomor, warna, brand, 4000);
+            vehicles.add(new Motorcycle(platNomor, warna, brand, 4000));
+            return new Motorcycle(platNomor, warna, brand, 4000);
         } else if (jenis.equalsIgnoreCase("Mobil")) {
             vehicles.add(new Car(platNomor, warna, brand, 8000));
             return new Car(platNomor, warna, brand, 8000);
