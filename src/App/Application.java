@@ -17,61 +17,72 @@ public class Application implements Topup {
         menu.mainMenu();
     }
 
-    public void tambahCustomer() {
-        System.out.print("Masukkan Nama Customer: ");
-        String nama = in.nextLine();
-        System.out.print("Masukkan Email Customer: ");
+    public void addCustomer() {
+        System.out.print("Enter name         : ");
+        String name = in.nextLine();
+        System.out.print("Enter email        : ");
         String email = in.nextLine();
-        System.out.print("Masukkan Nomor HP: ");
-        String nomorHP = in.nextLine();
-        users.add(new Customer(nama, email, nomorHP, 0, this));
-        System.out.println("Register berhasil!");
+        System.out.print("Enter phone number : ");
+        String phoneNumber = in.nextLine();
+        users.add(new Customer(name, email, phoneNumber, 0, this));
+        System.out.println("Register successful");
     }
 
-    public void tambahDriver() {
-        System.out.print("Masukkan Nama Driver: ");
-        String nama = in.nextLine();
-        System.out.print("Masukkan Email: ");
+    public void addDriver() {
+        System.out.print("Enter name         : ");
+        String name = in.nextLine();
+        System.out.print("Enter email        : ");
         String email = in.nextLine();
-        System.out.print("Masukkan Nomor HP: ");
-        String nomorHP = in.nextLine();
-        Vehicle kendaraan = tambahKendaraan();
-        users.add(new Driver(nama, email, nomorHP, kendaraan, this));
-        System.out.println("Register berhasil!");
+        System.out.print("Enter phone number : ");
+        String phoneNumber = in.nextLine();
+        Vehicle vehicle = addVehicle();
+        if (vehicle == null) {
+            System.out.println("Register failed");
+            return;
+        }
+
+        users.add(new Driver(name, email, phoneNumber, vehicle, this));
+        System.out.println("Register successful");
     }
 
-    public Vehicle tambahKendaraan() {
-        System.out.print("Masukkan Jenis Kendaraan (Motor/Mobil): ");
-        String jenis = in.nextLine();
-        System.out.print("Masukkan Plat Nomor: ");
-        String platNomor = in.nextLine();
-        System.out.print("Masukkan Warna: ");
-        String warna = in.nextLine();
-        System.out.print("Masukkan Merk: ");
+    public Vehicle addVehicle() {
+        System.out.print("Enter vehicle type (Motorcycle/Car): ");
+        String type = in.nextLine();
+        if (!type.equalsIgnoreCase("Motorcycle") && !type.equalsIgnoreCase("Car")) {
+            return null;
+        }
+
+        System.out.print("Enter plate number                 : ");
+        String plateNumber = in.nextLine();
+        System.out.print("Enter color                        : ");
+        String color = in.nextLine();
+        System.out.print("Enter brand                        : ");
         String brand = in.nextLine();
 
-        if (jenis.equalsIgnoreCase("Motor")) {
-            vehicles.add(new Motorcycle(platNomor, warna, brand, 4000));
-            return new Motorcycle(platNomor, warna, brand, 4000);
-        } else if (jenis.equalsIgnoreCase("Mobil")) {
-            vehicles.add(new Car(platNomor, warna, brand, 8000));
-            return new Car(platNomor, warna, brand, 8000);
+        if (type.equalsIgnoreCase("Motorcycle")) {
+            Vehicle vehicle = new Motorcycle(plateNumber, color, brand, 4000);
+            vehicles.add(vehicle);
+            return vehicle;
+        } else if (type.equalsIgnoreCase("Car")) {
+            Vehicle vehicle = new Car(plateNumber, color, brand, 8000);
+            vehicles.add(vehicle);
+            return vehicle;
         } else {
-            System.out.println("Jenis kendaraan tidak valid.");
+            System.out.println("Invalid vehicle type");
             return null;
         }
     }
 
-    public void lihatSemuaUser() {
-        System.out.println("=== List Customer ===");
+    public void showAllUsers() {
+        System.out.println("=== Customer List ===");
         for (User user : users) {
-            if(user instanceof Customer) {
+            if (user instanceof Customer) {
                 user.showProfile();
             } 
         }
-        System.out.println("=== List Driver ===");
+        System.out.println("=== Driver List ===");
         for (User user : users) {
-            if(user instanceof Driver) {
+            if (user instanceof Driver) {
                 user.showProfile();
             } 
         }
@@ -103,21 +114,21 @@ public class Application implements Topup {
     }
 
     public void registerCustomer() {
-        tambahCustomer();
+        addCustomer();
     }
 
     public void registerDriver() {
-        tambahDriver();
+        addDriver();
     }
 
     public String topupBalance(Customer customer) {
         double balance = customer.getBalance();
         boolean status = true;
 
-        System.out.println("Pilih metode pembayaran");
+        System.out.println("Choose payment method");
         System.out.println("1. Bank Jatim");
         System.out.println("2. Bank BRI");
-        System.out.print("Pilih: " );
+        System.out.print("Choose: " );
         int choice = in.nextInt();
         in.nextLine();
         double amount = createPayment(choice, customer);
@@ -128,7 +139,7 @@ public class Application implements Topup {
             status = false;
         }
 
-        return (status ? "Topup saldo berhasil" : "Topup gagal"); 
+        return (status ? "Topup successful" : "Topup failed"); 
     }
 
     private double createPayment(int choice, Customer customer) {
@@ -136,13 +147,13 @@ public class Application implements Topup {
 
         if (choice == 1) {
             String virtualAccount = "114" + customer.getPhone();
-            System.out.print("Transfer ke nomor virtual account berikut: " + virtualAccount);
-            System.out.print("\nMasukkan nominal topup: ");
+            System.out.print("Transfer to following virtual account: " + virtualAccount);
+            System.out.print("\nEnter topup amount: ");
             amount = in.nextDouble();
         } else {
             String virtualAccount = "002" + customer.getPhone();
-            System.out.print("Transfer ke nomor virtual account berikut: " + virtualAccount);
-            System.out.print("\nMasukkan nominal topup: ");
+            System.out.print("Transfer to following virtual account: " + virtualAccount);
+            System.out.print("\n Enter topup amount: ");
             amount = in.nextDouble();
         }
 

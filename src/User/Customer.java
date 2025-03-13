@@ -40,7 +40,7 @@ public class Customer extends User {
         System.out.print("Enter your destination: ");
         String destination = in.nextLine();
 
-        System.out.print("Enter the distance: ");
+        System.out.print("Enter the distance (km): ");
         double distance = in.nextDouble();
         in.nextLine();
 
@@ -75,7 +75,7 @@ public class Customer extends User {
     }
 
     public void showPayment(Order order) {
-        System.out.println("Payment Details");
+        System.out.println("--- Payment Details ---");
         System.out.println("Customer: " + this.getName());
         System.out.println("Driver  : " + order.getDriver().getName());
         System.out.println("Amount  : " + order.getPayment());

@@ -73,7 +73,7 @@ public class Order implements Chat, Payment, Review {
     }
 
     public void showOrder() {
-        System.out.println("Order Details");
+        System.out.println("--- Order Details ---");
         System.out.println("Customer: " + this.customer.getName());
         System.out.println("Driver  : " + this.driver.getName());
         System.out.println("Vehicle : " + this.driver.getVehicle().getName());
