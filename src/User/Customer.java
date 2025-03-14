@@ -10,8 +10,8 @@ public class Customer extends User {
     private Order nowOrder;
     private boolean isOrdering = false;
 
-    public Customer(String name, String email, String phone, double balance, Application app) {
-        super(name, email, phone, app);
+    public Customer(String name, String email, String password, String phone, double balance, Application app) {
+        super(name, email, password, phone, app);
         this.balance = balance;
     }
 
@@ -90,10 +90,17 @@ public class Customer extends User {
     @Override
     public void showProfile() {
         System.out.println("--- Customer Profile ---");
-        System.out.println("ID     : " + super.getId());
-        System.out.println("Name   : " + super.getName());
-        System.out.println("Email  : " + super.getEmail());
-        System.out.println("Phone  : " + super.getPhone());
-        System.out.println("Balance: " + this.balance);
+        System.out.println("ID       : " + super.getId());
+        System.out.println("Name     : " + super.getName());
+        System.out.println("Email    : " + super.getEmail());
+        System.out.print("Password : ");
+        String password = super.getPassword();
+        for (char c : password.toCharArray()) {
+            c = '*';
+            System.out.print(c);
+        }
+        System.out.println();
+        System.out.println("Phone    : " + super.getPhone());
+        System.out.println("Balance  : " + this.balance);
     }
 }

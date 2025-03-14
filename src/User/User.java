@@ -7,12 +7,14 @@ public abstract class User {
     private String id;
     private String name;
     private String email;
+    private String password;
     private String phone;
 
-    public User(String name, String email, String phone, Application app) {
+    public User(String name, String email, String password, String phone, Application app) {
         this.id = app.generateRandomId();
         this.name = name;
         this.email = email;
+        this.password = password;
         this.phone = phone;
         this.app = app;
     }
@@ -27,6 +29,10 @@ public abstract class User {
 
     public String getEmail() {
         return this.email;
+    }
+
+    public String getPassword() {
+        return this.password;
     }
 
     public String getPhone() {

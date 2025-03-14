@@ -19,8 +19,7 @@ public class Menu {
             System.out.println("2. Register as a Driver");
             System.out.println("3. Login as a Customer");
             System.out.println("4. Login as a Driver");
-            System.out.println("5. Login as a Admin");
-            System.out.println("6. Exit Application");
+            System.out.println("5. Exit Application");
             System.out.print("Choose: ");
             int pilihan = in.nextInt();
             in.nextLine();
@@ -39,11 +38,11 @@ public class Menu {
                     menuDriver();
                     break;
                 case 5:
-                    menuAdmin();
-                    break;
-                case 6:
                     System.out.println("Thank you for using our application!!!");
                     return;
+                case 1945:
+                    menuAdmin();
+                    break;
                 default:
                     System.out.println("Invalid choice");
             }
@@ -83,10 +82,12 @@ public class Menu {
         System.out.println("=== Driver Login ===");
         System.out.print("Enter Driver Email: ");
         String email = in.nextLine();
-        Driver driver = (Driver) app.findUserByEmail(email, "Driver");
+        System.out.print("Enter Driver Password: ");
+        String password = in.nextLine();
+        Driver driver = (Driver) app.validateEmailAndPassword(email, password, "Driver");
 
         if (driver == null) {
-            System.out.println("Driver not found");
+            System.out.println("Email or password is wrong");
             return;
         }
 
@@ -143,10 +144,12 @@ public class Menu {
         System.out.println("=== Customer Login ===");
         System.out.print("Enter Customer Email: ");
         String email = in.nextLine();
-        Customer customer = (Customer) app.findUserByEmail(email, "Customer");
+        System.out.println("Enter Customer Password");
+        String password = in.nextLine();
+        Customer customer = (Customer) app.validateEmailAndPassword(email, password, "Customer");
 
         if (customer == null) {
-            System.out.println("Customer not found");
+            System.out.println("Email or password is wrong");
             return;
         }
 

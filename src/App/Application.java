@@ -22,9 +22,11 @@ public class Application implements Topup {
         String name = in.nextLine();
         System.out.print("Enter email        : ");
         String email = in.nextLine();
+        System.out.print("Enter password     :");
+        String password = in.nextLine();
         System.out.print("Enter phone number : ");
         String phoneNumber = in.nextLine();
-        users.add(new Customer(name, email, phoneNumber, 0, this));
+        users.add(new Customer(name, email, password, phoneNumber, 0, this));
         System.out.println("Register successful");
     }
 
@@ -33,6 +35,8 @@ public class Application implements Topup {
         String name = in.nextLine();
         System.out.print("Enter email        : ");
         String email = in.nextLine();
+        System.out.print("Enter password     : ");
+        String password = in.nextLine();
         System.out.print("Enter phone number : ");
         String phoneNumber = in.nextLine();
         Vehicle vehicle = addVehicle();
@@ -41,7 +45,7 @@ public class Application implements Topup {
             return;
         }
 
-        users.add(new Driver(name, email, phoneNumber, vehicle, this));
+        users.add(new Driver(name, email, password, phoneNumber, vehicle, this));
         System.out.println("Register successful");
     }
 
@@ -92,9 +96,9 @@ public class Application implements Topup {
         return UUID.randomUUID().toString();
     }
 
-    public User findUserByEmail(String email, String type) {
+    public User validateEmailAndPassword(String email, String password, String type) {
         for (User user : users) {
-            if (user.getEmail().equals(email) && user.getClass().getSimpleName().equals(type)) {
+            if (user.getEmail().equals(email) && user.getPassword().equals(password) && user.getClass().getSimpleName().equals(type)) {
                 return user;
             }
         }
