@@ -55,13 +55,6 @@ public class Driver extends User {
         this.orderCount++;
     }
 
-    public Driver(String name, String email, String password, String phone, Vehicle vehicle, double rating, int orderCount, Application app) {
-        super(name, email, password, phone, app);
-        this.vehicle = vehicle;
-        this.rating = rating;
-        this.orderCount = orderCount;
-    }
-
     public boolean getAvailability() {
         return this.isAvailable;
     }
