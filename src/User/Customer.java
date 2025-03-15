@@ -6,9 +6,10 @@ import java.util.*;
 
 public class Customer extends User {
     private double balance;
-    private Scanner in = new Scanner(System.in);
     private Order nowOrder;
     private boolean isOrdering = false;
+
+    private Scanner in = new Scanner(System.in);
 
     public Customer(String name, String email, String password, String phone, double balance, Application app) {
         super(name, email, password, phone, app);
