@@ -22,7 +22,7 @@ public class Application implements Topup {
         String name = in.nextLine();
         System.out.print("Enter email        : ");
         String email = in.nextLine();
-        System.out.print("Enter password     :");
+        System.out.print("Enter password     : ");
         String password = in.nextLine();
         System.out.print("Enter phone number : ");
         String phoneNumber = in.nextLine();
@@ -77,6 +77,34 @@ public class Application implements Topup {
         }
     }
 
+    public void removeCustomer() {
+        System.out.print("Enter customer email: ");
+        String email = in.nextLine();
+
+        User toRemove = findUserByEmail(email, "Customer");
+        if (toRemove != null) {
+            users.remove(toRemove);
+            System.out.println("Customer removed successfully");
+        } else {
+            System.out.println("Customer not found");
+        }
+    }
+
+    public void removeDriver() {
+        System.out.print("Enter driver email: ");
+        String email = in.nextLine();
+
+        User toRemove = findUserByEmail(email, "Driver");
+        if (toRemove != null) {
+            Vehicle vehicle = ((Driver) toRemove).getVehicle();
+            vehicles.remove(vehicle);
+            users.remove(toRemove);
+            System.out.println("Driver removed successfully");
+        } else {
+            System.out.println("Driver not found");
+        }
+    }
+
     public void showAllUsers() {
         System.out.println("=== Customer List ===");
         for (User user : users) {
@@ -94,6 +122,15 @@ public class Application implements Topup {
 
     public String generateRandomId() {
         return UUID.randomUUID().toString();
+    }
+
+    public User findUserByEmail(String email, String type) {
+        for (User user : users) {
+            if (user.getEmail().equals(email) && user.getClass().getSimpleName().equals(type)) {
+                return user;
+            }
+        }
+        return null;
     }
 
     public User validateEmailAndPassword(String email, String password, String type) {

@@ -54,8 +54,10 @@ public class Menu {
             System.out.println("\n=== Admin Menu ===");
             System.out.println("1. Add Customer");
             System.out.println("2. Add Driver");
-            System.out.println("3. Show All Users");
-            System.out.println("4. Logout");
+            System.out.println("3. Remove Customer");
+            System.out.println("4. Remove Driver");
+            System.out.println("5. Show All Users");
+            System.out.println("6. Logout");
             System.out.print("Choose: ");
             int pilihan = in.nextInt();
             in.nextLine();
@@ -68,9 +70,15 @@ public class Menu {
                     app.addDriver();
                     break;
                 case 3:
-                    app.showAllUsers();
+                    app.removeCustomer();
                     break;
                 case 4:
+                    app.removeDriver();
+                    break;
+                case 5:
+                    app.showAllUsers();
+                    break;
+                case 6:
                     return;
                 default:
                     System.out.println("Invalid choice");
