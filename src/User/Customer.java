@@ -46,7 +46,7 @@ public class Customer extends User {
         in.nextLine();
 
         nowOrder = new Order(this, driver, location, destination, distance);
-        if(nowOrder.getPayment() > this.balance){
+        if (nowOrder.getPayment() > this.balance) {
             System.out.println("Insufficient balance");
             nowOrder = null;
             isOrdering = false;
@@ -56,7 +56,7 @@ public class Customer extends User {
     }
 
     public void pay(Order order, double amount) {
-        if(this.balance < amount){
+        if (this.balance < amount) {
             System.out.println("Insufficient balance");
             return;
         }
