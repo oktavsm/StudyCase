@@ -113,10 +113,10 @@ public class Menu {
                     driver.showProfile();
                     break;
                 case 2:
-                if(driver.getOrder() == null){
-                    System.out.println("No order");
-                    break;
-                }
+                    if(driver.getOrder() == null){
+                        System.out.println("No order");
+                        break;
+                    }
                     driver.showOrder();
                     System.out.println("1. Chat Customer");
                     System.out.println("2. Finish Order");
