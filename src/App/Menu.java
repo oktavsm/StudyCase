@@ -152,7 +152,7 @@ public class Menu {
         System.out.println("=== Customer Login ===");
         System.out.print("Enter Customer Email: ");
         String email = in.nextLine();
-        System.out.println("Enter Customer Password");
+        System.out.print("Enter Customer Password: ");
         String password = in.nextLine();
         Customer customer = (Customer) app.validateEmailAndPassword(email, password, "Customer");
 
