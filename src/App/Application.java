@@ -76,6 +76,16 @@ public class Application implements Topup {
     }
 
     public void loadCustomers() throws IOException{
+        fileReader = new FileReader("src/Database/Customer.txt");
+        bufferedReader = new BufferedReader(fileReader);
+        String data = bufferedReader.readLine();
+
+        while(data != null){
+            String[] check = data.split(",");
+            users.add(new Customer(check[0], check[1], check[2], check[3], 0, this));
+            data = bufferedReader.readLine();
+        }
+        bufferedReader.close();
 
     }
 
