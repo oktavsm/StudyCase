@@ -3,6 +3,7 @@ package App;
 import java.util.*;
 import User.*;
 import Order.*;
+import java.io.*;
 
 public class Menu {
     Application app;
@@ -12,7 +13,7 @@ public class Menu {
         this.app = app;
     }
 
-    void mainMenu() {
+    void mainMenu() throws IOException {
         while (true) {
             System.out.println("\n=== Online Transportation ===");
             System.out.println("1. Register as a Customer");
@@ -49,7 +50,7 @@ public class Menu {
         }
     }
 
-    void menuAdmin() {
+    void menuAdmin() throws IOException {
         while (true) {
             System.out.println("\n=== Admin Menu ===");
             System.out.println("1. Add Customer");
@@ -113,10 +114,10 @@ public class Menu {
                     driver.showProfile();
                     break;
                 case 2:
-                    if(driver.getOrder() == null){
-                        System.out.println("No order");
-                        break;
-                    }
+                if(driver.getOrder() == null){
+                    System.out.println("No order");
+                    break;
+                }
                     driver.showOrder();
                     System.out.println("1. Chat Customer");
                     System.out.println("2. Finish Order");
@@ -152,7 +153,7 @@ public class Menu {
         System.out.println("=== Customer Login ===");
         System.out.print("Enter Customer Email: ");
         String email = in.nextLine();
-        System.out.print("Enter Customer Password: ");
+        System.out.println("Enter Customer Password");
         String password = in.nextLine();
         Customer customer = (Customer) app.validateEmailAndPassword(email, password, "Customer");
 
