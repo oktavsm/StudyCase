@@ -1,0 +1,2 @@
+Car,BA 123 N,Blue,Toyota,8000.0
+Motorcycle,BA 123 HA,green,CBR,4000.0

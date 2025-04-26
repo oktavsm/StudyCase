@@ -1,5 +1,6 @@
 package Vehicle;
 
+import java.io.*;
 public abstract class Vehicle {
     String plateNumber;
     String color;
@@ -11,6 +12,30 @@ public abstract class Vehicle {
         this.color = color;
         this.brand = brand;
         this.baseRate = baseRate;
+        writeToFile();
+    }
+
+    private void writeToFile() {
+        String fileName = "vehicle_data.txt";
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(getType()).append(",")
+          .append(plateNumber).append(",")
+          .append(color).append(",")
+          .append(brand).append(",")
+          .append(baseRate).append("\n");
+        String data = new String(stringBuilder);
+        try {
+          FileWriter fileOutput = new FileWriter(fileName, true);
+            fileOutput.write(data);
+            fileOutput.close();
+        } 
+        catch (IOException e) {
+            System.err.println("Maaf, file gagal dibuat & ditulisi");
+            System.exit(1);
+
+        }
     }
 
     public String getPlateNumber() {
