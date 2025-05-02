@@ -65,7 +65,7 @@ public class Menu {
 
             switch (pilihan) {
                 case 1:
-                    app.addCustomer();
+                    // app.addCustomer();
                     break;
                 case 2:
                     app.addDriver();

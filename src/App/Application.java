@@ -6,6 +6,7 @@ import Order.Order;
 import User.*;
 import Vehicle.*;
 import java.io.*;
+import GUI.*;
 
 
 
@@ -19,43 +20,43 @@ public class Application implements Topup {
     BufferedReader bufferedReader;
     FileWriter fileWriter;
     BufferedWriter BufferedWriter;
+    
 
     public void showMenu() throws IOException {
-        menu.mainMenu();
+        AppGUI appGUI = new AppGUI(this);
+        appGUI.setVisible(true);
+        // menu.mainMenu();
     }
 
-    public void addCustomer() throws IOException {
-        System.out.print("Enter name         : ");
-        String name = in.nextLine();
-        System.out.print("Enter email        : ");
-        String email = in.nextLine();
-        System.out.print("Enter password     : ");
-        String password = in.nextLine();
-        System.out.print("Enter phone number : ");
-        String phoneNumber = in.nextLine();
-
-        //check if the customer exist
-        if(checkCustomerIsExist(email)){
+    public void addCustomer(String email, String name, String password, String phoneNumber) {
+        
+        //check if the customer exst
+        if(validateEmail(email)){
             //register failed, email already registered
             System.out.println("Register failed, email already registered");
         } else{
             //add customer data to "src/Database/Customer.txt"   
-            fileWriter = new FileWriter("src/Database/Customer.txt", true);
-            BufferedWriter = new BufferedWriter(fileWriter);
-            BufferedWriter.write(name + "," + email + "," + password + "," + phoneNumber);
-            BufferedWriter.newLine();
-            BufferedWriter.close();
-            users.add(new Customer(name, email, password, phoneNumber, 0, this));
-            System.out.println("Register successful");
+            try{
+                fileWriter = new FileWriter("src/Database/Customer.txt", true);
+                BufferedWriter = new BufferedWriter(fileWriter);
+                BufferedWriter.write(name + "," + email + "," + password + "," + phoneNumber);
+                BufferedWriter.newLine();
+                BufferedWriter.close();
+                users.add(new Customer(name, email, password, phoneNumber, 0, this));
+                System.out.println("Register successful");
+            } catch (IOException e){
+
+            }
         }
     }
 
-    public boolean checkCustomerIsExist(String email)throws IOException{
-        FileReader fileInput = new FileReader("src/Database/Customer.txt");
+    public boolean validateEmail(String email){
+        boolean isExist = false;
+        try{
+            FileReader fileInput = new FileReader("src/Database/Customer.txt");
         BufferedReader bufferInput = new BufferedReader(fileInput);
 
         String data = bufferInput.readLine();
-        boolean isExist = false;
 
         while(data != null){
             String check[] = data.split(",");
@@ -67,7 +68,11 @@ public class Application implements Topup {
         }
 
         bufferInput.close();
-        return isExist;
+    } catch (IOException e){
+        
+    }
+    return isExist;
+        
     }
 
     public void loadDatabase() throws IOException{
@@ -218,7 +223,7 @@ public class Application implements Topup {
     }
 
     public void registerCustomer() throws IOException {
-        addCustomer();
+        // addCustomer();
     }
 
     public void registerDriver() {

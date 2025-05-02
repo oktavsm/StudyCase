@@ -1,0 +1,13 @@
+import java.util.*;
+import App.Application;
+import java.io.*;
+
+public class Main2 {
+    static Scanner in = new Scanner(System.in);
+
+    public static void main(String[] args) throws IOException {
+        Application app = new Application();
+        app.loadDatabase();
+        app.showMenu();
+    }
+}
