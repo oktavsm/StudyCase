@@ -1,6 +1,7 @@
 package GUI;
 
 import GUI.Customer.*;
+import GUI.Driver.*;
 import App.Application;
 
 import javax.swing.*;
@@ -26,7 +27,8 @@ public class AppGUI extends JFrame {
         mainPanel.add(new MainMenuPanel(app, cardLayout, mainPanel), "MainMenu");
         mainPanel.add(new RegisterCustomerPanel(app, cardLayout, mainPanel), "RegisterCustomer");
         mainPanel.add(new LoginCustomerPanel(app, cardLayout, mainPanel), "LoginCustomer");
-
+        mainPanel.add(new RegisterDriverPanel(app, cardLayout, mainPanel), "RegisterDriver");
+        
         cardLayout.show(mainPanel, "MainMenu");
     }
 }

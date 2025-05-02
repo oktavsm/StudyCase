@@ -37,6 +37,12 @@ public class MainMenuPanel extends JPanel {
                 cardLayout.show(mainPanel, "LoginCustomer"); // Menampilkan panel login customer
             }
         });
+        btnRegisterDriver.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(mainPanel, "RegisterDriver"); // Menampilkan panel registrasi driver
+            }
+        });
 
 
     }

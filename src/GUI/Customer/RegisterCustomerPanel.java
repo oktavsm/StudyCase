@@ -49,7 +49,7 @@ public class RegisterCustomerPanel extends CustomerPanel {
                     return;
                 }
                 //validate email first
-                if (app.validateEmail(email) == true) {
+                if (app.validateEmailCustomer(email) == true) {
                     JOptionPane.showMessageDialog(null, "Email already exists!");
                     return;
                 } else {

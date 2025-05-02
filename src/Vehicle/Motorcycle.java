@@ -1,8 +1,8 @@
 package Vehicle;
 
 public class Motorcycle extends Vehicle {
-    public Motorcycle(String plateNumber, String color, String brand, int baseRate) {
-        super(plateNumber, color, brand, baseRate);
+    public Motorcycle(String plateNumber, String color, String brand) {
+        super(plateNumber, color, brand, 8000);
     }
 
     public String getType() {

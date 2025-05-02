@@ -58,6 +58,9 @@ public class Driver extends User {
     public boolean getAvailability() {
         return this.isAvailable;
     }
+    public String getPhoneNumber() {
+        return super.getPhone();
+    }
 
     public Vehicle getVehicle() {
         return this.vehicle;
@@ -71,6 +74,12 @@ public class Driver extends User {
         for(Order order: this.ordersHistory) {
             order.showOrder();
         }
+    }
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
+    }
+    public void setOrder(Order order) {
+        this.nowOrder = order;
     }
 
     @Override

@@ -31,7 +31,7 @@ public class Application implements Topup {
     public void addCustomer(String email, String name, String password, String phoneNumber) {
         
         //check if the customer exst
-        if(validateEmail(email)){
+        if(validateEmailCustomer(email)){
             //register failed, email already registered
             System.out.println("Register failed, email already registered");
         } else{
@@ -50,7 +50,7 @@ public class Application implements Topup {
         }
     }
 
-    public boolean validateEmail(String email){
+    public boolean validateEmailCustomer(String email){
         boolean isExist = false;
         try{
             FileReader fileInput = new FileReader("src/Database/Customer.txt");
@@ -61,6 +61,54 @@ public class Application implements Topup {
         while(data != null){
             String check[] = data.split(",");
             if(check[1].equals(email)){
+                isExist = true;
+                break;
+            }
+            data = bufferInput.readLine();
+        }
+
+        bufferInput.close();
+    } catch (IOException e){
+        
+    }
+    return isExist;
+        
+    }
+    public boolean validateEmailDriver(String email){
+        boolean isExist = false;
+        try{
+            FileReader fileInput = new FileReader("src/Database/Driver/Driver.txt");
+        BufferedReader bufferInput = new BufferedReader(fileInput);
+
+        String data = bufferInput.readLine();
+
+        while(data != null){
+            String check[] = data.split(",");
+            if(check[1].equals(email)){
+                isExist = true;
+                break;
+            }
+            data = bufferInput.readLine();
+        }
+
+        bufferInput.close();
+    } catch (IOException e){
+        
+    }
+    return isExist;
+        
+    }
+    public boolean validateVehicleDriver(String plateNumber){
+        boolean isExist = false;
+        try{
+            FileReader fileInput = new FileReader("src/Database/Driver/Vehicle.txt");
+        BufferedReader bufferInput = new BufferedReader(fileInput);
+
+        String data = bufferInput.readLine();
+
+        while(data != null){
+            String check[] = data.split(",");
+            if(check[2].equals(plateNumber)){
                 isExist = true;
                 break;
             }
@@ -98,45 +146,40 @@ public class Application implements Topup {
 
     }
 
-    public void addDriver() {
-        System.out.print("Enter name         : ");
-        String name = in.nextLine();
-        System.out.print("Enter email        : ");
-        String email = in.nextLine();
-        System.out.print("Enter password     : ");
-        String password = in.nextLine();
-        System.out.print("Enter phone number : ");
-        String phoneNumber = in.nextLine();
-        Vehicle vehicle = addVehicle();
-        if (vehicle == null) {
-            System.out.println("Register failed");
-            return;
-        }
+    public void addDriver(String name, String email, String password, String phoneNumber, Vehicle vehicle)  {
+        
+            //add driver data to "src/Database/Driver.txt"   
+            try{
+                fileWriter = new FileWriter("src/Database/Driver/Driver.txt", true);
+                BufferedWriter = new BufferedWriter(fileWriter);
+                BufferedWriter.write(name + "," + password + "," + email + "," + phoneNumber);
+                BufferedWriter.newLine();
+                BufferedWriter.close();
+            } catch (IOException e){
 
+            }
+        
         users.add(new Driver(name, email, password, phoneNumber, vehicle, this));
-        System.out.println("Register successful");
+        
     }
 
-    public Vehicle addVehicle() {
-        System.out.print("Enter vehicle type (Motorcycle/Car): ");
-        String type = in.nextLine();
-        if (!type.equalsIgnoreCase("Motorcycle") && !type.equalsIgnoreCase("Car")) {
-            return null;
+    public Vehicle addVehicle(String email, String type, String plateNumber, String color, String brand) {
+        //write to database
+        try {
+            fileWriter = new FileWriter("src/Database/Driver/Vehicle.txt", true);
+            BufferedWriter = new BufferedWriter(fileWriter);
+            BufferedWriter.write(email + "," + type + "," + plateNumber + "," + color + "," + brand);
+            BufferedWriter.newLine();
+            BufferedWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
-        System.out.print("Enter plate number                 : ");
-        String plateNumber = in.nextLine();
-        System.out.print("Enter color                        : ");
-        String color = in.nextLine();
-        System.out.print("Enter brand                        : ");
-        String brand = in.nextLine();
-
         if (type.equalsIgnoreCase("Motorcycle")) {
-            Vehicle vehicle = new Motorcycle(plateNumber, color, brand, 4000);
+            Vehicle vehicle = new Motorcycle(plateNumber, color, brand);
             vehicles.add(vehicle);
             return vehicle;
         } else if (type.equalsIgnoreCase("Car")) {
-            Vehicle vehicle = new Car(plateNumber, color, brand, 8000);
+            Vehicle vehicle = new Car(plateNumber, color, brand);
             vehicles.add(vehicle);
             return vehicle;
         } else {
@@ -227,7 +270,7 @@ public class Application implements Topup {
     }
 
     public void registerDriver() {
-        addDriver();
+        // addDriver();
     }
 
     public String topupBalance(Customer customer) {
