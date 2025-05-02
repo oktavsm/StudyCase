@@ -55,7 +55,7 @@ public class RegisterDriverPanel extends DriverPanel {
                     JOptionPane.showMessageDialog(null, "Email already exists!");
                     return;
                 } else {
-                    Driver driver = new Driver(name, email, password, phoneNumber, null, app);
+                    Driver driver = new Driver(email, password, name,phoneNumber, null, app);
                     // Show vehicle registration panel
                     JPanel vehiclePanel = vehicleRegistPanel(driver);
                     mainPanel.add(vehiclePanel, "VehicleRegistPanel");
