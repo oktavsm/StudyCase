@@ -38,6 +38,8 @@ public abstract class User {
     public String getPhone() {
         return this.phone;
     }
-
+    public double getBalance(){
+        return 10000.0;
+    };
     abstract public void showProfile();
 }

@@ -4,6 +4,8 @@ import App.Application;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import User.Customer;
+import User.User;
 
 public class LoginCustomerPanel extends CustomerPanel {
 
@@ -37,12 +39,17 @@ public class LoginCustomerPanel extends CustomerPanel {
                     return;
                 }
                 //validate email and password
-                if (app.validateEmailAndPassword(email,password, "Customer") == null) {
+                User customer = app.validateEmailAndPassword(email,password, "Customer");
+                if (customer == null) {
                     JOptionPane.showMessageDialog(null, "Email or password is wrong!");
                     return;
                 } else {
                     JOptionPane.showMessageDialog(null, "Login successful!");
-                    cardLayout.show(mainPanel, "MainMenu"); // Kembali ke menu utama setelah login
+                    // Show customer menu panel
+                    JPanel customerMenuPanel = new MenuCustomerPanel(app, cardLayout, mainPanel,  customer);
+                    mainPanel.add(customerMenuPanel, "CustomerMenu");
+
+                    cardLayout.show(mainPanel, "CustomerMenu");
                     
                 } 
 

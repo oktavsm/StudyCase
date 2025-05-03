@@ -126,9 +126,7 @@ public class Application implements Topup {
         try {
             loadCustomers();
             loadDriver();
-            for (User user : users) {
-                user.showProfile();
-            }
+            
         } catch (IOException e) {
             System.out.println("Error loading database: " + e.getMessage());
         }
