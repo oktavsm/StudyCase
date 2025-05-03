@@ -309,44 +309,22 @@ public class Application implements Topup {
         // addDriver();
     }
 
-    public String topupBalance(Customer customer) {
-        double balance = customer.getBalance();
-        boolean status = true;
+    public void topupBalance(double amount, Customer customer) {
+        customer.setBalance(customer.getBalance() + amount);
 
-        System.out.println("Choose payment method");
-        System.out.println("1. Bank Jatim");
-        System.out.println("2. Bank BRI");
-        System.out.print("Choose: ");
-        int choice = in.nextInt();
-        in.nextLine();
-        double amount = createPayment(choice, customer);
-
-        customer.setBalance(balance += amount);
-
-        if (choice != 1 && choice != 2) {
-            status = false;
-        }
-
-        return (status ? "Topup successful" : "Topup failed");
     }
 
-    private double createPayment(int choice, Customer customer) {
-        double amount = 0;
-
+    public String createPayment(int choice, Customer customer, int amount) {
+        
+        String virtualAccount;
         if (choice == 1) {
-            String virtualAccount = "114" + customer.getPhone();
-            System.out.print("Transfer to following virtual account: " + virtualAccount);
-            System.out.print("\nEnter topup amount: ");
-            amount = in.nextDouble();
-            in.nextLine();
+            virtualAccount = "114" + customer.getPhone()+amount;
         } else {
-            String virtualAccount = "002" + customer.getPhone();
-            System.out.print("Transfer to following virtual account: " + virtualAccount);
-            System.out.print("\n Enter topup amount: ");
-            amount = in.nextDouble();
-            in.nextLine();
-        }
+            virtualAccount = "002" + customer.getPhone()+amount;
+          }
 
-        return amount;
+        return virtualAccount;
     }
+
+    
 }

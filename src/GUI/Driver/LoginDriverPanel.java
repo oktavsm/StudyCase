@@ -43,7 +43,7 @@ public class LoginDriverPanel extends DriverPanel {
                     // Show driver menu panel
                     // JPanel driverMenuPanel = new DriverMenuPanel(app, cardLayout, mainPanel);
                     // mainPanel.add(driverMenuPanel, "DriverMenu");
-                    // cardLayout.show(mainPanel, "DriverMenu");
+                    cardLayout.show(mainPanel, "MainMenu");
                 } else {
                     JOptionPane.showMessageDialog(null, "Invalid email or password!");
                 }

@@ -224,8 +224,8 @@ public class Menu {
                     }
                     break;
                 case 4:
-                    String message = app.topupBalance(customer);
-                    System.out.println(message);
+                    // String message = app.topupBalance(customer);
+                    // System.out.println(message);
                     break;
                 case 5:
                     return;

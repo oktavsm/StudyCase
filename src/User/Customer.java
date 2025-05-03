@@ -68,6 +68,10 @@ public class Customer extends User {
         return this.nowOrder;
     }
 
+    public boolean isOrdering(){
+        return this.isOrdering;
+    }
+
     public double getBalance() {
         return this.balance;
     }

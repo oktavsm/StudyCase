@@ -8,7 +8,7 @@ import User.*;
 
 
 public class MenuCustomerPanel extends CustomerPanel {
-    public MenuCustomerPanel(Application app, CardLayout cardLayout, JPanel mainPanel, User customer) {
+    public MenuCustomerPanel(Application app, CardLayout cardLayout, JPanel mainPanel, Customer customer) {
         super(app, cardLayout, mainPanel);
         //menu preview
         /*
@@ -51,6 +51,53 @@ public class MenuCustomerPanel extends CustomerPanel {
             System.out.println("Bukan customer");
         }
 
+        btnTopUp.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JPanel topUpPanel = new TopUpCustomer(app, cardLayout, mainPanel, customer);
+                mainPanel.add(topUpPanel, "TopUpCustomer");
+                cardLayout.show(mainPanel, "TopUpCustomer"); // Menampilkan panel top up
+            }
+        });
+
+        //logout
+        btnLogout.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to logout?", "Logout", JOptionPane.YES_NO_OPTION);
+                if (confirm == JOptionPane.YES_OPTION) {
+                    cardLayout.show(mainPanel, "MainMenu"); // Kembali ke menu utama setelah logout
+                }
+            }
+        });
+
+        //info order
+        btnOrderInfo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(!customer.isOrdering()){
+                    JOptionPane.showMessageDialog(null, "You are not ordering any service!");
+                    return;
+                }
+
+
+                // Show order info panel
+                // JPanel orderInfoPanel = new OrderInfoCustomer(app, cardLayout, mainPanel, customer);
+                // mainPanel.add(orderInfoPanel, "OrderInfoCustomer");
+                // cardLayout.show(mainPanel, "OrderInfoCustomer"); // Menampilkan panel order info
+            }
+        });
+
+        //profile info
+        btnProfile.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Show profile panel
+                JPanel profilePanel = new ProfileCustomer(app, cardLayout, mainPanel, customer);
+                mainPanel.add(profilePanel, "ProfileCustomer");
+                cardLayout.show(mainPanel, "ProfileCustomer"); // Menampilkan panel profile
+            }
+        });
     }
     
 }
