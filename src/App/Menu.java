@@ -65,10 +65,10 @@ public class Menu {
 
             switch (pilihan) {
                 case 1:
-                    app.addCustomer();
+                    // app.addCustomer();
                     break;
                 case 2:
-                    app.addDriver();
+                    // app.addDriver();
                     break;
                 case 3:
                     app.removeCustomer();
@@ -224,8 +224,8 @@ public class Menu {
                     }
                     break;
                 case 4:
-                    String message = app.topupBalance(customer);
-                    System.out.println(message);
+                    // String message = app.topupBalance(customer);
+                    // System.out.println(message);
                     break;
                 case 5:
                     return;

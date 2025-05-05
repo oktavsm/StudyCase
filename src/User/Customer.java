@@ -68,6 +68,10 @@ public class Customer extends User {
         return this.nowOrder;
     }
 
+    public boolean isOrdering(){
+        return this.isOrdering;
+    }
+
     public double getBalance() {
         return this.balance;
     }
@@ -94,12 +98,12 @@ public class Customer extends User {
         System.out.println("ID       : " + super.getId());
         System.out.println("Name     : " + super.getName());
         System.out.println("Email    : " + super.getEmail());
-        System.out.print("Password : ");
+        System.out.println("Password : " + super.getPassword());
         String password = super.getPassword();
-        for (char c : password.toCharArray()) {
-            c = '*';
-            System.out.print(c);
-        }
+        // for (char c : password.toCharArray()) {
+        //     c = '*';
+        //     System.out.print(c);
+        // }
         System.out.println();
         System.out.println("Phone    : " + super.getPhone());
         System.out.println("Balance  : " + this.balance);

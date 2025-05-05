@@ -6,8 +6,7 @@ import Order.Order;
 import User.*;
 import Vehicle.*;
 import java.io.*;
-
-
+import GUI.*;
 
 public class Application implements Topup {
     ArrayList<Vehicle> vehicles = new ArrayList<>();
@@ -21,66 +20,124 @@ public class Application implements Topup {
     BufferedWriter BufferedWriter;
 
     public void showMenu() throws IOException {
-        menu.mainMenu();
+        AppGUI appGUI = new AppGUI(this);
+        appGUI.setVisible(true);
+        // menu.mainMenu();
     }
 
-    public void addCustomer() throws IOException {
-        System.out.print("Enter name         : ");
-        String name = in.nextLine();
-        System.out.print("Enter email        : ");
-        String email = in.nextLine();
-        System.out.print("Enter password     : ");
-        String password = in.nextLine();
-        System.out.print("Enter phone number : ");
-        String phoneNumber = in.nextLine();
+    public void addCustomer(String email, String name, String password, String phoneNumber) {
 
-        //check if the customer exist
-        if(checkCustomerIsExist(email)){
-            //register failed, email already registered
+        // check if the customer exst
+        if (validateEmailCustomer(email)) {
+            // register failed, email already registered
             System.out.println("Register failed, email already registered");
-        } else{
-            //add customer data to "src/Database/Customer.txt"   
-            fileWriter = new FileWriter("src/Database/Customer.txt", true);
-            BufferedWriter = new BufferedWriter(fileWriter);
-            BufferedWriter.write(name + "," + email + "," + password + "," + phoneNumber);
-            BufferedWriter.newLine();
-            BufferedWriter.close();
-            users.add(new Customer(name, email, password, phoneNumber, 0, this));
-            System.out.println("Register successful");
-        }
-    }
+        } else {
+            // add customer data to "src/Database/Customer.txt"
+            try {
+                fileWriter = new FileWriter("src/Database/Customer.txt", true);
+                BufferedWriter = new BufferedWriter(fileWriter);
+                BufferedWriter.write(name + "," + email + "," + password + "," + phoneNumber);
+                BufferedWriter.newLine();
+                BufferedWriter.close();
+                users.add(new Customer(name, email, password, phoneNumber, 0, this));
+                System.out.println("Register successful");
+            } catch (IOException e) {
 
-    public boolean checkCustomerIsExist(String email)throws IOException{
-        FileReader fileInput = new FileReader("src/Database/Customer.txt");
-        BufferedReader bufferInput = new BufferedReader(fileInput);
-
-        String data = bufferInput.readLine();
-        boolean isExist = false;
-
-        while(data != null){
-            String check[] = data.split(",");
-            if(check[1].equals(email)){
-                isExist = true;
-                break;
             }
-            data = bufferInput.readLine();
         }
+    }
 
-        bufferInput.close();
+    public boolean validateEmailCustomer(String email) {
+        boolean isExist = false;
+        try {
+            FileReader fileInput = new FileReader("src/Database/Customer.txt");
+            BufferedReader bufferInput = new BufferedReader(fileInput);
+
+            String data = bufferInput.readLine();
+
+            while (data != null && !data.isEmpty()) {
+                String check[] = data.split(",");
+                if (check[1].equals(email)) {
+                    isExist = true;
+                    break;
+                }
+                data = bufferInput.readLine();
+            }
+
+            bufferInput.close();
+        } catch (IOException e) {
+
+        }
         return isExist;
+
     }
 
-    public void loadDatabase() throws IOException{
-        loadCustomers();
-        loadDriver();
+    public boolean validateEmailDriver(String email) {
+        boolean isExist = false;
+        try {
+            FileReader fileInput = new FileReader("src/Database/Driver/Driver.txt");
+            BufferedReader bufferInput = new BufferedReader(fileInput);
+
+            String data = bufferInput.readLine();
+
+            while (data != null && !data.isEmpty()) {
+                String check[] = data.split(",");
+                if (check[1].equals(email)) {
+                    isExist = true;
+                    break;
+                }
+                data = bufferInput.readLine();
+            }
+
+            bufferInput.close();
+        } catch (IOException e) {
+
+        }
+        return isExist;
+
     }
 
-    public void loadCustomers() throws IOException{
+    public boolean validateVehicleDriver(String plateNumber) {
+        boolean isExist = false;
+        try {
+            FileReader fileInput = new FileReader("src/Database/Driver/Vehicle.txt");
+            BufferedReader bufferInput = new BufferedReader(fileInput);
+
+            String data = bufferInput.readLine();
+
+            while (data != null && !data.isEmpty()) {
+                String check[] = data.split(",");
+                if (check[2].equals(plateNumber)) {
+                    isExist = true;
+                    break;
+                }
+                data = bufferInput.readLine();
+            }
+
+            bufferInput.close();
+        } catch (IOException e) {
+
+        }
+        return isExist;
+
+    }
+
+    public void loadDatabase() {
+        try {
+            loadCustomers();
+            loadDriver();
+            
+        } catch (IOException e) {
+            System.out.println("Error loading database: " + e.getMessage());
+        }
+    }
+
+    public void loadCustomers() throws IOException {
         fileReader = new FileReader("src/Database/Customer.txt");
         bufferedReader = new BufferedReader(fileReader);
         String data = bufferedReader.readLine();
 
-        while(data != null){
+        while (data != null) {
             String[] check = data.split(",");
             users.add(new Customer(check[0], check[1], check[2], check[3], 0, this));
             data = bufferedReader.readLine();
@@ -89,49 +146,75 @@ public class Application implements Topup {
 
     }
 
-    public void loadDriver() throws IOException{
+    public void loadDriver() throws IOException {
+        // from "src/Database/Driver/Driver.txt and the vehicle on
+        // src/Database/Driver/Vehicle.txt"
+        // driver : email,password,name,phoneNumber
+        // vehicle : email,type,plateNumber,color,brand
+        fileReader = new FileReader("src/Database/Driver/Driver.txt");
+        bufferedReader = new BufferedReader(fileReader);
+        String data = bufferedReader.readLine();
+        while (data != null && !data.isEmpty()) {
+            String[] check = data.split(",");
+            // load vehicle
+            fileReader = new FileReader("src/Database/Driver/Vehicle.txt");
+            BufferedReader bufferedReader2 = new BufferedReader(fileReader);
+            String data2 = bufferedReader2.readLine();
+            while (data2 != null && !data2.isEmpty()) {
+                String[] check2 = data2.split(",");
+                if (check[0].equals(check2[0])) {
+                    Vehicle vehicle;
+                    if (check2[1].equals("Motorcycle")) {
+                        vehicle = new Motorcycle(check2[2], check2[3], check2[4]);
+                    } else {
+                        vehicle = new Car(check2[2], check2[3], check2[4]);
+                    }
+
+                    users.add(new Driver(check[0], check[1], check[2], check[3], vehicle, this));
+                }
+                data2 = bufferedReader2.readLine();
+            }
+            bufferedReader2.close();
+            data = bufferedReader.readLine();
+        }
+        bufferedReader.close();
 
     }
 
-    public void addDriver() {
-        System.out.print("Enter name         : ");
-        String name = in.nextLine();
-        System.out.print("Enter email        : ");
-        String email = in.nextLine();
-        System.out.print("Enter password     : ");
-        String password = in.nextLine();
-        System.out.print("Enter phone number : ");
-        String phoneNumber = in.nextLine();
-        Vehicle vehicle = addVehicle();
-        if (vehicle == null) {
-            System.out.println("Register failed");
-            return;
+    public void addDriver(String email, String password, String name, String phoneNumber, Vehicle vehicle) {
+
+        // add driver data to "src/Database/Driver.txt"
+        try {
+            fileWriter = new FileWriter("src/Database/Driver/Driver.txt", true);
+            BufferedWriter = new BufferedWriter(fileWriter);
+            BufferedWriter.write(email + "," + password + "," + name + "," + phoneNumber);
+            BufferedWriter.newLine();
+            BufferedWriter.close();
+        } catch (IOException e) {
+
         }
 
-        users.add(new Driver(name, email, password, phoneNumber, vehicle, this));
-        System.out.println("Register successful");
+        users.add(new Driver(email, password, name, phoneNumber, vehicle, this));
+
     }
 
-    public Vehicle addVehicle() {
-        System.out.print("Enter vehicle type (Motorcycle/Car): ");
-        String type = in.nextLine();
-        if (!type.equalsIgnoreCase("Motorcycle") && !type.equalsIgnoreCase("Car")) {
-            return null;
+    public Vehicle addVehicle(String email, String type, String plateNumber, String color, String brand) {
+        // write to database
+        try {
+            fileWriter = new FileWriter("src/Database/Driver/Vehicle.txt", true);
+            BufferedWriter = new BufferedWriter(fileWriter);
+            BufferedWriter.write(email + "," + type + "," + plateNumber + "," + color + "," + brand);
+            BufferedWriter.newLine();
+            BufferedWriter.close();
+        } catch (IOException e) {
+
         }
-
-        System.out.print("Enter plate number                 : ");
-        String plateNumber = in.nextLine();
-        System.out.print("Enter color                        : ");
-        String color = in.nextLine();
-        System.out.print("Enter brand                        : ");
-        String brand = in.nextLine();
-
         if (type.equalsIgnoreCase("Motorcycle")) {
-            Vehicle vehicle = new Motorcycle(plateNumber, color, brand, 4000);
+            Vehicle vehicle = new Motorcycle(plateNumber, color, brand);
             vehicles.add(vehicle);
             return vehicle;
         } else if (type.equalsIgnoreCase("Car")) {
-            Vehicle vehicle = new Car(plateNumber, color, brand, 8000);
+            Vehicle vehicle = new Car(plateNumber, color, brand);
             vehicles.add(vehicle);
             return vehicle;
         } else {
@@ -173,13 +256,13 @@ public class Application implements Topup {
         for (User user : users) {
             if (user instanceof Customer) {
                 user.showProfile();
-            } 
+            }
         }
         System.out.println("=== Driver List ===");
         for (User user : users) {
             if (user instanceof Driver) {
                 user.showProfile();
-            } 
+            }
         }
     }
 
@@ -198,7 +281,8 @@ public class Application implements Topup {
 
     public User validateEmailAndPassword(String email, String password, String type) {
         for (User user : users) {
-            if (user.getEmail().equals(email) && user.getPassword().equals(password) && user.getClass().getSimpleName().equals(type)) {
+            if (user.getEmail().equals(email) && user.getPassword().equals(password)
+                    && user.getClass().getSimpleName().equals(type)) {
                 return user;
             }
         }
@@ -207,7 +291,7 @@ public class Application implements Topup {
 
     public Driver findAvailableDriver(String type) {
         for (User user : users) {
-            if (user instanceof Driver ) {
+            if (user instanceof Driver) {
                 Driver driver = (Driver) user;
                 if (driver.getAvailability() && driver.getVehicle().getType().equals(type)) {
                     return driver;
@@ -218,51 +302,29 @@ public class Application implements Topup {
     }
 
     public void registerCustomer() throws IOException {
-        addCustomer();
+        // addCustomer();
     }
 
     public void registerDriver() {
-        addDriver();
+        // addDriver();
     }
 
-    public String topupBalance(Customer customer) {
-        double balance = customer.getBalance();
-        boolean status = true;
+    public void topupBalance(double amount, Customer customer) {
+        customer.setBalance(customer.getBalance() + amount);
 
-        System.out.println("Choose payment method");
-        System.out.println("1. Bank Jatim");
-        System.out.println("2. Bank BRI");
-        System.out.print("Choose: " );
-        int choice = in.nextInt();
-        in.nextLine();
-        double amount = createPayment(choice, customer);
-
-        customer.setBalance(balance += amount);
-
-        if (choice != 1 && choice != 2) {
-            status = false;
-        }
-
-        return (status ? "Topup successful" : "Topup failed"); 
     }
 
-    private double createPayment(int choice, Customer customer) {
-        double amount = 0;
-
+    public String createPayment(int choice, Customer customer, int amount) {
+        
+        String virtualAccount;
         if (choice == 1) {
-            String virtualAccount = "114" + customer.getPhone();
-            System.out.print("Transfer to following virtual account: " + virtualAccount);
-            System.out.print("\nEnter topup amount: ");
-            amount = in.nextDouble();
-            in.nextLine();
+            virtualAccount = "114" + customer.getPhone()+amount;
         } else {
-            String virtualAccount = "002" + customer.getPhone();
-            System.out.print("Transfer to following virtual account: " + virtualAccount);
-            System.out.print("\n Enter topup amount: ");
-            amount = in.nextDouble();
-            in.nextLine();
-        }
+            virtualAccount = "002" + customer.getPhone()+amount;
+          }
 
-        return amount;
+        return virtualAccount;
     }
+
+    
 }
