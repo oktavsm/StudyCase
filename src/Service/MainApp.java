@@ -1,7 +1,7 @@
 import MapPickerMultiStep;
 import MapPickerMultiStep.CoordinatePair;
 
-package Test;
+package Service;
 public class MainApp {
 
     public static void main(String[] args) {
