@@ -2,7 +2,6 @@ package Service;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -72,19 +71,42 @@ public class GoogleMapService {
         return new String[]{distance, duration};
     }
 
-    // Mendapatkan gambar statik dari rute (Static Maps API)
-    public static ImageIcon getStaticMapImage(String origin, String destination) throws Exception {
+    // Mendapatkan gambar map dengan rute sesuai jalan raya (pakai encoded polyline)
+    public static ImageIcon getRouteMap(String origin, String destination) throws Exception {
         String encodedOrigin = URLEncoder.encode(origin, "UTF-8");
         String encodedDestination = URLEncoder.encode(destination, "UTF-8");
 
-        String mapUrl = "https://maps.googleapis.com/maps/api/staticmap?size=600x400"
+        // Step 1: Ambil encoded polyline dari Directions API
+        String url = "https://maps.googleapis.com/maps/api/directions/json?origin=" + encodedOrigin
+                   + "&destination=" + encodedDestination
+                   + "&mode=driving&key=" + API_KEY;
+
+        HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
+        conn.setRequestMethod("GET");
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        StringBuilder response = new StringBuilder();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            response.append(line);
+        }
+        reader.close();
+
+        JSONObject json = new JSONObject(response.toString());
+        String encodedPolyline = json.getJSONArray("routes")
+                                     .getJSONObject(0)
+                                     .getJSONObject("overview_polyline")
+                                     .getString("points");
+        
+        // Step 2: Buat URL static map dengan encoded polyline sebagai path
+        String size = "600x400";
+        String mapUrl = "https://maps.googleapis.com/maps/api/staticmap?"
+                      + "size=" + size
                       + "&markers=color:green|" + encodedOrigin
                       + "&markers=color:red|" + encodedDestination
-                      + "&path=color:blue|" + encodedOrigin + "|" + encodedDestination
+                      + "&path=enc:" + encodedPolyline
                       + "&key=" + API_KEY;
 
-        URL url = new URL(mapUrl);
-        return new ImageIcon(url);
+        return new ImageIcon(new URL(mapUrl));
     }
 }
-
