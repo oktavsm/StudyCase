@@ -31,8 +31,11 @@ public class MenuCustomerPanel extends CustomerPanel {
         balanceLabel.setFont(new Font("Arial", Font.BOLD, 16)); // Set font size
 
 
+        // tombol Service Tetenger Sepedah
+
+        //Tombol Service Tetenger Montor
         JButton btnTopUp = new JButton("Top Up Balance");
-        JButton btnOrder = new JButton("Order Service");
+        JButton btnOrder = new JButton("Tetenger Services");
         JButton btnOrderInfo = new JButton("Order Info");
         JButton btnLogout = new JButton("Logout");
         JButton btnProfile = new JButton("Profile");
@@ -45,11 +48,16 @@ public class MenuCustomerPanel extends CustomerPanel {
         add(btnProfile);
         add(btnLogout);
 
-        if(customer instanceof Customer) {
-            System.out.println("Customer: " + customer.getName());
-        } else{
-            System.out.println("Bukan customer");
-        }
+        btnOrder.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Show order panel for Sepedah
+                JPanel orderPanel = new CustomerOrderPanel(app, cardLayout, mainPanel, customer);
+                mainPanel.add(orderPanel, "CustomerOrderPanel");
+                cardLayout.show(mainPanel, "CustomerOrderPanel"); // Menampilkan panel order
+            }
+        });
+        
 
         btnTopUp.addActionListener(new ActionListener() {
             @Override
