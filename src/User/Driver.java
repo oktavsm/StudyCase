@@ -47,6 +47,7 @@ public class Driver extends User {
     public void giveReview(double rating) {
         this.rating = (this.rating * this.orderCount + rating) / (this.orderCount + 1);
     }
+    
 
     public void finishOrder() {
         this.ordersHistory.add(this.nowOrder);
@@ -64,6 +65,9 @@ public class Driver extends User {
 
     public Vehicle getVehicle() {
         return this.vehicle;
+    }
+    public double getRating(){
+        return this.rating;
     }
 
     public void setAvailability(boolean availability) {

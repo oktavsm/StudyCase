@@ -1,8 +1,9 @@
 package Interface;
 
 import User.*;
+import java.util.*;
 
 public interface Chat {
-    public void sendChat(User sender, String message);
-    public void showChat();
+    public void saveChat(User sender, String message);
+    public ArrayList<String> getChat();
 }
