@@ -12,8 +12,9 @@ public class LoginCustomerPanel extends CustomerPanel {
     public LoginCustomerPanel(Application app, CardLayout cardLayout, JPanel mainPanel) {
         super(app, cardLayout, mainPanel);
         setLayout(new GridLayout(3, 2)); // 3 baris, 2 kolom
-
+        // set width and height 150, 30
         JLabel emailLabel = new JLabel("Email: ");
+        
         JTextField emailField = new JTextField();
         JLabel passwordLabel = new JLabel("Password: ");
         JPasswordField passwordField = new JPasswordField();

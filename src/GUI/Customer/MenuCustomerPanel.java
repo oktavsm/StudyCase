@@ -88,11 +88,7 @@ public class MenuCustomerPanel extends CustomerPanel {
                     return;
                 }
 
-
-                // Show order info panel
-                // JPanel orderInfoPanel = new OrderInfoCustomer(app, cardLayout, mainPanel, customer);
-                // mainPanel.add(orderInfoPanel, "OrderInfoCustomer");
-                // cardLayout.show(mainPanel, "OrderInfoCustomer"); // Menampilkan panel order info
+                customer.getOrder().initPanel(app, cardLayout, mainPanel);
             }
         });
 

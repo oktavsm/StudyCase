@@ -3,6 +3,11 @@ package Order;
 import java.util.*;
 import Interface.*;
 import User.*;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import App.Application;
+import GUI.Customer.OrderInfo;
 
 public class Order implements Chat, Payment, Review {
     private ArrayList<String> chatHistory = new ArrayList<String>();
@@ -13,30 +18,41 @@ public class Order implements Chat, Payment, Review {
     double distance;
     double rate;
     boolean donePayment = false;
-
+    JPanel orderInfoPanel;
+    String time;
     public void giveReview(double rating) {
         this.driver.giveReview(rating);
     }
 
-    public Order(Customer customer, Driver driver, String location, String destination, double distance) {
+    public Order(Customer customer, Driver driver, String location, String destination, double distance, String time) {
         this.driver = driver;
         this.customer = customer;
         this.location = location;
         this.destination = destination;
         this.distance = distance;
         this.rate = driver.getVehicle().calculateRate(distance);
+        this.time = time;
+       
     }
-
-    public void sendChat(User sender, String message) {
-        String chat = sender.getName() + ": " + message;
+    public String getPickupLocation(){
+        return this.location;
+    }
+    public String getDestinationLocation(){
+        return this.destination;
+    }
+    public double getDistance(){
+        return this.distance;
+    }
+    public String getEstimationTime(){
+        return this.time;
+    }
+    public void saveChat(User sender, String message) {
+        String chat = sender.getName() + "###***###" + message;
         this.chatHistory.add(chat);
     }
 
-    public void showChat() {
-        System.out.println("Chat History");
-        for(String chat: this.chatHistory){
-            System.out.println(chat);
-        }
+    public ArrayList<String> getChat() {
+       return this.chatHistory;
     }
 
     public void pay(double amount) {
@@ -53,10 +69,23 @@ public class Order implements Chat, Payment, Review {
 
     public void processOrder() {
         this.driver.takeOrder(this);
+        pay(rate);
+        //option pane payment success
+        JOptionPane.showMessageDialog(null, "Payment Success! \n" +
+                "Rate: Rp. " + this.rate + "\n" +
+                "Driver: " + driver.getName() + "\n" +
+                "Vehicle: " + driver.getVehicle().getType() + "\n" +
+                "From: " + location + "\n" +
+                "To: " + destination + "\n" +
+                "Distance: " + distance + " KM\n" +
+                "Estimation Time: " + time);
     }
 
     public Driver getDriver() {
         return this.driver;
+    }
+    public Customer getCustomer(){
+        return this.customer;
     }
 
     public double getPayment() {
@@ -68,8 +97,23 @@ public class Order implements Chat, Payment, Review {
         this.driver.finishOrder();
     }
 
+    public Order getOrder(){
+        return this;
+    }
+
     public boolean getPaymentStatus() {
         return donePayment;
+    }
+    public JPanel getOrderInfoPanel(){
+        return this.orderInfoPanel;
+    }
+    public void setOrderInfoPanel(JPanel orderInfoPanel){
+        this.orderInfoPanel = orderInfoPanel;
+    }
+    public void initPanel(Application app, CardLayout cardLayout, JPanel mainPanel){
+        mainPanel.remove(this.orderInfoPanel);
+        mainPanel.add(this.orderInfoPanel,"OrderInfo");
+        cardLayout.show(mainPanel,"OrderInfo");
     }
 
     public void showOrder() {

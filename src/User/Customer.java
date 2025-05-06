@@ -3,6 +3,7 @@ package User;
 import Order.Order;
 import App.Application;
 import java.util.*;
+import javax.swing.JOptionPane;
 
 public class Customer extends User {
     private double balance;
@@ -16,38 +17,24 @@ public class Customer extends User {
         this.balance = balance;
     }
 
-    public Order newOrder() {
+    public Order newOrder(String destination, String location, double distance,String time, String type) {
         if (isOrdering) {
-            System.out.println("You still have an active order");
+            JOptionPane.showMessageDialog(null, "You already have an order in progress.");
             return null;
         }
 
-        System.out.print("Choose your vehicle type (1. Motorcycle, 2. Car): ");
-        int choice = in.nextInt();
-        in.nextLine();
-
-        String type = (choice == 1) ? "Motorcycle" : "Car";
-
         Driver driver = app.findAvailableDriver(type);
         if(driver == null){
-            System.out.println("No driver available at the moment");
+            JOptionPane.showMessageDialog(null, "No available driver found.");
             return null;
         }
 
         isOrdering = true;
-        System.out.print("Enter your location: ");
-        String location = in.nextLine();
+        
 
-        System.out.print("Enter your destination: ");
-        String destination = in.nextLine();
-
-        System.out.print("Enter the distance (km): ");
-        double distance = in.nextDouble();
-        in.nextLine();
-
-        nowOrder = new Order(this, driver, location, destination, distance);
+        nowOrder = new Order(this, driver, location, destination, distance,time);
         if (nowOrder.getPayment() > this.balance) {
-            System.out.println("Insufficient balance");
+            JOptionPane.showMessageDialog(null, "Insufficient balance for this order.");
             nowOrder = null;
             isOrdering = false;
             return null;

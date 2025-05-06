@@ -76,6 +76,16 @@ public class TopUpCustomer extends CustomerPanel {
                 cardLayout.show(mainPanel, "PaymentGetwayPanel");
             }
         });
+        // Action listener for back button
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Show customer menu panel
+                JPanel customerMenuPanel = new MenuCustomerPanel(app, cardLayout, mainPanel, (Customer)customer);
+                mainPanel.add(customerMenuPanel, "CustomerMenu");
+                cardLayout.show(mainPanel, "CustomerMenu"); // Menampilkan panel order
+            }
+        });
 }
 
 JPanel paymentGetwayPanel(User customer, String paymentMethod, int amount,int choice,Application app, CardLayout cardLayout, JPanel mainPanel) {
@@ -106,6 +116,7 @@ JPanel paymentGetwayPanel(User customer, String paymentMethod, int amount,int ch
             cardLayout.show(mainPanel, "CustomerMenu");
         }
     });
+
     paymentPanel.add(instructionLabel);
     paymentPanel.add(doneButton);
 
