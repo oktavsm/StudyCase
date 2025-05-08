@@ -43,6 +43,11 @@ public class Driver extends User {
     public Order getOrder() {
         return this.nowOrder;
     }
+    public double getBalance(){
+        return this.balance;
+    };
+
+    
 
     public void giveReview(double rating) {
         this.rating = (this.rating * this.orderCount + rating) / (this.orderCount + 1);

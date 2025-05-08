@@ -5,6 +5,8 @@ import App.Application;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import User.Driver;
+import javax.swing.JOptionPane;
 
 public class LoginDriverPanel extends DriverPanel {
     public LoginDriverPanel(Application app, CardLayout cardLayout, JPanel mainPanel) {
@@ -36,14 +38,18 @@ public class LoginDriverPanel extends DriverPanel {
                     JOptionPane.showMessageDialog(null, "Please fill all fields!");
                     return;
                 }
-
+                Driver driver = (Driver) app.validateEmailAndPassword(email, password,"Driver");
                 // Validate email and password
                 if (app.validateEmailAndPassword(email, password,"Driver")!= null) {
                     JOptionPane.showMessageDialog(null, "Login successful!");
+                    JPanel menuDriver = new MenuDriver(app, cardLayout, mainPanel, driver);
+                    mainPanel.add(menuDriver, "DriverMenu");
+                    cardLayout.show(mainPanel, "DriverMenu");   
+
+                    
                     // Show driver menu panel
                     // JPanel driverMenuPanel = new DriverMenuPanel(app, cardLayout, mainPanel);
                     // mainPanel.add(driverMenuPanel, "DriverMenu");
-                    cardLayout.show(mainPanel, "MainMenu");
                 } else {
                     JOptionPane.showMessageDialog(null, "Invalid email or password!");
                 }
