@@ -9,7 +9,5 @@ public class Main2 {
         Application app = new Application();
         app.loadDatabase();
         app.showMenu();
-
-        
     }
 }
