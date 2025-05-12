@@ -29,7 +29,7 @@ public class AppGUI extends JFrame {
         mainPanel.add(new LoginCustomerPanel(app, cardLayout, mainPanel), "LoginCustomer");
         mainPanel.add(new RegisterDriverPanel(app, cardLayout, mainPanel), "RegisterDriver");
         mainPanel.add(new LoginDriverPanel(app, cardLayout, mainPanel), "LoginDriver");
-        
+
         cardLayout.show(mainPanel, "MainMenu");
     }
 }

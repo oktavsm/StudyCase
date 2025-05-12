@@ -6,7 +6,7 @@ import java.awt.event.*;
 import App.Application;
 import User.*;
 public class TopUpCustomer extends CustomerPanel {
-    public TopUpCustomer(Application app, CardLayout cardLayout, JPanel mainPanel, User customer) {
+    public TopUpCustomer(Application app, CardLayout cardLayout, JPanel mainPanel, Customer customer) {
         super(app, cardLayout, mainPanel);
         /*  
          preview layout
@@ -88,7 +88,7 @@ public class TopUpCustomer extends CustomerPanel {
         });
 }
 
-JPanel paymentGetwayPanel(User customer, String paymentMethod, int amount,int choice,Application app, CardLayout cardLayout, JPanel mainPanel) {
+JPanel paymentGetwayPanel(Customer customer, String paymentMethod, int amount,int choice,Application app, CardLayout cardLayout, JPanel mainPanel) {
     JPanel paymentPanel = new JPanel(new GridLayout(3, 1));
     JLabel titleLabel = new JLabel("Top Up Balance", SwingConstants.CENTER);
     titleLabel.setFont(new Font("Arial", Font.BOLD, 16)); // Set font size
