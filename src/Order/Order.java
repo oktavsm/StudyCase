@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.event.*;
 import App.Application;
 import GUI.Customer.OrderInfo;
+import GUI.ChatUI;
 
 public class Order implements Chat, Payment, Review {
     private ArrayList<String> chatHistory = new ArrayList<String>();
@@ -18,12 +19,16 @@ public class Order implements Chat, Payment, Review {
     double distance;
     double rate;
     boolean donePayment = false;
+    boolean isDrop = false;
     JPanel orderInfoPanel;
     String time;
+    private ChatUI chatUI;
     public void giveReview(double rating) {
         this.driver.giveReview(rating);
     }
-
+    public void setRating(double rating){
+        this.driver.setRating(rating);
+    }
     public Order(Customer customer, Driver driver, String location, String destination, double distance, String time) {
         this.driver = driver;
         this.customer = customer;
@@ -32,7 +37,16 @@ public class Order implements Chat, Payment, Review {
         this.distance = distance;
         this.rate = driver.getVehicle().calculateRate(distance);
         this.time = time;
-       
+        chargeCustommer(this.rate);
+    }
+    public void showChat(User current) {
+        this.chatUI = new ChatUI(this, current);
+        this.chatUI.setVisible(true);
+    }
+    public void closeChat(){
+        this.chatUI.setVisible(false);
+        this.chatUI.dispose();
+
     }
     public String getPickupLocation(){
         return this.location;
@@ -57,19 +71,27 @@ public class Order implements Chat, Payment, Review {
 
     public void pay(double amount) {
         if(!donePayment) {
-            this.customer.pay(this, amount);
             this.driver.receivedPayment(amount);
             this.donePayment = true;
         }
     }
-
+    
+    public void chargeCustommer(double amount){
+        this.customer.pay(this, amount);
+    }
     public void showPayment() {
         this.customer.showPayment(this);
+    }
+    public void dropOff(){
+        this.isDrop = true;
+        pay(rate);
+    }
+    public boolean isDrop(){
+        return this.isDrop;
     }
 
     public void processOrder() {
         this.driver.takeOrder(this);
-        pay(rate);
         //option pane payment success
         JOptionPane.showMessageDialog(null, "Payment Success! \n" +
                 "Rate: Rp. " + this.rate + "\n" +

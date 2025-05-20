@@ -1,0 +1,48 @@
+package GUI.Customer;
+
+import javax.swing.*;
+import java.awt.*;
+import App.Application;
+import Order.Order;
+import User.Driver;
+
+public class RatingUtil extends CustomerPanel {
+
+    public RatingUtil(Application app, CardLayout cardLayout, JPanel mainPanel,Order order) {
+        super(app, cardLayout, mainPanel);
+
+        // Buat panel custom untuk input di JOptionPane
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+        JLabel label = new JLabel("Beri rating untuk driver:");
+        panel.add(label);
+
+        String[] ratings = {"★", "★★", "★★★", "★★★★", "★★★★★"};
+        JComboBox<String> comboBox = new JComboBox<>(ratings);
+        panel.add(comboBox);
+
+        JTextField commentField = new JTextField();
+        commentField.setBorder(BorderFactory.createTitledBorder("Komentar (opsional)"));
+        panel.add(commentField);
+
+        int result = JOptionPane.showConfirmDialog(null, panel, "Rating Driver",
+                JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+        if (result == JOptionPane.OK_OPTION) {
+            double rating = comboBox.getSelectedIndex() + 1;
+            String comment = commentField.getText().trim();
+
+            // Simpan rating ke driver
+            order.setRating(rating);
+          // pastikan method ini ada di class Driver
+
+            JOptionPane.showMessageDialog(null, "Terima kasih! Rating berhasil disimpan.");
+            order.finishOrder();
+            cardLayout.show(mainPanel, "CustomerMenu");
+        }
+
+        // Kalau mau lanjut navigasi, kamu bisa tambahin ini misalnya:
+        // cardLayout.show(mainPanel, "CustomerMenu");
+    }
+}

@@ -68,8 +68,8 @@ public class Customer extends User {
     }
 
     public void finishOrder() {
-        this.nowOrder = null;
         isOrdering = false;
+        nowOrder = null;
     }
 
     public void showPayment(Order order) {

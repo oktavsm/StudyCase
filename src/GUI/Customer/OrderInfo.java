@@ -10,7 +10,9 @@ import Service.GoogleMapService;
 import User.*;
 import GUI.ChatUI;
 public class OrderInfo extends CustomerPanel {
-    public OrderInfo(Application app, CardLayout cardLayout, JPanel mainPanel, Order order, JLabel imageMap) {
+    
+
+    public OrderInfo(Application app, CardLayout cardLayout, JPanel mainPanel, Order order, JLabel imageMap, Customer customer) {
         super(app, cardLayout, mainPanel);
         setLayout(null); // 3 rows, 2 columns
         JLabel titleLabel = new JLabel("Order Info", SwingConstants.CENTER);
@@ -84,7 +86,7 @@ public class OrderInfo extends CustomerPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //open chat window
-                ChatUI chatUI = new ChatUI(order,(User)order.getCustomer());
+                order.showChat((User) customer);
             }
         });
 
@@ -98,6 +100,7 @@ public class OrderInfo extends CustomerPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(mainPanel, "CustomerMenu");
+                customer.getOrder().closeChat();
             }
         });
     }

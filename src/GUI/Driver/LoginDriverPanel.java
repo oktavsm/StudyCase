@@ -43,6 +43,7 @@ public class LoginDriverPanel extends DriverPanel {
                 if (app.validateEmailAndPassword(email, password,"Driver")!= null) {
                     JOptionPane.showMessageDialog(null, "Login successful!");
                     JPanel menuDriver = new MenuDriver(app, cardLayout, mainPanel, driver);
+                    mainPanel.remove(menuDriver);
                     mainPanel.add(menuDriver, "DriverMenu");
                     cardLayout.show(mainPanel, "DriverMenu");   
 

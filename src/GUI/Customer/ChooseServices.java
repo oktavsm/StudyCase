@@ -97,7 +97,7 @@ public class ChooseServices extends CustomerPanel {
                     JPanel customerMenuPanel = new MenuCustomerPanel(app, cardLayout, mainPanel, customer);
                     mainPanel.remove(customerMenuPanel);
                     mainPanel.add(customerMenuPanel, "CustomerMenu");
-                    JPanel orderInfo = new OrderInfo(app, cardLayout, mainPanel, order, labelMap);
+                    JPanel orderInfo = new OrderInfo(app, cardLayout, mainPanel, order, labelMap, customer);
                     order.setOrderInfoPanel(orderInfo);
                     order.initPanel(app,cardLayout, mainPanel);
                 } else {
@@ -120,7 +120,7 @@ public class ChooseServices extends CustomerPanel {
                     JPanel customerMenuPanel = new MenuCustomerPanel(app, cardLayout, mainPanel, customer);
                     mainPanel.remove(customerMenuPanel);
                     mainPanel.add(customerMenuPanel, "CustomerMenu");
-                    JPanel orderInfo = new OrderInfo(app, cardLayout, mainPanel, order, labelMap);
+                    JPanel orderInfo = new OrderInfo(app, cardLayout, mainPanel, order, labelMap, customer);
                     order.setOrderInfoPanel(orderInfo);
                     order.initPanel(app,cardLayout, mainPanel);
                 } else {

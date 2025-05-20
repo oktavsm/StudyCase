@@ -47,6 +47,9 @@ public class Driver extends User {
         return this.balance;
     };
 
+    public boolean isHaveOrder(){
+        return this.nowOrder != null;
+    }
     
 
     public void giveReview(double rating) {
@@ -89,6 +92,12 @@ public class Driver extends User {
     }
     public void setOrder(Order order) {
         this.nowOrder = order;
+    }
+
+    public void setRating(double rating) {
+        // oldest rating + new rating
+        this.rating = (this.rating * this.orderCount + rating) / (this.orderCount + 1);
+        this.orderCount++;
     }
 
     @Override
