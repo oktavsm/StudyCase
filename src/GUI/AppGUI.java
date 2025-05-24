@@ -1,11 +1,10 @@
 package GUI;
 
+import App.Application;
 import GUI.Customer.*;
 import GUI.Driver.*;
-import App.Application;
-
-import javax.swing.*;
 import java.awt.*;
+import javax.swing.*;
 
 public class AppGUI extends JFrame {
     private Application app;
@@ -15,7 +14,7 @@ public class AppGUI extends JFrame {
     public AppGUI(Application app) {
         this.app = app;
         setTitle("Tetenger Dalan");
-        setSize(600, 800);
+        setSize(360, 640);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
