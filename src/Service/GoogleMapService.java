@@ -98,7 +98,7 @@ public class GoogleMapService {
                                      .getString("points");
 
         // Step 2: Buat URL static map dengan encoded polyline
-        String size = "600x400";
+        String size = "340x226";
         String mapUrl = System.getProperty("GOOGLE_ROUTE_URL")
                       + "size=" + size
                       + "&markers=color:green|" + encodedOrigin

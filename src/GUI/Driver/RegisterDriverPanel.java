@@ -87,7 +87,7 @@ public class RegisterDriverPanel extends DriverPanel {
         vehiclePanel.add(titleLabel); 
 
         JLabel vehicleTypeLabel = new JLabel("Vehicle Type: ");
-        JTextField vehicleTypeField = new JTextField();
+        JComboBox<String> vehicleTypeField = new JComboBox<>(new String[]{"Car", "Motorcycle"});
         JLabel vehicleBrandLabel = new JLabel("Vehicle Brand: ");
         JTextField vehicleBrandField = new JTextField();
         JLabel vehicleColorLabel = new JLabel("Vehicle Color: ");
@@ -123,7 +123,7 @@ public class RegisterDriverPanel extends DriverPanel {
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String type = vehicleTypeField.getText();
+                String type = vehicleTypeField.getSelectedItem().toString();
                 String brand = vehicleBrandField.getText();
                 String color = vehicleColorField.getText();
                 String plate = vehiclePlateField.getText();
@@ -138,13 +138,18 @@ public class RegisterDriverPanel extends DriverPanel {
                     return;
                 }
 
-                Vehicle vehicle = type.equals("Motorcycle") 
-                    ? new Motorcycle(plate, color, brand) 
-                    : new Car(plate, color, brand);
+                                // Create a Vehicle object and assign it to the driver
+                Vehicle vehicle = null;
+                if(type.equals("Motorcycle")){
+                    vehicle = new Motorcycle(plate,color,brand);
+                } else{
+                    vehicle = new Car(plate,color,brand);
+                }
+
 
                 driver.setVehicle(vehicle);
-                app.addDriver(driver.getEmail(), driver.getName(), driver.getPassword(), driver.getPhoneNumber(), vehicle);
-                app.addVehicle(driver.getEmail(), type, plate, color, brand);
+                // app.addDriver(driver.getEmail(), driver.getName(), driver.getPassword(), driver.getPhoneNumber(), vehicle);
+                // app.addVehicle(driver.getEmail(), type, plate, color, brand);
                 JOptionPane.showMessageDialog(null, "Driver registered successfully!");
                 cardLayout.show(mainPanel, "MainMenu");
             }

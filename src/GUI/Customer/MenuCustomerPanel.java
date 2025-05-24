@@ -113,7 +113,7 @@ public class MenuCustomerPanel extends CustomerPanel {
 
                 // Tambahkan tombol baru
                 JButton chatButton = new JButton("Chat with Driver");
-                chatButton.setBounds(120, 640, 150, 30); // Set position and size
+                chatButton.setBounds(120, 586, 150, 30); // Set position and size
                 chatButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -124,7 +124,7 @@ public class MenuCustomerPanel extends CustomerPanel {
                 });
                 orderInfoPanel.add(chatButton);
                 JButton backButton = new JButton("Back");
-                backButton.setBounds(10, 640, 100, 30); // Set position and size
+                backButton.setBounds(10, 586, 100, 30); // Set position and size
                 backButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {

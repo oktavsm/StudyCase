@@ -42,10 +42,10 @@ public class ChooseServices extends CustomerPanel {
         
             labelMap = new JLabel(mapImage);
             //set map possition
-            labelMap.setBounds(10, 30, 580, 380); // Set position and size
+            labelMap.setBounds(10, 30, 340, 266); // Set position and size
             add(labelMap);
             JLabel labelInfo = new JLabel("Jarak: " + info[0] + " | Estimasi waktu: " + info[1]);
-            labelInfo.setBounds(10, 420, 580, 30); // Set position and size
+            labelInfo.setBounds(10, 306, 340, 30); // Set position and size
             add(labelInfo); 
         } catch (Exception exc) {
             exc.printStackTrace();
@@ -63,14 +63,14 @@ public class ChooseServices extends CustomerPanel {
         String labelButtonSedah = "Tetenger Sepedah Rp. " + rateSepedah;
 
         JButton btnSepedah = new JButton(labelButtonSedah);
-        btnSepedah.setBounds(10, 470, 580, 50); // Set position and size
+        btnSepedah.setBounds(10, 346, 340, 50); // Set position and size
         // Tetenger Montor
         String labelButtonMontor = "Tetenger Montor Rp. " + rateMontor;
         JButton btnMontor = new JButton(labelButtonMontor);
-        btnMontor.setBounds(10, 530, 580, 50); // Set position and size
+        btnMontor.setBounds(10, 406, 340, 50); // Set position and size
         // Back Button
         JButton btnBack = new JButton("Back to Menu");
-        btnBack.setBounds(10, 580, 580, 50); // Set position and size
+        btnBack.setBounds(10, 466, 340, 50); // Set position and size
         add(btnSepedah);
         add(btnMontor);
         add(btnBack);

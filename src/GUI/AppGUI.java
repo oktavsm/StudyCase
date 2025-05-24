@@ -14,7 +14,7 @@ public class AppGUI extends JFrame {
     public AppGUI(Application app) {
         this.app = app;
         setTitle("Tetenger Dalan");
-        setSize(360, 640);
+        setSize(370, 640);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
