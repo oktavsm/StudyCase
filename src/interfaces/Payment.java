@@ -1,4 +1,4 @@
-package Interface;
+package interfaces;
 
 public interface Payment {
     public void pay(double amount);

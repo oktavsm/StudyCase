@@ -1,11 +1,11 @@
 package domain.order;
 
 import java.util.*;
-import Interface.*;
+
 import app.Application;
 import domain.user.*;
 import gui.ChatUI;
-
+import interfaces.*;
 import javax.swing.*;
 import java.awt.*;
 

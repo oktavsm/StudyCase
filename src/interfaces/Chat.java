@@ -1,4 +1,4 @@
-package Interface;
+package interfaces;
 
 import domain.user.*;
 import java.util.*;
