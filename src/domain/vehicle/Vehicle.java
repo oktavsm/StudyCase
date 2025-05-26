@@ -17,7 +17,7 @@ public abstract class Vehicle {
     }
 
     private void writeToFile() {
-        String fileName = "src/database/driver/vehicle.txt";
+        String fileName = "database/driver/vehicle.txt";
 
         StringBuilder stringBuilder = new StringBuilder();
 

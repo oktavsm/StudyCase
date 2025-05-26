@@ -29,7 +29,7 @@ public class Application implements Topup {
             System.out.println("Register failed, email already registered");
         } else {
             try {
-                fileWriter = new FileWriter("src/database/customer/customer.txt", true);
+                fileWriter = new FileWriter("database/customer/customer.txt", true);
                 BufferedWriter = new BufferedWriter(fileWriter);
                 BufferedWriter.write(name + "," + email + "," + password + "," + phoneNumber);
                 BufferedWriter.newLine();
@@ -45,7 +45,7 @@ public class Application implements Topup {
     public boolean validateEmailCustomer(String email) {
         boolean isExist = false;
         try {
-            FileReader fileInput = new FileReader("src/database/customer/customer.txt");
+            FileReader fileInput = new FileReader("database/customer/customer.txt");
             BufferedReader bufferInput = new BufferedReader(fileInput);
 
             String data = bufferInput.readLine();
@@ -70,7 +70,7 @@ public class Application implements Topup {
     public boolean validateEmailDriver(String email) {
         boolean isExist = false;
         try {
-            FileReader fileInput = new FileReader("src/database/driver/driver.txt");
+            FileReader fileInput = new FileReader("database/driver/driver.txt");
             BufferedReader bufferInput = new BufferedReader(fileInput);
 
             String data = bufferInput.readLine();
@@ -95,7 +95,7 @@ public class Application implements Topup {
     public boolean validateVehicleDriver(String plateNumber) {
         boolean isExist = false;
         try {
-            FileReader fileInput = new FileReader("src/database/driver/vehicle.txt");
+            FileReader fileInput = new FileReader("database/driver/vehicle.txt");
             BufferedReader bufferInput = new BufferedReader(fileInput);
 
             String data = bufferInput.readLine();
@@ -127,7 +127,7 @@ public class Application implements Topup {
     }
 
     public void loadCustomers() throws IOException {
-        fileReader = new FileReader("src/database/customer/customer.txt");
+        fileReader = new FileReader("database/customer/customer.txt");
         bufferedReader = new BufferedReader(fileReader);
         String data = bufferedReader.readLine();
 
@@ -141,12 +141,12 @@ public class Application implements Topup {
     }
 
     public void loadDriver() throws IOException {
-        fileReader = new FileReader("src/database/driver/driver.txt");
+        fileReader = new FileReader("database/driver/driver.txt");
         bufferedReader = new BufferedReader(fileReader);
         String data = bufferedReader.readLine();
         while (data != null && !data.isEmpty()) {
             String[] check = data.split(",");
-            fileReader = new FileReader("src/database/driver/vehicle.txt");
+            fileReader = new FileReader("database/driver/vehicle.txt");
             BufferedReader bufferedReader2 = new BufferedReader(fileReader);
             String data2 = bufferedReader2.readLine();
             while (data2 != null && !data2.isEmpty()) {
@@ -172,7 +172,7 @@ public class Application implements Topup {
 
     public void addDriver(String email, String password, String name, String phoneNumber, Vehicle vehicle) {
         try {
-            fileWriter = new FileWriter("src/database/driver/driver.txt", true);
+            fileWriter = new FileWriter("database/driver/driver.txt", true);
             BufferedWriter = new BufferedWriter(fileWriter);
             BufferedWriter.write(email + "," + password + "," + name + "," + phoneNumber);
             BufferedWriter.newLine();
@@ -186,7 +186,7 @@ public class Application implements Topup {
 
     public Vehicle addVehicle(String email, String type, String plateNumber, String color, String brand) {
         try {
-            fileWriter = new FileWriter("src/database/driver/vehicle.txt", true);
+            fileWriter = new FileWriter("database/driver/vehicle.txt", true);
             BufferedWriter = new BufferedWriter(fileWriter);
             BufferedWriter.write(email + "," + type + "," + plateNumber + "," + color + "," + brand);
             BufferedWriter.newLine();
