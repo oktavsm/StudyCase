@@ -6,14 +6,13 @@ import App.Application;
 import Order.Order;
 
 public class RatingUtil extends CustomerPanel {
-
     public RatingUtil(Application app, CardLayout cardLayout, JPanel mainPanel, Order order) {
         super(app, cardLayout, mainPanel);
 
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
-        JLabel label = new JLabel("Beri rating untuk driver:");
+        JLabel label = new JLabel("Rate the driver:");
         panel.add(label);
 
         String[] ratings = { "★", "★★", "★★★", "★★★★", "★★★★★" };
@@ -21,7 +20,7 @@ public class RatingUtil extends CustomerPanel {
         panel.add(comboBox);
 
         JTextField commentField = new JTextField();
-        commentField.setBorder(BorderFactory.createTitledBorder("Komentar (opsional)"));
+        commentField.setBorder(BorderFactory.createTitledBorder("Commentar (optional)"));
         panel.add(commentField);
 
         int result = JOptionPane.showConfirmDialog(null, panel, "Rating Driver",
@@ -32,7 +31,7 @@ public class RatingUtil extends CustomerPanel {
             String comment = commentField.getText().trim();
             order.setRating(rating);
 
-            JOptionPane.showMessageDialog(null, "Terima kasih! Rating berhasil disimpan.");
+            JOptionPane.showMessageDialog(null, "Thank you for your rating!");
             order.finishOrder();
             cardLayout.show(mainPanel, "CustomerMenu");
         }

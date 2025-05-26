@@ -22,11 +22,11 @@ public class AppGUI extends JFrame {
         mainPanel = new JPanel(cardLayout);
         add(mainPanel);
 
-        mainPanel.add(new MainMenuPanel(app, cardLayout, mainPanel), "MainMenu");
-        mainPanel.add(new RegisterCustomerPanel(app, cardLayout, mainPanel), "RegisterCustomer");
-        mainPanel.add(new LoginCustomerPanel(app, cardLayout, mainPanel), "LoginCustomer");
-        mainPanel.add(new RegisterDriverPanel(app, cardLayout, mainPanel), "RegisterDriver");
-        mainPanel.add(new LoginDriverPanel(app, cardLayout, mainPanel), "LoginDriver");
+        mainPanel.add(new MainMenuPanel(this.app, cardLayout, mainPanel), "MainMenu");
+        mainPanel.add(new RegisterCustomerPanel(this.app, cardLayout, mainPanel), "RegisterCustomer");
+        mainPanel.add(new LoginCustomerPanel(this.app, cardLayout, mainPanel), "LoginCustomer");
+        mainPanel.add(new RegisterDriverPanel(this.app, cardLayout, mainPanel), "RegisterDriver");
+        mainPanel.add(new LoginDriverPanel(this.app, cardLayout, mainPanel), "LoginDriver");
 
         cardLayout.show(mainPanel, "MainMenu");
     }

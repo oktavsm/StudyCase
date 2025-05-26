@@ -104,7 +104,7 @@ public class Order implements Chat, Payment, Review {
     public void processOrder() {
         this.driver.takeOrder(this);
         JOptionPane.showMessageDialog(null, "Payment Success! \n" +
-                "Rate: Rp. " + this.rate + "\n" +
+                "Rate: Rp" + this.rate + "\n" +
                 "Driver: " + driver.getName() + "\n" +
                 "Vehicle: " + driver.getVehicle().getType() + "\n" +
                 "From: " + location + "\n" +

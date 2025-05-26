@@ -36,7 +36,7 @@ public class Application implements Topup {
                 users.add(new Customer(name, email, password, phoneNumber, 0, this));
                 System.out.println("Register successful");
             } catch (IOException e) {
-
+                System.out.println("Error writing to file: " + e.getMessage());
             }
         }
     }
@@ -60,10 +60,10 @@ public class Application implements Topup {
 
             bufferInput.close();
         } catch (IOException e) {
-
+            System.out.println("Error reading file: " + e.getMessage());
         }
-        return isExist;
 
+        return isExist;
     }
 
     public boolean validateEmailDriver(String email) {
@@ -85,10 +85,10 @@ public class Application implements Topup {
 
             bufferInput.close();
         } catch (IOException e) {
-
+            System.out.println("Error reading file: " + e.getMessage());
         }
-        return isExist;
 
+        return isExist;
     }
 
     public boolean validateVehicleDriver(String plateNumber) {
@@ -110,17 +110,16 @@ public class Application implements Topup {
 
             bufferInput.close();
         } catch (IOException e) {
-
+            System.out.println("Error reading file: " + e.getMessage());
         }
-        return isExist;
 
+        return isExist;
     }
 
     public void loadDatabase() {
         try {
             loadCustomers();
             loadDriver();
-
         } catch (IOException e) {
             System.out.println("Error loading database: " + e.getMessage());
         }
@@ -136,8 +135,8 @@ public class Application implements Topup {
             users.add(new Customer(check[0], check[1], check[2], check[3], 0, this));
             data = bufferedReader.readLine();
         }
-        bufferedReader.close();
 
+        bufferedReader.close();
     }
 
     public void loadDriver() throws IOException {
@@ -166,8 +165,8 @@ public class Application implements Topup {
             bufferedReader2.close();
             data = bufferedReader.readLine();
         }
-        bufferedReader.close();
 
+        bufferedReader.close();
     }
 
     public void addDriver(String email, String password, String name, String phoneNumber, Vehicle vehicle) {
@@ -178,6 +177,7 @@ public class Application implements Topup {
             BufferedWriter.newLine();
             BufferedWriter.close();
         } catch (IOException e) {
+            System.out.println("Error writing to file: " + e.getMessage());
         }
 
         users.add(new Driver(email, password, name, phoneNumber, vehicle, this));
@@ -191,6 +191,7 @@ public class Application implements Topup {
             BufferedWriter.newLine();
             BufferedWriter.close();
         } catch (IOException e) {
+            System.out.println("Error writing to file: " + e.getMessage());
         }
 
         if (type.equalsIgnoreCase("Motorcycle")) {
@@ -273,5 +274,4 @@ public class Application implements Topup {
 
         return virtualAccount;
     }
-
 }

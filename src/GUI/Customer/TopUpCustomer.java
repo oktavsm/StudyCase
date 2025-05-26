@@ -83,7 +83,7 @@ public class TopUpCustomer extends CustomerPanel {
         JLabel titleLabel = new JLabel("Top Up Balance", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 16));
 
-        JLabel amountLabel = new JLabel("Amount: Rp. " + amount);
+        JLabel amountLabel = new JLabel("Amount: Rp" + amount);
         String virtualAccount = app.createPayment(choice, customer, amount);
 
         JLabel virtualAccountLabel = new JLabel("Virtual Account: " + virtualAccount);
@@ -110,7 +110,7 @@ public class TopUpCustomer extends CustomerPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 app.topupBalance(amount, customer);
-                JOptionPane.showMessageDialog(null, "Top Up successful! New balance: Rp. " + customer.getBalance());
+                JOptionPane.showMessageDialog(null, "Top Up successful! New balance: Rp" + customer.getBalance());
 
                 JPanel customerMenuPanel = new MenuCustomerPanel(app, cardLayout, mainPanel, customer);
                 mainPanel.add(customerMenuPanel, "CustomerMenu");

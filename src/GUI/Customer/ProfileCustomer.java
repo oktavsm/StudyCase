@@ -7,7 +7,6 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class ProfileCustomer extends CustomerPanel {
-
     public ProfileCustomer(Application app, CardLayout cardLayout, JPanel mainPanel, Customer customer) {
         super(app, cardLayout, mainPanel);
         setLayout(null);

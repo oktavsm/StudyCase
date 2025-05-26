@@ -2,7 +2,6 @@ package User;
 
 import Order.Order;
 import App.Application;
-import java.util.*;
 import javax.swing.JOptionPane;
 
 public class Customer extends User {

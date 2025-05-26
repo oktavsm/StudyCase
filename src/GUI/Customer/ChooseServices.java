@@ -13,8 +13,8 @@ public class ChooseServices extends CustomerPanel {
     ImageIcon mapImage = null;
     JLabel labelMap = new JLabel();
 
-    public ChooseServices(Application app, CardLayout cardLayout, JPanel mainPanel, Customer customer, String jemput,
-            String tujuan) {
+    public ChooseServices(Application app, CardLayout cardLayout, JPanel mainPanel, Customer customer, String location,
+            String destination) {
         super(app, cardLayout, mainPanel);
         setLayout(null);
 
@@ -23,18 +23,18 @@ public class ChooseServices extends CustomerPanel {
         titleLabel.setBounds(0, 10, 400, 30);
 
         try {
-            info = GoogleMapService.getRouteInfo(jemput, tujuan);
-            mapImage = GoogleMapService.getRouteMap(jemput, tujuan);
+            info = GoogleMapService.getRouteInfo(location, destination);
+            mapImage = GoogleMapService.getRouteMap(location, destination);
 
             labelMap = new JLabel(mapImage);
             labelMap.setBounds(10, 30, 340, 266);
             add(labelMap);
-            JLabel labelInfo = new JLabel("Jarak: " + info[0] + " | Estimasi waktu: " + info[1]);
+            JLabel labelInfo = new JLabel("Distance: " + info[0] + " | Estimated Time: " + info[1]);
             labelInfo.setBounds(10, 306, 340, 30);
             add(labelInfo);
         } catch (Exception exc) {
             exc.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Gagal mengambil data dari Google Maps API.");
+            JOptionPane.showMessageDialog(null, "Error fetching route information. Please try again later.");
         }
         String time = info[1];
         String distanceS = info[0].replace(" km", "").replace(",", ".");
@@ -42,11 +42,11 @@ public class ChooseServices extends CustomerPanel {
         double rateSepedah = 8000 * Math.max(1, distance);
         double rateMontor = 14000 * Math.max(1, distance);
 
-        String labelButtonSedah = "Tetenger Sepedah Rp. " + rateSepedah;
+        String labelButtonSepedah = "Tetenger Sepedah Rp" + rateSepedah;
 
-        JButton btnSepedah = new JButton(labelButtonSedah);
+        JButton btnSepedah = new JButton(labelButtonSepedah);
         btnSepedah.setBounds(10, 346, 340, 50);
-        String labelButtonMontor = "Tetenger Montor Rp. " + rateMontor;
+        String labelButtonMontor = "Tetenger Montor Rp" + rateMontor;
         JButton btnMontor = new JButton(labelButtonMontor);
         btnMontor.setBounds(10, 406, 340, 50);
         JButton btnBack = new JButton("Back to Menu");
@@ -65,7 +65,7 @@ public class ChooseServices extends CustomerPanel {
         btnSepedah.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Order order = customer.newOrder(tujuan, jemput, distance, time, "Motorcycle");
+                Order order = customer.newOrder(destination, location, distance, time, "Motorcycle");
                 if (order != null) {
                     order.processOrder();
                     JPanel customerMenuPanel = new MenuCustomerPanel(app, cardLayout, mainPanel, customer);
@@ -75,7 +75,6 @@ public class ChooseServices extends CustomerPanel {
                     order.setOrderInfoPanel(orderInfo);
                     order.initPanel(app, cardLayout, mainPanel);
                 } else {
-                    // back to main menu
                     JPanel customerMenuPanel = new MenuCustomerPanel(app, cardLayout, mainPanel, customer);
                     mainPanel.add(customerMenuPanel, "CustomerMenu");
                     cardLayout.show(mainPanel, "CustomerMenu");
@@ -85,7 +84,7 @@ public class ChooseServices extends CustomerPanel {
         btnMontor.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Order order = customer.newOrder(tujuan, jemput, distance, time, "Car");
+                Order order = customer.newOrder(destination, location, distance, time, "Car");
                 if (order != null) {
                     order.processOrder();
                     JPanel customerMenuPanel = new MenuCustomerPanel(app, cardLayout, mainPanel, customer);

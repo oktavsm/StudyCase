@@ -9,7 +9,7 @@ public class MainMenuPanel extends JPanel {
     public MainMenuPanel(Application app, CardLayout cardLayout, JPanel mainPanel) {
         setLayout(null);
 
-        JLabel titleLabel = new JLabel("=== Online Transportation ===", SwingConstants.CENTER);
+        JLabel titleLabel = new JLabel("=== Tetenger Dalan ===", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 16));
         titleLabel.setBounds(30, 20, 300, 30);
         add(titleLabel);
