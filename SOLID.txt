@@ -1,0 +1,38 @@
+1. S -> main2?
+User.java — Berfungsi sebagai class dasar user (baik Driver maupun Customer). ✅
+
+Customer.java dan Driver.java — Turunan dari User, menambah atribut sesuai peran masing-masing. ✅
+
+Vehicle.java, Car.java, Motorcycle.java — Masing-masing fokus merepresentasikan kendaraan. ✅
+
+Payment.java — Menangani proses pembayaran. ✅
+
+✅ SRP TERPENUHI: Setiap class punya satu tanggung jawab.
+
+2. O -> interface payment?
+Apakah kita bisa menambah fitur baru tanpa mengubah kode lama?
+
+Vehicle adalah class abstrak.
+
+Car dan Motorcycle adalah class turunan.
+
+Menambahkan jenis kendaraan baru (misal: ElectricScooter) cukup membuat subclass baru dari Vehicle, tanpa mengubah Car atau Motorcycle.
+
+✅ OCP TERPENUHI: Struktur class mendukung perluasan tanpa mengubah kode lama.
+
+3. L -> 
+3. Liskov Substitution Principle (LSP)
+Apakah subclass bisa menggantikan superclass tanpa menyebabkan error?
+
+Car dan Motorcycle bisa digunakan sebagai Vehicle.
+
+Customer dan Driver bisa digunakan sebagai User.
+
+Tidak terlihat ada override yang melanggar kontrak induk, seperti exception atau behavior yang tidak sesuai.
+
+✅ LSP TERPENUHI: Subclass dapat menggantikan superclass dengan aman.
+
+4. I -> interface review?
+
+
+5. D -> 
