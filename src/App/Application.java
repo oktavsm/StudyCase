@@ -12,7 +12,6 @@ public class Application implements Topup {
     ArrayList<Vehicle> vehicles = new ArrayList<>();
     ArrayList<User> users = new ArrayList<>();
     ArrayList<Order> orders = new ArrayList<>();
-    Scanner in = new Scanner(System.in);
     FileReader fileReader;
     BufferedReader bufferedReader;
     FileWriter fileWriter;
@@ -205,34 +204,6 @@ public class Application implements Topup {
         } else {
             System.out.println("Invalid vehicle type");
             return null;
-        }
-    }
-
-    public void removeCustomer() {
-        System.out.print("Enter customer email: ");
-        String email = in.nextLine();
-
-        User toRemove = findUserByEmail(email, "Customer");
-        if (toRemove != null) {
-            users.remove(toRemove);
-            System.out.println("Customer removed successfully");
-        } else {
-            System.out.println("Customer not found");
-        }
-    }
-
-    public void removeDriver() {
-        System.out.print("Enter driver email: ");
-        String email = in.nextLine();
-
-        User toRemove = findUserByEmail(email, "Driver");
-        if (toRemove != null) {
-            Vehicle vehicle = ((Driver) toRemove).getVehicle();
-            vehicles.remove(vehicle);
-            users.remove(toRemove);
-            System.out.println("Driver removed successfully");
-        } else {
-            System.out.println("Driver not found");
         }
     }
 
