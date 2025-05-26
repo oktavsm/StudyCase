@@ -17,7 +17,7 @@ public abstract class Vehicle {
     }
 
     private void writeToFile() {
-        String fileName = "vehicle_data.txt";
+        String fileName = "Database/Driver/Vehicle.txt";
 
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -32,9 +32,7 @@ public abstract class Vehicle {
             fileOutput.write(data);
             fileOutput.close();
         } catch (IOException e) {
-            System.err.println("Maaf, file gagal dibuat & ditulisi");
             System.exit(1);
-
         }
     }
 
