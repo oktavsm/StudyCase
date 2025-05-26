@@ -1,11 +1,11 @@
-package GUI.Driver;
+package gui.Driver;
 
-import App.Application;
 import javax.swing.*;
+import app.Application;
 import java.awt.*;
 import java.awt.event.*;
-import User.Driver;
-import Vehicle.*;
+import domain.user.Driver;
+import domain.vehicle.*;
 
 public class RegisterDriverPanel extends DriverPanel {
     public RegisterDriverPanel(Application app, CardLayout cardLayout, JPanel mainPanel) {

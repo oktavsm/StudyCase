@@ -1,6 +1,6 @@
-import App.Application;
+import utils.EnvLoader;
 import java.io.*;
-import Utils.EnvLoader;
+import app.Application;
 
 public class Main {
     public static void main(String[] args) throws IOException {

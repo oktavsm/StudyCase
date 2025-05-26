@@ -1,8 +1,8 @@
-package GUI;
+package gui;
 
-import App.Application;
-import GUI.Customer.*;
-import GUI.Driver.*;
+import app.Application;
+import gui.Customer.*;
+import gui.Driver.*;
 import java.awt.*;
 import javax.swing.*;
 

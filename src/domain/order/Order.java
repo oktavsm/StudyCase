@@ -1,12 +1,13 @@
-package Order;
+package domain.order;
 
 import java.util.*;
 import Interface.*;
-import User.*;
+import app.Application;
+import domain.user.*;
+import gui.ChatUI;
+
 import javax.swing.*;
 import java.awt.*;
-import App.Application;
-import GUI.ChatUI;
 
 public class Order implements Chat, Payment, Review {
     private ArrayList<String> chatHistory = new ArrayList<String>();

@@ -1,9 +1,9 @@
-package GUI;
+package gui;
 
 import javax.swing.*;
 import java.awt.*;
-import Order.Order;
-import User.*;
+import domain.order.*;
+import domain.user.*;
 
 public class ChatUI extends JFrame {
     private JPanel chatPanel;

@@ -1,9 +1,9 @@
-package GUI.Customer;
+package gui.Customer;
 
 import javax.swing.*;
+import app.Application;
 import java.awt.*;
-import App.Application;
-import Order.Order;
+import domain.order.*;
 
 public class RatingUtil extends CustomerPanel {
     public RatingUtil(Application app, CardLayout cardLayout, JPanel mainPanel, Order order) {

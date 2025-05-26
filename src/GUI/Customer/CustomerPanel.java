@@ -1,7 +1,7 @@
-package GUI.Customer;
+package gui.Customer;
 
-import App.Application;
 import javax.swing.*;
+import app.Application;
 import java.awt.*;
 
 public abstract class CustomerPanel extends JPanel {

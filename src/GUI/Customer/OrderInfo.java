@@ -1,11 +1,11 @@
-package GUI.Customer;
+package gui.Customer;
 
 import javax.swing.*;
+import app.Application;
 import java.awt.*;
 import java.awt.event.*;
-import App.Application;
-import Order.Order;
-import User.*;
+import domain.order.*;
+import domain.user.*;
 
 public class OrderInfo extends CustomerPanel {
 

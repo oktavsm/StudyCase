@@ -1,9 +1,9 @@
-package User;
+package domain.user;
 
-import Vehicle.*;
-import Order.Order;
+import domain.vehicle.*;
+import domain.order.*;
 import java.util.*;
-import App.Application;
+import app.Application;
 
 public class Driver extends User {
     private Order nowOrder;

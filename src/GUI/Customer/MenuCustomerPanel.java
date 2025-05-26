@@ -1,10 +1,10 @@
-package GUI.Customer;
+package gui.Customer;
 
 import javax.swing.*;
+import app.Application;
 import java.awt.*;
 import java.awt.event.*;
-import App.Application;
-import User.*;
+import domain.user.*;
 
 public class MenuCustomerPanel extends CustomerPanel {
     public MenuCustomerPanel(Application app, CardLayout cardLayout, JPanel mainPanel, Customer customer) {

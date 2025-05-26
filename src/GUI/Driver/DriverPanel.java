@@ -1,7 +1,7 @@
-package GUI.Driver;
+package gui.Driver;
 
-import App.Application;
 import javax.swing.*;
+import app.Application;
 import java.awt.*;
 
 public abstract class DriverPanel extends JPanel {

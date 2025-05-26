@@ -1,10 +1,10 @@
-package GUI.Driver;
+package gui.Driver;
 
-import App.Application;
-import User.Driver;
+import domain.user.Driver;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import app.Application;
 
 public class LoginDriverPanel extends DriverPanel {
     public LoginDriverPanel(Application app, CardLayout cardLayout, JPanel mainPanel) {

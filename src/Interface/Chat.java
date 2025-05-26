@@ -1,6 +1,6 @@
 package Interface;
 
-import User.*;
+import domain.user.*;
 import java.util.*;
 
 public interface Chat {

@@ -1,12 +1,12 @@
-package GUI.Customer;
+package gui.Customer;
 
 import javax.swing.*;
+import app.Application;
 import java.awt.*;
 import java.awt.event.*;
-import App.Application;
-import Order.Order;
-import Service.GoogleMapService;
-import User.*;
+import domain.order.*;
+import domain.user.*;
+import infra.maps.GoogleMap;
 
 public class ChooseServices extends CustomerPanel {
     String info[] = null;
@@ -23,8 +23,8 @@ public class ChooseServices extends CustomerPanel {
         titleLabel.setBounds(0, 10, 400, 30);
 
         try {
-            info = GoogleMapService.getRouteInfo(location, destination);
-            mapImage = GoogleMapService.getRouteMap(location, destination);
+            info = GoogleMap.getRouteInfo(location, destination);
+            mapImage = GoogleMap.getRouteMap(location, destination);
 
             labelMap = new JLabel(mapImage);
             labelMap.setBounds(10, 30, 340, 266);

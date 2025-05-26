@@ -1,4 +1,4 @@
-package Vehicle;
+package domain.vehicle;
 
 import java.io.*;
 
@@ -17,7 +17,7 @@ public abstract class Vehicle {
     }
 
     private void writeToFile() {
-        String fileName = "src/Database/Driver/Vehicle.txt";
+        String fileName = "src/database/driver/vehicle.txt";
 
         StringBuilder stringBuilder = new StringBuilder();
 

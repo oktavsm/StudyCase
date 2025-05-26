@@ -1,6 +1,6 @@
 package Interface;
 
-import User.Customer;
+import domain.user.Customer;
 
 public interface Topup {
 

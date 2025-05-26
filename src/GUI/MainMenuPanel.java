@@ -1,9 +1,9 @@
-package GUI;
+package gui;
 
 import javax.swing.*;
+import app.Application;
 import java.awt.*;
 import java.awt.event.*;
-import App.Application;
 
 public class MainMenuPanel extends JPanel {
     public MainMenuPanel(Application app, CardLayout cardLayout, JPanel mainPanel) {

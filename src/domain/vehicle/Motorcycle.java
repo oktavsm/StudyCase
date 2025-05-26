@@ -1,4 +1,4 @@
-package Vehicle;
+package domain.vehicle;
 
 public class Motorcycle extends Vehicle {
     public Motorcycle(String plateNumber, String color, String brand) {

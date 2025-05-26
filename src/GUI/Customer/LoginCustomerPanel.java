@@ -1,10 +1,10 @@
-package GUI.Customer;
+package gui.Customer;
 
-import App.Application;
-import User.Customer;
+import domain.user.Customer;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import app.Application;
 
 public class LoginCustomerPanel extends CustomerPanel {
 

@@ -1,6 +1,6 @@
-package User;
+package domain.user;
 
-import App.Application;
+import app.Application;
 
 public abstract class User {
     Application app;

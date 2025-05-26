@@ -1,8 +1,8 @@
-package User;
+package domain.user;
 
-import Order.Order;
-import App.Application;
+import domain.order.*;
 import javax.swing.JOptionPane;
+import app.Application;
 
 public class Customer extends User {
     private double balance;
