@@ -5,17 +5,15 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-
 import javax.swing.ImageIcon;
-
 import org.json.JSONObject;
 
 public class GoogleMapService {
-    
-    // Ambil koordinat dari alamat (pakai Geocoding API)
+
     public static String[] getCoordinates(String address) throws Exception {
         String encodedAddress = URLEncoder.encode(address, "UTF-8");
-        String url = System.getProperty("GOOGLE_DATA_URL") + encodedAddress + "&key=" + System.getProperty("GOOGLE_API_KEY");
+        String url = System.getProperty("GOOGLE_DATA_URL") + encodedAddress + "&key="
+                + System.getProperty("GOOGLE_API_KEY");
 
         HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
         conn.setRequestMethod("GET");
@@ -30,22 +28,21 @@ public class GoogleMapService {
 
         JSONObject json = new JSONObject(response.toString());
         JSONObject location = json.getJSONArray("results")
-                                  .getJSONObject(0)
-                                  .getJSONObject("geometry")
-                                  .getJSONObject("location");
+                .getJSONObject(0)
+                .getJSONObject("geometry")
+                .getJSONObject("location");
 
         String lat = String.valueOf(location.getDouble("lat"));
         String lng = String.valueOf(location.getDouble("lng"));
-        return new String[]{ lat, lng };
+        return new String[] { lat, lng };
     }
 
-    // Ambil info jarak & durasi dari Directions API
     public static String[] getRouteInfo(String origin, String destination) throws Exception {
         String encodedOrigin = URLEncoder.encode(origin, "UTF-8");
         String encodedDestination = URLEncoder.encode(destination, "UTF-8");
 
         String url = System.getProperty("GOOGLE_DIRECTION_URL") + encodedOrigin +
-                     "&destination=" + encodedDestination + "&mode=driving&key=" + System.getProperty("GOOGLE_API_KEY");
+                "&destination=" + encodedDestination + "&mode=driving&key=" + System.getProperty("GOOGLE_API_KEY");
 
         HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
         conn.setRequestMethod("GET");
@@ -60,25 +57,23 @@ public class GoogleMapService {
 
         JSONObject json = new JSONObject(response.toString());
         JSONObject leg = json.getJSONArray("routes")
-                             .getJSONObject(0)
-                             .getJSONArray("legs")
-                             .getJSONObject(0);
+                .getJSONObject(0)
+                .getJSONArray("legs")
+                .getJSONObject(0);
 
         String distance = leg.getJSONObject("distance").getString("text");
         String duration = leg.getJSONObject("duration").getString("text");
 
-        return new String[]{ distance, duration };
+        return new String[] { distance, duration };
     }
 
-    // Ambil gambar peta dengan rute sesuai jalan raya
     public static ImageIcon getRouteMap(String origin, String destination) throws Exception {
         String encodedOrigin = URLEncoder.encode(origin, "UTF-8");
         String encodedDestination = URLEncoder.encode(destination, "UTF-8");
 
-        // Step 1: Ambil encoded polyline dari Directions API
         String directionUrl = System.getProperty("GOOGLE_MAP_URL") + encodedOrigin
-                            + "&destination=" + encodedDestination
-                            + "&mode=driving&key=" + System.getProperty("GOOGLE_API_KEY");
+                + "&destination=" + encodedDestination
+                + "&mode=driving&key=" + System.getProperty("GOOGLE_API_KEY");
 
         HttpURLConnection conn = (HttpURLConnection) new URL(directionUrl).openConnection();
         conn.setRequestMethod("GET");
@@ -93,18 +88,17 @@ public class GoogleMapService {
 
         JSONObject json = new JSONObject(response.toString());
         String encodedPolyline = json.getJSONArray("routes")
-                                     .getJSONObject(0)
-                                     .getJSONObject("overview_polyline")
-                                     .getString("points");
+                .getJSONObject(0)
+                .getJSONObject("overview_polyline")
+                .getString("points");
 
-        // Step 2: Buat URL static map dengan encoded polyline
         String size = "340x226";
         String mapUrl = System.getProperty("GOOGLE_ROUTE_URL")
-                      + "size=" + size
-                      + "&markers=color:green|" + encodedOrigin
-                      + "&markers=color:red|" + encodedDestination
-                      + "&path=enc:" + encodedPolyline
-                      + "&key=" + System.getProperty("GOOGLE_API_KEY");
+                + "size=" + size
+                + "&markers=color:green|" + encodedOrigin
+                + "&markers=color:red|" + encodedDestination
+                + "&path=enc:" + encodedPolyline
+                + "&key=" + System.getProperty("GOOGLE_API_KEY");
 
         return new ImageIcon(new URL(mapUrl));
     }

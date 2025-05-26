@@ -2,7 +2,6 @@ package GUI;
 
 import javax.swing.*;
 import java.awt.*;
-import App.Application;
 import Order.Order;
 import User.*;
 
@@ -20,7 +19,6 @@ public class ChatUI extends JFrame {
         this.order = order;
         this.currentUser = currentUser;
 
-        // Tentukan lawan bicara
         if (currentUser instanceof Customer) {
             chatPartner = order.getDriver();
         } else if (currentUser instanceof Driver) {
@@ -37,7 +35,6 @@ public class ChatUI extends JFrame {
         setResizable(false);
         setLayout(new BorderLayout());
 
-        // Panel chat
         chatPanel = new JPanel();
         verticalBox = Box.createVerticalBox();
         chatPanel.setLayout(new BorderLayout());
@@ -46,7 +43,6 @@ public class ChatUI extends JFrame {
         scrollPane = new JScrollPane(chatPanel);
         add(scrollPane, BorderLayout.CENTER);
 
-        // Panel input bawah
         JPanel inputPanel = new JPanel(new BorderLayout());
         inputField = new JTextField();
         sendButton = new JButton("Send");
@@ -54,11 +50,9 @@ public class ChatUI extends JFrame {
         inputPanel.add(sendButton, BorderLayout.EAST);
         add(inputPanel, BorderLayout.SOUTH);
 
-        // Aksi kirim
         sendButton.addActionListener(e -> sendChat());
         inputField.addActionListener(e -> sendChat());
 
-        // Load pesan lama
         loadMessages();
     }
 
@@ -73,7 +67,8 @@ public class ChatUI extends JFrame {
     private void loadMessages() {
         for (String chat : order.getChat()) {
             String[] parts = chat.split("###\\*\\*\\*###");
-            if (parts.length < 2) continue;
+            if (parts.length < 2)
+                continue;
 
             String senderName = parts[0];
             String message = parts[1];
@@ -107,7 +102,6 @@ public class ChatUI extends JFrame {
         chatPanel.repaint();
         inputField.setText("");
 
-        // Scroll ke bawah otomatis
         SwingUtilities.invokeLater(() -> scrollPane.getVerticalScrollBar()
                 .setValue(scrollPane.getVerticalScrollBar().getMaximum()));
     }

@@ -5,9 +5,7 @@ import Interface.*;
 import User.*;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 import App.Application;
-import GUI.Customer.OrderInfo;
 import GUI.ChatUI;
 
 public class Order implements Chat, Payment, Review {
@@ -23,12 +21,15 @@ public class Order implements Chat, Payment, Review {
     JPanel orderInfoPanel;
     String time;
     private ChatUI chatUI;
+
     public void giveReview(double rating) {
         this.driver.giveReview(rating);
     }
-    public void setRating(double rating){
+
+    public void setRating(double rating) {
         this.driver.setRating(rating);
     }
+
     public Order(Customer customer, Driver driver, String location, String destination, double distance, String time) {
         this.driver = driver;
         this.customer = customer;
@@ -39,60 +40,69 @@ public class Order implements Chat, Payment, Review {
         this.time = time;
         chargeCustommer(this.rate);
     }
+
     public void showChat(User current) {
         this.chatUI = new ChatUI(this, current);
         this.chatUI.setVisible(true);
     }
-    public void closeChat(){
+
+    public void closeChat() {
         this.chatUI.setVisible(false);
         this.chatUI.dispose();
 
     }
-    public String getPickupLocation(){
+
+    public String getPickupLocation() {
         return this.location;
     }
-    public String getDestinationLocation(){
+
+    public String getDestinationLocation() {
         return this.destination;
     }
-    public double getDistance(){
+
+    public double getDistance() {
         return this.distance;
     }
-    public String getEstimationTime(){
+
+    public String getEstimationTime() {
         return this.time;
     }
+
     public void saveChat(User sender, String message) {
         String chat = sender.getName() + "###***###" + message;
         this.chatHistory.add(chat);
     }
 
     public ArrayList<String> getChat() {
-       return this.chatHistory;
+        return this.chatHistory;
     }
 
     public void pay(double amount) {
-        if(!donePayment) {
+        if (!donePayment) {
             this.driver.receivedPayment(amount);
             this.donePayment = true;
         }
     }
-    
-    public void chargeCustommer(double amount){
+
+    public void chargeCustommer(double amount) {
         this.customer.pay(this, amount);
     }
+
     public void showPayment() {
         this.customer.showPayment(this);
     }
-    public void dropOff(){
+
+    public void dropOff() {
         this.isDrop = true;
         pay(rate);
     }
-    public boolean isDrop(){
+
+    public boolean isDrop() {
         return this.isDrop;
     }
 
     public void processOrder() {
         this.driver.takeOrder(this);
-        //option pane payment success
         JOptionPane.showMessageDialog(null, "Payment Success! \n" +
                 "Rate: Rp. " + this.rate + "\n" +
                 "Driver: " + driver.getName() + "\n" +
@@ -106,7 +116,8 @@ public class Order implements Chat, Payment, Review {
     public Driver getDriver() {
         return this.driver;
     }
-    public Customer getCustomer(){
+
+    public Customer getCustomer() {
         return this.customer;
     }
 
@@ -119,23 +130,26 @@ public class Order implements Chat, Payment, Review {
         this.driver.finishOrder();
     }
 
-    public Order getOrder(){
+    public Order getOrder() {
         return this;
     }
 
     public boolean getPaymentStatus() {
         return donePayment;
     }
-    public JPanel getOrderInfoPanel(){
+
+    public JPanel getOrderInfoPanel() {
         return this.orderInfoPanel;
     }
-    public void setOrderInfoPanel(JPanel orderInfoPanel){
+
+    public void setOrderInfoPanel(JPanel orderInfoPanel) {
         this.orderInfoPanel = orderInfoPanel;
     }
-    public void initPanel(Application app, CardLayout cardLayout, JPanel mainPanel){
+
+    public void initPanel(Application app, CardLayout cardLayout, JPanel mainPanel) {
         mainPanel.remove(this.orderInfoPanel);
-        mainPanel.add(this.orderInfoPanel,"OrderInfo");
-        cardLayout.show(mainPanel,"OrderInfo");
+        mainPanel.add(this.orderInfoPanel, "OrderInfo");
+        cardLayout.show(mainPanel, "OrderInfo");
     }
 
     public void showOrder() {
@@ -150,7 +164,7 @@ public class Order implements Chat, Payment, Review {
         String donePay = (getPaymentStatus()) ? "Done" : "Not Yet";
         System.out.println("Payment : " + donePay);
 
-        if(this.donePayment) {
+        if (this.donePayment) {
             System.out.println("Review  : " + this.rate);
         }
     }

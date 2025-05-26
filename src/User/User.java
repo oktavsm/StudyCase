@@ -38,7 +38,8 @@ public abstract class User {
     public String getPhone() {
         return this.phone;
     }
+
     public abstract double getBalance();
-    
-    abstract public void showProfile();
+
+    public abstract void showProfile();
 }

@@ -17,22 +17,21 @@ public class Customer extends User {
         this.balance = balance;
     }
 
-    public Order newOrder(String destination, String location, double distance,String time, String type) {
+    public Order newOrder(String destination, String location, double distance, String time, String type) {
         if (isOrdering) {
             JOptionPane.showMessageDialog(null, "You already have an order in progress.");
             return null;
         }
 
         Driver driver = app.findAvailableDriver(type);
-        if(driver == null){
+        if (driver == null) {
             JOptionPane.showMessageDialog(null, "No available driver found.");
             return null;
         }
 
         isOrdering = true;
-        
 
-        nowOrder = new Order(this, driver, location, destination, distance,time);
+        nowOrder = new Order(this, driver, location, destination, distance, time);
         if (nowOrder.getPayment() > this.balance) {
             JOptionPane.showMessageDialog(null, "Insufficient balance for this order.");
             nowOrder = null;
@@ -55,7 +54,7 @@ public class Customer extends User {
         return this.nowOrder;
     }
 
-    public boolean isOrdering(){
+    public boolean isOrdering() {
         return this.isOrdering;
     }
 
@@ -86,11 +85,6 @@ public class Customer extends User {
         System.out.println("Name     : " + super.getName());
         System.out.println("Email    : " + super.getEmail());
         System.out.println("Password : " + super.getPassword());
-        String password = super.getPassword();
-        // for (char c : password.toCharArray()) {
-        //     c = '*';
-        //     System.out.print(c);
-        // }
         System.out.println();
         System.out.println("Phone    : " + super.getPhone());
         System.out.println("Balance  : " + this.balance);

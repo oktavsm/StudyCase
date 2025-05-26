@@ -1,4 +1,5 @@
 package Vehicle;
+
 public class Car extends Vehicle {
     public Car(String plateNumber, String color, String brand) {
         super(plateNumber, color, brand, 14000);

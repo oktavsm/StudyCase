@@ -22,7 +22,6 @@ public class AppGUI extends JFrame {
         mainPanel = new JPanel(cardLayout);
         add(mainPanel);
 
-        // Tambahkan panel-panel
         mainPanel.add(new MainMenuPanel(app, cardLayout, mainPanel), "MainMenu");
         mainPanel.add(new RegisterCustomerPanel(app, cardLayout, mainPanel), "RegisterCustomer");
         mainPanel.add(new LoginCustomerPanel(app, cardLayout, mainPanel), "LoginCustomer");

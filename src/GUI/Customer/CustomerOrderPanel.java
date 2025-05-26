@@ -9,40 +9,26 @@ import javax.swing.*;
 public class CustomerOrderPanel extends CustomerPanel {
     public CustomerOrderPanel(Application app, CardLayout cardLayout, JPanel mainPanel, Customer customer) {
         super(app, cardLayout, mainPanel);
-        setLayout(null); 
-
-        // choice : 1. Sepedah (Bike) 2. Montor (Car)
-        //preview layout
-        /*
-         Where To Go? : ....input destination
-
-
-         Your Location? : ....input customer location
-         Order Button
-         */
+        setLayout(null);
 
         JLabel titleLabel = new JLabel("=== Order Service ===", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 16));
-        titleLabel.setBounds(30, 20, 300, 30); 
+        titleLabel.setBounds(30, 20, 300, 30);
         add(titleLabel);
 
-        // Where To Go?
         JLabel locationLabel = new JLabel("Where To Go?");
-        locationLabel.setBounds(30, 60, 100, 30); 
+        locationLabel.setBounds(30, 60, 100, 30);
         JTextField locationField = new JTextField();
         locationField.setBounds(30, 90, 300, 30);
 
-        // Your Location?
         JLabel yourLocationLabel = new JLabel("Your Location?");
         yourLocationLabel.setBounds(30, 130, 100, 30);
         JTextField yourLocationField = new JTextField();
         yourLocationField.setBounds(30, 160, 300, 30);
 
-        // Order Button
         JButton orderButton = new JButton("Order");
         orderButton.setBounds(30, 200, 150, 30);
 
-        // Back Button
         JButton backButton = new JButton("Back to Menu");
         backButton.setBounds(190, 200, 150, 30);
 
@@ -59,7 +45,6 @@ public class CustomerOrderPanel extends CustomerPanel {
                 String jemput = yourLocationField.getText();
                 String tujuan = locationField.getText();
 
-                // Validate input
                 if (jemput.isEmpty() || tujuan.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Please fill all fields!");
                     return;

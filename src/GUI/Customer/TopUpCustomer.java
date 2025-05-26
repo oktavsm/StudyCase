@@ -9,30 +9,7 @@ import User.*;
 public class TopUpCustomer extends CustomerPanel {
     public TopUpCustomer(Application app, CardLayout cardLayout, JPanel mainPanel, Customer customer) {
         super(app, cardLayout, mainPanel);
-        setLayout(null); // Menggunakan tata letak manual (null layout)
-
-        /*  
-         preview layout
-         _____________________________
-         |Top Up Balance
-         |
-         |Choose payment method : ____  (combobox : Bank Jawir , Bank CBA)
-         |
-         |Amount : Rp. __________
-         |____________________________
-        
-        payment getway panel 
-         _____________________________
-         |Top Up Balance
-         |Amount : Rpxxxxxx
-
-         Virtual Account : xxxxxxx
-         |
-         |Please transfer to the virtual account above etc
-         |
-         |____________________________
-        
-         */
+        setLayout(null);
 
         JLabel titleLabel = new JLabel("Top Up Balance", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 16));
@@ -41,22 +18,22 @@ public class TopUpCustomer extends CustomerPanel {
 
         JLabel paymentLabel = new JLabel("Choose payment method: ");
 
-        String[] paymentMethods = {"Bank Jawir", "Bank CBA"};
+        String[] paymentMethods = { "Bank Jawir", "Bank CBA" };
         JComboBox<String> paymentComboBox = new JComboBox<>(paymentMethods);
 
         JLabel amountLabel = new JLabel("Amount: Rp. ");
         JTextField amountField = new JTextField();
-        
+
         JButton topUpButton = new JButton("Top Up");
         JButton backButton = new JButton("Back to Menu");
-        
+
         paymentLabel.setBounds(30, 60, 200, 30);
         paymentComboBox.setBounds(30, 90, 300, 30);
         amountLabel.setBounds(30, 130, 100, 30);
         amountField.setBounds(30, 160, 300, 30);
         topUpButton.setBounds(30, 200, 100, 30);
         backButton.setBounds(140, 200, 150, 30);
-        
+
         add(paymentLabel);
         add(paymentComboBox);
         add(amountLabel);
@@ -80,11 +57,9 @@ public class TopUpCustomer extends CustomerPanel {
                     JOptionPane.showMessageDialog(null, "Please enter a valid amount!");
                     return;
                 }
-                // Process top up logic here
-                // For example, update customer balance and show confirmation message
-                // go to payment getway panel
                 int choice = (paymentMethod.equals("Bank Jawir")) ? 1 : 2;
-                JPanel paymentPanel = paymentGetwayPanel(customer, paymentMethod, amount, choice, app, cardLayout, mainPanel);
+                JPanel paymentPanel = paymentGetwayPanel(customer, paymentMethod, amount, choice, app, cardLayout,
+                        mainPanel);
                 mainPanel.add(paymentPanel, "PaymentGetwayPanel");
                 cardLayout.show(mainPanel, "PaymentGetwayPanel");
             }
@@ -100,8 +75,9 @@ public class TopUpCustomer extends CustomerPanel {
         });
     }
 
-    JPanel paymentGetwayPanel(Customer customer, String paymentMethod, int amount, int choice, Application app, CardLayout cardLayout, JPanel mainPanel) {
-        JPanel paymentPanel = new JPanel(null); 
+    JPanel paymentGetwayPanel(Customer customer, String paymentMethod, int amount, int choice, Application app,
+            CardLayout cardLayout, JPanel mainPanel) {
+        JPanel paymentPanel = new JPanel(null);
         paymentPanel.setPreferredSize(new Dimension(400, 300));
 
         JLabel titleLabel = new JLabel("Top Up Balance", SwingConstants.CENTER);
@@ -115,10 +91,9 @@ public class TopUpCustomer extends CustomerPanel {
 
         JLabel instructionLabel = new JLabel("Please transfer to the virtual account above and confirm your payment.");
         instructionLabel.setFont(new Font("Arial", Font.PLAIN, 12));
-        
-        //done button : return to main menu and set balance
+
         JButton doneButton = new JButton("Done");
-        
+
         titleLabel.setBounds(30, 20, 340, 30);
         amountLabel.setBounds(30, 60, 300, 30);
         virtualAccountLabel.setBounds(30, 100, 300, 30);
@@ -130,15 +105,13 @@ public class TopUpCustomer extends CustomerPanel {
         paymentPanel.add(virtualAccountLabel);
         paymentPanel.add(instructionLabel);
         paymentPanel.add(doneButton);
-        
+
         doneButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Update customer balance and show confirmation message
                 app.topupBalance(amount, customer);
                 JOptionPane.showMessageDialog(null, "Top Up successful! New balance: Rp. " + customer.getBalance());
 
-                 //refresh menuCustomer panel
                 JPanel customerMenuPanel = new MenuCustomerPanel(app, cardLayout, mainPanel, customer);
                 mainPanel.add(customerMenuPanel, "CustomerMenu");
                 cardLayout.show(mainPanel, "CustomerMenu");

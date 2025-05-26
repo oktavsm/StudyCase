@@ -14,7 +14,7 @@ public class Driver extends User {
     private int orderCount = 0;
     private double balance = 0.0;
 
-    public Driver(String email, String password,String name, String phone, Vehicle vehicle, Application app) {
+    public Driver(String email, String password, String name, String phone, Vehicle vehicle, Application app) {
         super(name, email, password, phone, app);
         this.vehicle = vehicle;
     }
@@ -43,19 +43,18 @@ public class Driver extends User {
     public Order getOrder() {
         return this.nowOrder;
     }
-    public double getBalance(){
+
+    public double getBalance() {
         return this.balance;
     };
 
-    public boolean isHaveOrder(){
+    public boolean isHaveOrder() {
         return this.nowOrder != null;
     }
-    
 
     public void giveReview(double rating) {
         this.rating = (this.rating * this.orderCount + rating) / (this.orderCount + 1);
     }
-    
 
     public void finishOrder() {
         this.ordersHistory.add(this.nowOrder);
@@ -67,6 +66,7 @@ public class Driver extends User {
     public boolean getAvailability() {
         return this.isAvailable;
     }
+
     public String getPhoneNumber() {
         return super.getPhone();
     }
@@ -74,7 +74,8 @@ public class Driver extends User {
     public Vehicle getVehicle() {
         return this.vehicle;
     }
-    public double getRating(){
+
+    public double getRating() {
         return this.rating;
     }
 
@@ -83,19 +84,20 @@ public class Driver extends User {
     }
 
     public void showOrderHistory() {
-        for(Order order: this.ordersHistory) {
+        for (Order order : this.ordersHistory) {
             order.showOrder();
         }
     }
+
     public void setVehicle(Vehicle vehicle) {
         this.vehicle = vehicle;
     }
+
     public void setOrder(Order order) {
         this.nowOrder = order;
     }
 
     public void setRating(double rating) {
-        // oldest rating + new rating
         this.rating = (this.rating * this.orderCount + rating) / (this.orderCount + 1);
         this.orderCount++;
     }
@@ -107,11 +109,6 @@ public class Driver extends User {
         System.out.println("Name        : " + super.getName());
         System.out.println("Email       : " + super.getEmail());
         System.out.print("Password    : " + super.getPassword());
-        // String password = super.getPassword();
-        // for (char c : password.toCharArray()) {
-        //     c = '*';
-        //     System.out.print(c);
-        // }
         System.out.println();
         System.out.println("Phone       : " + super.getPhone());
         System.out.println("Vehicle   : ");

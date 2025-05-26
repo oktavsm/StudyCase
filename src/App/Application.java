@@ -13,7 +13,6 @@ public class Application implements Topup {
     ArrayList<User> users = new ArrayList<>();
     ArrayList<Order> orders = new ArrayList<>();
     Scanner in = new Scanner(System.in);
-    Menu menu = new Menu(this);
     FileReader fileReader;
     BufferedReader bufferedReader;
     FileWriter fileWriter;
@@ -22,19 +21,15 @@ public class Application implements Topup {
     public void showMenu() throws IOException {
         AppGUI appGUI = new AppGUI(this);
         appGUI.setVisible(true);
-        // menu.mainMenu();
     }
 
     public void addCustomer(String email, String name, String password, String phoneNumber) {
 
-        // check if the customer exst
         if (validateEmailCustomer(email)) {
-            // register failed, email already registered
             System.out.println("Register failed, email already registered");
         } else {
-            // add customer data to "src/Database/Customer.txt"
             try {
-                fileWriter = new FileWriter("src/Database/Customer.txt", true);
+                fileWriter = new FileWriter("src/Database/Customer/Customer.txt", true);
                 BufferedWriter = new BufferedWriter(fileWriter);
                 BufferedWriter.write(name + "," + email + "," + password + "," + phoneNumber);
                 BufferedWriter.newLine();
@@ -50,7 +45,7 @@ public class Application implements Topup {
     public boolean validateEmailCustomer(String email) {
         boolean isExist = false;
         try {
-            FileReader fileInput = new FileReader("src/Database/Customer.txt");
+            FileReader fileInput = new FileReader("src/Database/Customer/Customer.txt");
             BufferedReader bufferInput = new BufferedReader(fileInput);
 
             String data = bufferInput.readLine();
@@ -126,14 +121,14 @@ public class Application implements Topup {
         try {
             loadCustomers();
             loadDriver();
-            
+
         } catch (IOException e) {
             System.out.println("Error loading database: " + e.getMessage());
         }
     }
 
     public void loadCustomers() throws IOException {
-        fileReader = new FileReader("src/Database/Customer.txt");
+        fileReader = new FileReader("src/Database/Customer/Customer.txt");
         bufferedReader = new BufferedReader(fileReader);
         String data = bufferedReader.readLine();
 
@@ -147,16 +142,11 @@ public class Application implements Topup {
     }
 
     public void loadDriver() throws IOException {
-        // from "src/Database/Driver/Driver.txt and the vehicle on
-        // src/Database/Driver/Vehicle.txt"
-        // driver : email,password,name,phoneNumber
-        // vehicle : email,type,plateNumber,color,brand
         fileReader = new FileReader("src/Database/Driver/Driver.txt");
         bufferedReader = new BufferedReader(fileReader);
         String data = bufferedReader.readLine();
         while (data != null && !data.isEmpty()) {
             String[] check = data.split(",");
-            // load vehicle
             fileReader = new FileReader("src/Database/Driver/Vehicle.txt");
             BufferedReader bufferedReader2 = new BufferedReader(fileReader);
             String data2 = bufferedReader2.readLine();
@@ -182,8 +172,6 @@ public class Application implements Topup {
     }
 
     public void addDriver(String email, String password, String name, String phoneNumber, Vehicle vehicle) {
-
-        // add driver data to "src/Database/Driver.txt"
         try {
             fileWriter = new FileWriter("src/Database/Driver/Driver.txt", true);
             BufferedWriter = new BufferedWriter(fileWriter);
@@ -191,15 +179,12 @@ public class Application implements Topup {
             BufferedWriter.newLine();
             BufferedWriter.close();
         } catch (IOException e) {
-
         }
 
         users.add(new Driver(email, password, name, phoneNumber, vehicle, this));
-
     }
 
     public Vehicle addVehicle(String email, String type, String plateNumber, String color, String brand) {
-        // write to database
         try {
             fileWriter = new FileWriter("src/Database/Driver/Vehicle.txt", true);
             BufferedWriter = new BufferedWriter(fileWriter);
@@ -207,8 +192,8 @@ public class Application implements Topup {
             BufferedWriter.newLine();
             BufferedWriter.close();
         } catch (IOException e) {
-
         }
+
         if (type.equalsIgnoreCase("Motorcycle")) {
             Vehicle vehicle = new Motorcycle(plateNumber, color, brand);
             vehicles.add(vehicle);
@@ -301,30 +286,21 @@ public class Application implements Topup {
         return null;
     }
 
-    public void registerCustomer() throws IOException {
-        // addCustomer();
-    }
-
-    public void registerDriver() {
-        // addDriver();
-    }
-
     public void topupBalance(double amount, Customer customer) {
         customer.setBalance(customer.getBalance() + amount);
 
     }
 
     public String createPayment(int choice, Customer customer, int amount) {
-        
+
         String virtualAccount;
         if (choice == 1) {
-            virtualAccount = "114" + customer.getPhone()+amount;
+            virtualAccount = "114" + customer.getPhone() + amount;
         } else {
-            virtualAccount = "002" + customer.getPhone()+amount;
-          }
+            virtualAccount = "002" + customer.getPhone() + amount;
+        }
 
         return virtualAccount;
     }
 
-    
 }

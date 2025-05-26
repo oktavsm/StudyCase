@@ -10,12 +10,12 @@ public class LoginCustomerPanel extends CustomerPanel {
 
     public LoginCustomerPanel(Application app, CardLayout cardLayout, JPanel mainPanel) {
         super(app, cardLayout, mainPanel);
-        setLayout(null); 
+        setLayout(null);
 
         JLabel titleLabel = new JLabel("=== Login Customer ===", SwingConstants.CENTER);
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 16)); 
-        titleLabel.setBounds(30, 20, 300, 30); 
-        add(titleLabel); 
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        titleLabel.setBounds(30, 20, 300, 30);
+        add(titleLabel);
 
         JLabel emailLabel = new JLabel("Email: ");
         JTextField emailField = new JTextField();
@@ -43,22 +43,20 @@ public class LoginCustomerPanel extends CustomerPanel {
                 String email = emailField.getText();
                 String password = new String(passwordField.getPassword());
 
-                 //validate all field filled
                 if (email.isEmpty() || password.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Please fill all fields!");
                     return;
                 }
 
-                // Validate email and password
                 Customer customer = (Customer) app.validateEmailAndPassword(email, password, "Customer");
                 if (customer == null) {
                     JOptionPane.showMessageDialog(null, "Email or password is wrong!");
-                    System.out.println("email: " + email); // Debugging email
-                    System.out.println("password: " + password); // Debugging password
+                    System.out.println("email: " + email);
+                    System.out.println("password: " + password);
                     return;
                 } else {
                     JOptionPane.showMessageDialog(null, "Login successful!");
-                    
+
                     JPanel customerMenuPanel = new MenuCustomerPanel(app, cardLayout, mainPanel, customer);
                     mainPanel.add(customerMenuPanel, "CustomerMenu");
                     cardLayout.show(mainPanel, "CustomerMenu");

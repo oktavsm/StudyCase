@@ -11,9 +11,9 @@ public class RegisterCustomerPanel extends CustomerPanel {
         setLayout(null);
 
         JLabel titleLabel = new JLabel("=== Customer Register ===", SwingConstants.CENTER);
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 16)); 
-        titleLabel.setBounds(30, 20, 300, 30); 
-        add(titleLabel); 
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        titleLabel.setBounds(30, 20, 300, 30);
+        add(titleLabel);
 
         JLabel nameLabel = new JLabel("Name: ");
         JTextField nameField = new JTextField();
@@ -57,13 +57,11 @@ public class RegisterCustomerPanel extends CustomerPanel {
                 String password = new String(passwordField.getPassword());
                 String phoneNumber = phoneField.getText();
 
-                // Validate input
                 if (name.isEmpty() || email.isEmpty() || password.isEmpty() || phoneNumber.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Please fill all fields!");
                     return;
                 }
 
-                // Validate email and password
                 if (app.validateEmailCustomer(email)) {
                     JOptionPane.showMessageDialog(null, "Email already exists!");
                     return;

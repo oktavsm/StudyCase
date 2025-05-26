@@ -9,12 +9,12 @@ import javax.swing.*;
 public class LoginDriverPanel extends DriverPanel {
     public LoginDriverPanel(Application app, CardLayout cardLayout, JPanel mainPanel) {
         super(app, cardLayout, mainPanel);
-        setLayout(null); 
+        setLayout(null);
 
         JLabel titleLabel = new JLabel("=== Login Driver ===", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 16));
-        titleLabel.setBounds(30, 20, 300, 30); 
-        add(titleLabel); 
+        titleLabel.setBounds(30, 20, 300, 30);
+        add(titleLabel);
 
         JLabel emailLabel = new JLabel("Email: ");
         JTextField emailField = new JTextField();
@@ -42,25 +42,18 @@ public class LoginDriverPanel extends DriverPanel {
                 String email = emailField.getText();
                 String password = new String(passwordField.getPassword());
 
-                // Validate all fields filled
                 if (email.isEmpty() || password.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Please fill all fields!");
                     return;
                 }
 
-                // Validate email and password
                 Driver driver = (Driver) app.validateEmailAndPassword(email, password, "Driver");
                 if (driver != null) {
                     JOptionPane.showMessageDialog(null, "Login successful!");
-                    
+
                     JPanel menuDriver = new MenuDriver(app, cardLayout, mainPanel, driver);
                     mainPanel.add(menuDriver, "DriverMenu");
                     cardLayout.show(mainPanel, "DriverMenu");
-                
-                    // Show driver menu panel
-                    // JPanel driverMenuPanel = new DriverMenuPanel(app, cardLayout, mainPanel);
-                    // mainPanel.add(driverMenuPanel, "DriverMenu");
-
                 } else {
                     JOptionPane.showMessageDialog(null, "Invalid email or password!");
                 }

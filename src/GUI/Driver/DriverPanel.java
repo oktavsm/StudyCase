@@ -1,7 +1,5 @@
 package GUI.Driver;
 
-
-
 import App.Application;
 import javax.swing.*;
 import java.awt.*;

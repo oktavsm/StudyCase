@@ -4,48 +4,24 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import App.Application;
-import GUI.ChatUI;
 import User.*;
 
 public class MenuDriver extends DriverPanel {
     public MenuDriver(Application app, CardLayout cardLayout, JPanel mainPanel, Driver driver) {
         super(app, cardLayout, mainPanel);
-        // menu preview
-        /*
-         * Welcome, name (Profile) | Logout
-         * -------------------------------
-         * |Rp.xxx.xxx Rating : |
-         * -------------------------------
-         * 
-         * Vehicle Information field
-         * 
-         * 
-         * 
-         * 
-         * -------------------------------------
-         * Incoming Order info if have order (Open Button)
-         * -------------------------------------
-         */
-
-        setLayout(new GridLayout(5, 1)); // 5 baris, 1 kolom
+        setLayout(new GridLayout(5, 1));
         JLabel welcomeLabel = new JLabel("Welcome, " + driver.getName(), SwingConstants.CENTER);
-        welcomeLabel.setFont(new Font("Arial", Font.BOLD, 16)); // Set font size
+        welcomeLabel.setFont(new Font("Arial", Font.BOLD, 16));
         JLabel balanceLabel = new JLabel("Balance: Rp. " + driver.getBalance(), SwingConstants.CENTER);
-        balanceLabel.setFont(new Font("Arial", Font.BOLD, 16)); // Set font size
-        // rating
+        balanceLabel.setFont(new Font("Arial", Font.BOLD, 16));
         JLabel ratingLabel = new JLabel("Rating: " + (driver.getRating() != 0 ? driver.getRating() : "No Review Yet"),
                 SwingConstants.CENTER);
-        ratingLabel.setFont(new Font("Arial", Font.BOLD, 16)); // Set font size
-
-        // tombol Service Tetenger Sepedah
-
-        // Tombol Service Tetenger Montor
+        ratingLabel.setFont(new Font("Arial", Font.BOLD, 16));
 
         JButton btnOrderInfo = new JButton("Order Info");
         JButton btnLogout = new JButton("Logout");
         JButton btnProfile = new JButton("Profile");
 
-        // listener
         btnOrderInfo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -63,21 +39,17 @@ public class MenuDriver extends DriverPanel {
                         }
                     }
 
-                    // Tambahkan tombol baru
                     JButton chatButton = new JButton("Chat with Customer");
-                    chatButton.setBounds(100, 586, 150, 30); // Set positi
+                    chatButton.setBounds(100, 586, 150, 30);
                     chatButton.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            // open chat window
-                            
                             driver.getOrder().showChat((User) driver);
-                            
                         }
                     });
                     orderInfoPanel.add(chatButton);
                     JButton backButton = new JButton("Back");
-                    backButton.setBounds(10, 586, 80, 30); // Set position and size
+                    backButton.setBounds(10, 586, 80, 30);
                     orderInfoPanel.add(backButton);
                     backButton.addActionListener(new ActionListener() {
                         @Override
@@ -87,16 +59,14 @@ public class MenuDriver extends DriverPanel {
                         }
                     });
 
-                    //driver Drop off Button
                     JButton dropOffButton = new JButton("Drop Off");
-                    dropOffButton.setBounds(260, 586, 80, 30); // Set position and size
+                    dropOffButton.setBounds(260, 586, 80, 30);
                     orderInfoPanel.add(dropOffButton);
                     dropOffButton.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             driver.getOrder().dropOff();
                             JOptionPane.showMessageDialog(null, "Order Completed");
-                            //refresh main menu
                             JPanel driverMenuPanel = new MenuDriver(app, cardLayout, mainPanel, driver);
                             mainPanel.remove(driverMenuPanel);
                             mainPanel.add(driverMenuPanel, "DriverMenu");
@@ -117,7 +87,6 @@ public class MenuDriver extends DriverPanel {
         btnLogout.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Logout
                 cardLayout.show(mainPanel, "MainMenu");
             }
         });

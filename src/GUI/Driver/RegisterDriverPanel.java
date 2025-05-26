@@ -10,12 +10,12 @@ import Vehicle.*;
 public class RegisterDriverPanel extends DriverPanel {
     public RegisterDriverPanel(Application app, CardLayout cardLayout, JPanel mainPanel) {
         super(app, cardLayout, mainPanel);
-        setLayout(null); 
+        setLayout(null);
 
         JLabel titleLabel = new JLabel("=== Driver Register ===", SwingConstants.CENTER);
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 16)); 
-        titleLabel.setBounds(30, 20, 300, 30); 
-        add(titleLabel); 
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        titleLabel.setBounds(30, 20, 300, 30);
+        add(titleLabel);
 
         JLabel nameLabel = new JLabel("Name: ");
         JTextField nameField = new JTextField();
@@ -59,7 +59,6 @@ public class RegisterDriverPanel extends DriverPanel {
                 String password = new String(passwordField.getPassword());
                 String phoneNumber = phoneField.getText();
 
-                // Validate input
                 if (name.isEmpty() || email.isEmpty() || password.isEmpty() || phoneNumber.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Please fill all fields!");
                     return;
@@ -79,15 +78,15 @@ public class RegisterDriverPanel extends DriverPanel {
 
     private JPanel vehicleRegistPanel(Driver driver) {
         JPanel vehiclePanel = new JPanel();
-        vehiclePanel.setLayout(null); 
+        vehiclePanel.setLayout(null);
 
         JLabel titleLabel = new JLabel("=== Vehicle Register ===", SwingConstants.CENTER);
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 16)); 
-        titleLabel.setBounds(30, 20, 300, 30); 
-        vehiclePanel.add(titleLabel); 
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        titleLabel.setBounds(30, 20, 300, 30);
+        vehiclePanel.add(titleLabel);
 
         JLabel vehicleTypeLabel = new JLabel("Vehicle Type: ");
-        JComboBox<String> vehicleTypeField = new JComboBox<>(new String[]{"Car", "Motorcycle"});
+        JComboBox<String> vehicleTypeField = new JComboBox<>(new String[] { "Car", "Motorcycle" });
         JLabel vehicleBrandLabel = new JLabel("Vehicle Brand: ");
         JTextField vehicleBrandField = new JTextField();
         JLabel vehicleColorLabel = new JLabel("Vehicle Color: ");
@@ -138,18 +137,14 @@ public class RegisterDriverPanel extends DriverPanel {
                     return;
                 }
 
-                                // Create a Vehicle object and assign it to the driver
                 Vehicle vehicle = null;
-                if(type.equals("Motorcycle")){
-                    vehicle = new Motorcycle(plate,color,brand);
-                } else{
-                    vehicle = new Car(plate,color,brand);
+                if (type.equals("Motorcycle")) {
+                    vehicle = new Motorcycle(plate, color, brand);
+                } else {
+                    vehicle = new Car(plate, color, brand);
                 }
 
-
                 driver.setVehicle(vehicle);
-                // app.addDriver(driver.getEmail(), driver.getName(), driver.getPassword(), driver.getPhoneNumber(), vehicle);
-                // app.addVehicle(driver.getEmail(), type, plate, color, brand);
                 JOptionPane.showMessageDialog(null, "Driver registered successfully!");
                 cardLayout.show(mainPanel, "MainMenu");
             }

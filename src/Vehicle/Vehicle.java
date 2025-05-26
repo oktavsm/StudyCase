@@ -1,6 +1,7 @@
 package Vehicle;
 
 import java.io.*;
+
 public abstract class Vehicle {
     String plateNumber;
     String color;
@@ -21,17 +22,16 @@ public abstract class Vehicle {
         StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder.append(getType()).append(",")
-          .append(plateNumber).append(",")
-          .append(color).append(",")
-          .append(brand).append(",")
-          .append(baseRate).append("\n");
+                .append(plateNumber).append(",")
+                .append(color).append(",")
+                .append(brand).append(",")
+                .append(baseRate).append("\n");
         String data = new String(stringBuilder);
         try {
-          FileWriter fileOutput = new FileWriter(fileName, true);
+            FileWriter fileOutput = new FileWriter(fileName, true);
             fileOutput.write(data);
             fileOutput.close();
-        } 
-        catch (IOException e) {
+        } catch (IOException e) {
             System.err.println("Maaf, file gagal dibuat & ditulisi");
             System.exit(1);
 
@@ -59,6 +59,8 @@ public abstract class Vehicle {
     }
 
     public abstract String getType();
+
     public abstract double calculateRate(double distance);
+
     public abstract void showVehicle();
 }
