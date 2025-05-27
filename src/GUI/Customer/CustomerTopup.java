@@ -1,4 +1,4 @@
-package gui.Customer;
+package gui.customer;
 
 import javax.swing.*;
 import app.Application;
@@ -6,8 +6,8 @@ import java.awt.*;
 import java.awt.event.*;
 import domain.user.*;
 
-public class TopUpCustomer extends CustomerPanel {
-    public TopUpCustomer(Application app, CardLayout cardLayout, JPanel mainPanel, Customer customer) {
+public class CustomerTopup extends CustomerDashboardPanel {
+    public CustomerTopup(Application app, CardLayout cardLayout, JPanel mainPanel, Customer customer) {
         super(app, cardLayout, mainPanel);
         setLayout(null);
 
@@ -57,25 +57,30 @@ public class TopUpCustomer extends CustomerPanel {
                     JOptionPane.showMessageDialog(null, "Please enter a valid amount!");
                     return;
                 }
+
+                if (amount > 1000000) {
+                    JOptionPane.showMessageDialog(null, "Maximum top-up amount is Rp1.000.000!");
+                }
+
                 int choice = (paymentMethod.equals("Bank Jawir")) ? 1 : 2;
-                JPanel paymentPanel = paymentGetwayPanel(customer, paymentMethod, amount, choice, app, cardLayout,
+                JPanel paymentPanel = paymentGatewayPanel(customer, paymentMethod, amount, choice, app, cardLayout,
                         mainPanel);
-                mainPanel.add(paymentPanel, "PaymentGetwayPanel");
-                cardLayout.show(mainPanel, "PaymentGetwayPanel");
+                mainPanel.add(paymentPanel, "paymentGatewayPanel");
+                cardLayout.show(mainPanel, "paymentGatewayPanel");
             }
         });
 
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JPanel customerMenuPanel = new MenuCustomerPanel(app, cardLayout, mainPanel, customer);
+                JPanel customerMenuPanel = new CustomerMenuPanel(app, cardLayout, mainPanel, customer);
                 mainPanel.add(customerMenuPanel, "CustomerMenu");
                 cardLayout.show(mainPanel, "CustomerMenu");
             }
         });
     }
 
-    JPanel paymentGetwayPanel(Customer customer, String paymentMethod, int amount, int choice, Application app,
+    JPanel paymentGatewayPanel(Customer customer, String paymentMethod, int amount, int choice, Application app,
             CardLayout cardLayout, JPanel mainPanel) {
         JPanel paymentPanel = new JPanel(null);
         paymentPanel.setPreferredSize(new Dimension(400, 300));
@@ -112,7 +117,7 @@ public class TopUpCustomer extends CustomerPanel {
                 app.topupBalance(amount, customer);
                 JOptionPane.showMessageDialog(null, "Top Up successful! New balance: Rp" + customer.getBalance());
 
-                JPanel customerMenuPanel = new MenuCustomerPanel(app, cardLayout, mainPanel, customer);
+                JPanel customerMenuPanel = new CustomerMenuPanel(app, cardLayout, mainPanel, customer);
                 mainPanel.add(customerMenuPanel, "CustomerMenu");
                 cardLayout.show(mainPanel, "CustomerMenu");
             }

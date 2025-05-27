@@ -1,4 +1,4 @@
-package gui.Customer;
+package gui.customer;
 
 import javax.swing.*;
 import app.Application;
@@ -8,12 +8,13 @@ import domain.order.*;
 import domain.user.*;
 import infra.maps.GoogleMap;
 
-public class ChooseServices extends CustomerPanel {
+public class CustomerChooseServicesPanel extends CustomerDashboardPanel {
     String info[] = null;
     ImageIcon mapImage = null;
     JLabel labelMap = new JLabel();
 
-    public ChooseServices(Application app, CardLayout cardLayout, JPanel mainPanel, Customer customer, String location,
+    public CustomerChooseServicesPanel(Application app, CardLayout cardLayout, JPanel mainPanel, Customer customer,
+            String location,
             String destination) {
         super(app, cardLayout, mainPanel);
         setLayout(null);
@@ -36,6 +37,7 @@ public class ChooseServices extends CustomerPanel {
             exc.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error fetching route information. Please try again later.");
         }
+
         String time = info[1];
         String distanceS = info[0].replace(" km", "").replace(",", ".");
         double distance = Double.parseDouble(distanceS);
@@ -51,50 +53,54 @@ public class ChooseServices extends CustomerPanel {
         btnMontor.setBounds(10, 406, 340, 50);
         JButton btnBack = new JButton("Back to Menu");
         btnBack.setBounds(10, 466, 340, 50);
+
         add(btnSepedah);
         add(btnMontor);
         add(btnBack);
+
         btnBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JPanel customerMenuPanel = new MenuCustomerPanel(app, cardLayout, mainPanel, customer);
+                JPanel customerMenuPanel = new CustomerMenuPanel(app, cardLayout, mainPanel, customer);
                 mainPanel.add(customerMenuPanel, "CustomerMenu");
                 cardLayout.show(mainPanel, "CustomerMenu");
             }
         });
+
         btnSepedah.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Order order = customer.newOrder(destination, location, distance, time, "Motorcycle");
                 if (order != null) {
                     order.processOrder();
-                    JPanel customerMenuPanel = new MenuCustomerPanel(app, cardLayout, mainPanel, customer);
+                    JPanel customerMenuPanel = new CustomerMenuPanel(app, cardLayout, mainPanel, customer);
                     mainPanel.remove(customerMenuPanel);
                     mainPanel.add(customerMenuPanel, "CustomerMenu");
-                    JPanel orderInfo = new OrderInfo(app, cardLayout, mainPanel, order, labelMap, customer);
+                    JPanel orderInfo = new CustomerOrderDetail(app, cardLayout, mainPanel, order, labelMap, customer);
                     order.setOrderInfoPanel(orderInfo);
                     order.initPanel(app, cardLayout, mainPanel);
                 } else {
-                    JPanel customerMenuPanel = new MenuCustomerPanel(app, cardLayout, mainPanel, customer);
+                    JPanel customerMenuPanel = new CustomerMenuPanel(app, cardLayout, mainPanel, customer);
                     mainPanel.add(customerMenuPanel, "CustomerMenu");
                     cardLayout.show(mainPanel, "CustomerMenu");
                 }
             }
         });
+
         btnMontor.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Order order = customer.newOrder(destination, location, distance, time, "Car");
                 if (order != null) {
                     order.processOrder();
-                    JPanel customerMenuPanel = new MenuCustomerPanel(app, cardLayout, mainPanel, customer);
+                    JPanel customerMenuPanel = new CustomerMenuPanel(app, cardLayout, mainPanel, customer);
                     mainPanel.remove(customerMenuPanel);
                     mainPanel.add(customerMenuPanel, "CustomerMenu");
-                    JPanel orderInfo = new OrderInfo(app, cardLayout, mainPanel, order, labelMap, customer);
+                    JPanel orderInfo = new CustomerOrderDetail(app, cardLayout, mainPanel, order, labelMap, customer);
                     order.setOrderInfoPanel(orderInfo);
                     order.initPanel(app, cardLayout, mainPanel);
                 } else {
-                    JPanel customerMenuPanel = new MenuCustomerPanel(app, cardLayout, mainPanel, customer);
+                    JPanel customerMenuPanel = new CustomerMenuPanel(app, cardLayout, mainPanel, customer);
                     mainPanel.add(customerMenuPanel, "CustomerMenu");
                     cardLayout.show(mainPanel, "CustomerMenu");
 
@@ -102,5 +108,4 @@ public class ChooseServices extends CustomerPanel {
             }
         });
     }
-
 }

@@ -1,12 +1,12 @@
-package gui.Customer;
+package gui.customer;
 
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import app.Application;
 
-public class RegisterCustomerPanel extends CustomerPanel {
-    public RegisterCustomerPanel(Application app, CardLayout cardLayout, JPanel mainPanel) {
+public class CustomerRegisterPanel extends CustomerDashboardPanel {
+    public CustomerRegisterPanel(Application app, CardLayout cardLayout, JPanel mainPanel) {
         super(app, cardLayout, mainPanel);
         setLayout(null);
 

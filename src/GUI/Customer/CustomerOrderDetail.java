@@ -1,4 +1,4 @@
-package gui.Customer;
+package gui.customer;
 
 import javax.swing.*;
 import app.Application;
@@ -7,9 +7,8 @@ import java.awt.event.*;
 import domain.order.*;
 import domain.user.*;
 
-public class OrderInfo extends CustomerPanel {
-
-    public OrderInfo(Application app, CardLayout cardLayout, JPanel mainPanel, Order order, JLabel imageMap,
+public class CustomerOrderDetail extends CustomerDashboardPanel {
+    public CustomerOrderDetail(Application app, CardLayout cardLayout, JPanel mainPanel, Order order, JLabel imageMap,
             Customer customer) {
         super(app, cardLayout, mainPanel);
         setLayout(null);
@@ -46,6 +45,7 @@ public class OrderInfo extends CustomerPanel {
         reviewLabel.setBounds(10, 556, 250, 20);
 
         backButton.setBounds(10, 586, 100, 30);
+
         add(customerLabel);
         add(driverLabel);
         add(vehicleLabel);
@@ -79,5 +79,4 @@ public class OrderInfo extends CustomerPanel {
             }
         });
     }
-
 }

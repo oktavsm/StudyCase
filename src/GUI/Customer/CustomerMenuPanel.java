@@ -1,4 +1,4 @@
-package gui.Customer;
+package gui.customer;
 
 import javax.swing.*;
 import app.Application;
@@ -6,8 +6,8 @@ import java.awt.*;
 import java.awt.event.*;
 import domain.user.*;
 
-public class MenuCustomerPanel extends CustomerPanel {
-    public MenuCustomerPanel(Application app, CardLayout cardLayout, JPanel mainPanel, Customer customer) {
+public class CustomerMenuPanel extends CustomerDashboardPanel {
+    public CustomerMenuPanel(Application app, CardLayout cardLayout, JPanel mainPanel, Customer customer) {
         super(app, cardLayout, mainPanel);
         setLayout(new GridLayout(5, 1));
         JLabel welcomeLabel = new JLabel("Welcome, " + customer.getName(), SwingConstants.CENTER);
@@ -17,7 +17,7 @@ public class MenuCustomerPanel extends CustomerPanel {
 
         JButton btnTopUp = new JButton("Top Up Balance");
         JButton btnOrder = new JButton("Tetenger Services");
-        JButton btnOrderInfo = new JButton("Order Info");
+        JButton btnOrderDetail = new JButton("Order Info");
         JButton btnLogout = new JButton("Logout");
         JButton btnProfile = new JButton("Profile");
 
@@ -25,17 +25,17 @@ public class MenuCustomerPanel extends CustomerPanel {
         add(balanceLabel);
         add(btnTopUp);
         add(btnOrder);
-        add(btnOrderInfo);
+        add(btnOrderDetail);
         add(btnProfile);
         add(btnLogout);
 
         if (customer.isOrdering() && customer.getOrder().isDrop()) {
-            JPanel ratePanel = new RatingUtil(app, cardLayout, mainPanel, customer.getOrder());
+            JPanel ratePanel = new CustomerRatingPanel(app, cardLayout, mainPanel, customer.getOrder());
             mainPanel.remove(ratePanel);
             mainPanel.add(ratePanel, "RatingUtil");
             cardLayout.show(mainPanel, "RatingUtil");
-
         }
+
         btnOrder.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -48,7 +48,7 @@ public class MenuCustomerPanel extends CustomerPanel {
         btnTopUp.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JPanel topUpPanel = new TopUpCustomer(app, cardLayout, mainPanel, customer);
+                JPanel topUpPanel = new CustomerTopup(app, cardLayout, mainPanel, customer);
                 mainPanel.add(topUpPanel, "TopUpCustomer");
                 cardLayout.show(mainPanel, "TopUpCustomer");
             }
@@ -65,7 +65,7 @@ public class MenuCustomerPanel extends CustomerPanel {
             }
         });
 
-        btnOrderInfo.addActionListener(new ActionListener() {
+        btnOrderDetail.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!customer.isOrdering()) {
@@ -120,7 +120,7 @@ public class MenuCustomerPanel extends CustomerPanel {
         btnProfile.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JPanel profilePanel = new ProfileCustomer(app, cardLayout, mainPanel, customer);
+                JPanel profilePanel = new CustomerProfilePanel(app, cardLayout, mainPanel, customer);
                 mainPanel.add(profilePanel, "ProfileCustomer");
                 cardLayout.show(mainPanel, "ProfileCustomer");
             }

@@ -1,4 +1,4 @@
-package gui.Customer;
+package gui.customer;
 
 import domain.user.Customer;
 import java.awt.*;
@@ -6,7 +6,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import app.Application;
 
-public class CustomerOrderPanel extends CustomerPanel {
+public class CustomerOrderPanel extends CustomerDashboardPanel {
     public CustomerOrderPanel(Application app, CardLayout cardLayout, JPanel mainPanel, Customer customer) {
         super(app, cardLayout, mainPanel);
         setLayout(null);
@@ -50,7 +50,9 @@ public class CustomerOrderPanel extends CustomerPanel {
                     return;
                 }
 
-                JPanel chooseServicesPanel = new ChooseServices(app, cardLayout, mainPanel, customer, jemput, tujuan);
+                JPanel chooseServicesPanel = new CustomerChooseServicesPanel(app, cardLayout, mainPanel, customer,
+                        jemput,
+                        tujuan);
                 mainPanel.add(chooseServicesPanel, "ChooseServices");
                 cardLayout.show(mainPanel, "ChooseServices");
             }
@@ -59,7 +61,7 @@ public class CustomerOrderPanel extends CustomerPanel {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JPanel customerMenuPanel = new MenuCustomerPanel(app, cardLayout, mainPanel, customer);
+                JPanel customerMenuPanel = new CustomerMenuPanel(app, cardLayout, mainPanel, customer);
                 mainPanel.add(customerMenuPanel, "CustomerMenu");
                 cardLayout.show(mainPanel, "CustomerMenu");
             }

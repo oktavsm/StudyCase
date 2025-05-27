@@ -1,4 +1,4 @@
-package gui.Driver;
+package gui.driver;
 
 import javax.swing.*;
 import app.Application;
@@ -7,8 +7,8 @@ import java.awt.event.*;
 import domain.user.Driver;
 import domain.vehicle.*;
 
-public class RegisterDriverPanel extends DriverPanel {
-    public RegisterDriverPanel(Application app, CardLayout cardLayout, JPanel mainPanel) {
+public class DriverRegisterPanel extends DriverDashboardPanel {
+    public DriverRegisterPanel(Application app, CardLayout cardLayout, JPanel mainPanel) {
         super(app, cardLayout, mainPanel);
         setLayout(null);
 

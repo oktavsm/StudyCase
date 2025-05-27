@@ -1,4 +1,4 @@
-package gui.Driver;
+package gui.driver;
 
 import javax.swing.*;
 import app.Application;
@@ -6,8 +6,8 @@ import java.awt.*;
 import java.awt.event.*;
 import domain.user.*;
 
-public class MenuDriver extends DriverPanel {
-    public MenuDriver(Application app, CardLayout cardLayout, JPanel mainPanel, Driver driver) {
+public class DriverMenuPanel extends DriverDashboardPanel {
+    public DriverMenuPanel(Application app, CardLayout cardLayout, JPanel mainPanel, Driver driver) {
         super(app, cardLayout, mainPanel);
         setLayout(new GridLayout(5, 1));
         JLabel welcomeLabel = new JLabel("Welcome, " + driver.getName(), SwingConstants.CENTER);
@@ -47,6 +47,7 @@ public class MenuDriver extends DriverPanel {
                             driver.getOrder().showChat((User) driver);
                         }
                     });
+
                     orderInfoPanel.add(chatButton);
                     JButton backButton = new JButton("Back");
                     backButton.setBounds(10, 586, 80, 30);
@@ -67,13 +68,14 @@ public class MenuDriver extends DriverPanel {
                         public void actionPerformed(ActionEvent e) {
                             driver.getOrder().dropOff();
                             JOptionPane.showMessageDialog(null, "Order Completed");
-                            JPanel driverMenuPanel = new MenuDriver(app, cardLayout, mainPanel, driver);
+                            JPanel driverMenuPanel = new DriverMenuPanel(app, cardLayout, mainPanel, driver);
                             mainPanel.remove(driverMenuPanel);
                             mainPanel.add(driverMenuPanel, "DriverMenu");
                             cardLayout.show(mainPanel, "DriverMenu");
                             driver.getOrder().closeChat();
                         }
                     });
+
                     orderInfoPanel.revalidate();
                     orderInfoPanel.repaint();
                     driver.getOrder().setOrderInfoPanel(orderInfoPanel);
@@ -84,6 +86,7 @@ public class MenuDriver extends DriverPanel {
 
             }
         });
+
         btnLogout.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -94,7 +97,6 @@ public class MenuDriver extends DriverPanel {
         add(welcomeLabel);
         add(balanceLabel);
         add(ratingLabel);
-
         add(btnOrderInfo);
         add(btnProfile);
         add(btnLogout);

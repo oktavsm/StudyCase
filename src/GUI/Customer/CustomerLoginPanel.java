@@ -1,17 +1,17 @@
-package gui.Driver;
+package gui.customer;
 
-import domain.user.Driver;
+import domain.user.Customer;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import app.Application;
 
-public class LoginDriverPanel extends DriverPanel {
-    public LoginDriverPanel(Application app, CardLayout cardLayout, JPanel mainPanel) {
+public class CustomerLoginPanel extends CustomerDashboardPanel {
+    public CustomerLoginPanel(Application app, CardLayout cardLayout, JPanel mainPanel) {
         super(app, cardLayout, mainPanel);
         setLayout(null);
 
-        JLabel titleLabel = new JLabel("=== Login Driver ===", SwingConstants.CENTER);
+        JLabel titleLabel = new JLabel("=== Login Customer ===", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 16));
         titleLabel.setBounds(30, 20, 300, 30);
         add(titleLabel);
@@ -47,15 +47,18 @@ public class LoginDriverPanel extends DriverPanel {
                     return;
                 }
 
-                Driver driver = (Driver) app.validateEmailAndPassword(email, password, "Driver");
-                if (driver != null) {
+                Customer customer = (Customer) app.validateEmailAndPassword(email, password, "Customer");
+                if (customer == null) {
+                    JOptionPane.showMessageDialog(null, "Email or password is wrong!");
+                    System.out.println("email: " + email);
+                    System.out.println("password: " + password);
+                    return;
+                } else {
                     JOptionPane.showMessageDialog(null, "Login successful!");
 
-                    JPanel menuDriver = new MenuDriver(app, cardLayout, mainPanel, driver);
-                    mainPanel.add(menuDriver, "DriverMenu");
-                    cardLayout.show(mainPanel, "DriverMenu");
-                } else {
-                    JOptionPane.showMessageDialog(null, "Invalid email or password!");
+                    JPanel customerMenuPanel = new CustomerMenuPanel(app, cardLayout, mainPanel, customer);
+                    mainPanel.add(customerMenuPanel, "CustomerMenu");
+                    cardLayout.show(mainPanel, "CustomerMenu");
                 }
             }
         });

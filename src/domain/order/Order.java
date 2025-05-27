@@ -1,10 +1,9 @@
 package domain.order;
 
 import java.util.*;
-
 import app.Application;
 import domain.user.*;
-import gui.ChatUI;
+import gui.app.ChatPanel;
 import interfaces.*;
 import javax.swing.*;
 import java.awt.*;
@@ -21,7 +20,7 @@ public class Order implements Chat, Payment, Review {
     boolean isDrop = false;
     JPanel orderInfoPanel;
     String time;
-    private ChatUI chatUI;
+    private ChatPanel chatUI;
 
     public void giveReview(double rating) {
         this.driver.giveReview(rating);
@@ -43,7 +42,7 @@ public class Order implements Chat, Payment, Review {
     }
 
     public void showChat(User current) {
-        this.chatUI = new ChatUI(this, current);
+        this.chatUI = new ChatPanel(this, current);
         this.chatUI.setVisible(true);
     }
 

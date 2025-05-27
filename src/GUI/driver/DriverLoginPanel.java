@@ -1,18 +1,17 @@
-package gui.Customer;
+package gui.driver;
 
-import domain.user.Customer;
+import domain.user.Driver;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import app.Application;
 
-public class LoginCustomerPanel extends CustomerPanel {
-
-    public LoginCustomerPanel(Application app, CardLayout cardLayout, JPanel mainPanel) {
+public class DriverLoginPanel extends DriverDashboardPanel {
+    public DriverLoginPanel(Application app, CardLayout cardLayout, JPanel mainPanel) {
         super(app, cardLayout, mainPanel);
         setLayout(null);
 
-        JLabel titleLabel = new JLabel("=== Login Customer ===", SwingConstants.CENTER);
+        JLabel titleLabel = new JLabel("=== Login Driver ===", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 16));
         titleLabel.setBounds(30, 20, 300, 30);
         add(titleLabel);
@@ -48,18 +47,15 @@ public class LoginCustomerPanel extends CustomerPanel {
                     return;
                 }
 
-                Customer customer = (Customer) app.validateEmailAndPassword(email, password, "Customer");
-                if (customer == null) {
-                    JOptionPane.showMessageDialog(null, "Email or password is wrong!");
-                    System.out.println("email: " + email);
-                    System.out.println("password: " + password);
-                    return;
-                } else {
+                Driver driver = (Driver) app.validateEmailAndPassword(email, password, "Driver");
+                if (driver != null) {
                     JOptionPane.showMessageDialog(null, "Login successful!");
 
-                    JPanel customerMenuPanel = new MenuCustomerPanel(app, cardLayout, mainPanel, customer);
-                    mainPanel.add(customerMenuPanel, "CustomerMenu");
-                    cardLayout.show(mainPanel, "CustomerMenu");
+                    JPanel menuDriver = new DriverMenuPanel(app, cardLayout, mainPanel, driver);
+                    mainPanel.add(menuDriver, "DriverMenu");
+                    cardLayout.show(mainPanel, "DriverMenu");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Invalid email or password!");
                 }
             }
         });

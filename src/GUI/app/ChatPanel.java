@@ -1,11 +1,11 @@
-package gui;
+package gui.app;
 
 import javax.swing.*;
 import java.awt.*;
 import domain.order.*;
 import domain.user.*;
 
-public class ChatUI extends JFrame {
+public class ChatPanel extends JFrame {
     private JPanel chatPanel;
     private JTextField inputField;
     private JButton sendButton;
@@ -15,7 +15,7 @@ public class ChatUI extends JFrame {
     private User currentUser;
     private User chatPartner;
 
-    public ChatUI(Order order, User currentUser) {
+    public ChatPanel(Order order, User currentUser) {
         this.order = order;
         this.currentUser = currentUser;
 

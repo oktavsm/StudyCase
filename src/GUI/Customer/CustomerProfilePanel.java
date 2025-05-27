@@ -1,26 +1,21 @@
-package gui.Customer;
+package gui.customer;
 
 import domain.user.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-
 import app.*;
 
-public class ProfileCustomer extends CustomerPanel {
-    public ProfileCustomer(Application app, CardLayout cardLayout, JPanel mainPanel, Customer customer) {
+public class CustomerProfilePanel extends CustomerDashboardPanel {
+    public CustomerProfilePanel(Application app, CardLayout cardLayout, JPanel mainPanel, Customer customer) {
         super(app, cardLayout, mainPanel);
         setLayout(null);
 
         JLabel titleLabel = new JLabel("=== Customer Profile ===", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 16));
-
         JLabel nameLabel = new JLabel("Name: " + customer.getName());
-
         JLabel emailLabel = new JLabel("Email: " + customer.getEmail());
-
         JLabel phoneLabel = new JLabel("Phone: " + customer.getPhone());
-
         JButton backButton = new JButton("Back");
 
         titleLabel.setBounds(30, 20, 300, 30);
