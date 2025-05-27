@@ -3,7 +3,7 @@ package domain.order;
 import java.util.*;
 import app.Application;
 import domain.user.*;
-import gui.app.ChatPanel;
+import gui.common.ChatPanel;
 import interfaces.*;
 import javax.swing.*;
 import java.awt.*;
