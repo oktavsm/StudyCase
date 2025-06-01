@@ -145,6 +145,10 @@ public class DriverRegisterPanel extends DriverDashboardPanel {
                 }
 
                 driver.setVehicle(vehicle);
+                Vehicle registeredVehicle = app.addVehicle(driver.getEmail(), type, plate, color, brand);
+
+                app.addDriver(driver.getEmail(), driver.getPassword(), driver.getName(), driver.getPhoneNumber(), registeredVehicle);
+
                 JOptionPane.showMessageDialog(null, "Driver registered successfully!");
                 cardLayout.show(mainPanel, "MainMenu");
             }

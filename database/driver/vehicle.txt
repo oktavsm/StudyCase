@@ -8,3 +8,6 @@ Motorcycle,AG 123123,White,Honda Vario 150,8000.0
 Car,KH 123123,Black,Brio,14000.0
 Motorcycle,N 1283 FH,White,Vario 125,8000.0
 Motorcycle,ag 123,ireng,supra,8000.0
+Car,dad,da,da,14000.0
+a,Car,dad,da,da
+Car,dad,da,da,14000.0
