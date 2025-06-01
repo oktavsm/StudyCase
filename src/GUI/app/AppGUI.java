@@ -1,8 +1,6 @@
 package gui.app;
 
 import app.Application;
-import gui.customer.*;
-import gui.driver.*;
 import java.awt.*;
 import javax.swing.*;
 
@@ -23,7 +21,6 @@ public class AppGUI extends JFrame {
 
         add(mainPanel);
 
-        mainPanel.add(new MainPanel(this.app, cardLayout, mainPanel), "MainMenu");
         mainPanel.add(new MainFrame(this.app, cardLayout, mainPanel), "MainFrame");
 
         cardLayout.show(mainPanel, "MainFrame");

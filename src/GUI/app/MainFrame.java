@@ -1,7 +1,6 @@
 
 package gui.app;
 
-import com.formdev.flatlaf.FlatDarkLaf;
 import java.awt.Color;
 import javax.swing.SwingUtilities;
 import javax.swing.JPanel;

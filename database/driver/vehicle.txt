@@ -16,3 +16,7 @@ Motorcycle,KH 123,Blue,Vario 150,8000.0
 Motorcycle,IKN 123,ireng,supra,8000.0
 Motorcycle,KH 123,Blue,Vario 150,8000.0
 Motorcycle,IKN 123,ireng,supra,8000.0
+Motorcycle,KH 123,Blue,Vario 150,8000.0
+Motorcycle,IKN 123,ireng,supra,8000.0
+Motorcycle,KH 123,Blue,Vario 150,8000.0
+Motorcycle,IKN 123,ireng,supra,8000.0

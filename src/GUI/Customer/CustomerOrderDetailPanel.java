@@ -7,11 +7,26 @@ import domain.order.*;
 import domain.user.*;
 
 public class CustomerOrderDetailPanel extends JPanel {
+    private final Application app;
+    private final Order order;
+    private final JLabel imageMap;
+    private final Customer customer;
+
     public CustomerOrderDetailPanel(Application app, Order order, JLabel imageMap, Customer customer) {
+        this.app = app;
+        this.order = order;
+        this.imageMap = imageMap;
+        this.customer = customer;
+
         setLayout(null);
         setPreferredSize(new Dimension(854, 834));
         setBackground(new Color(30, 30, 30));
 
+        buildOrderDetail();
+        buildChatButton();
+    }
+
+    private void buildOrderDetail() {
         JLabel titleLabel = new JLabel("Order Information", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Segoe UI Semibold", Font.BOLD, 24));
         titleLabel.setForeground(Color.WHITE);
@@ -39,10 +54,18 @@ public class CustomerOrderDetailPanel extends JPanel {
                 ? String.valueOf(order.getDriver().getRating())
                 : "No Review Yet";
         addLabel("Review: " + rating, 277, yStart + 10 * yStep);
+    }
+
+    private void buildChatButton() {
+        int yPosition = 330 + 12 * 30;
 
         JButton chatButton = new JButton("Chat with Driver");
-        chatButton.setBounds(432, yStart + 12 * yStep, 145, 40);
-        styleButton(chatButton);
+        chatButton.setBounds(432, yPosition, 145, 40);
+        chatButton.setBackground(new Color(100, 100, 100));
+        chatButton.setForeground(Color.WHITE);
+        chatButton.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 14));
+        chatButton.setFocusPainted(false);
+        chatButton.setBorderPainted(false);
         add(chatButton);
 
         chatButton.addActionListener(e -> order.showChat(customer));
@@ -54,13 +77,5 @@ public class CustomerOrderDetailPanel extends JPanel {
         label.setForeground(Color.LIGHT_GRAY);
         label.setBounds(x, y, 340, 25);
         add(label);
-    }
-
-    private void styleButton(JButton button) {
-        button.setBackground(new Color(100, 100, 100));
-        button.setForeground(Color.WHITE);
-        button.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 14));
-        button.setFocusPainted(false);
-        button.setBorderPainted(false);
     }
 }
