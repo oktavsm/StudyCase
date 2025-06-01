@@ -92,10 +92,11 @@ public class CustomerChooseServicesPanel extends JPanel {
         btnBack.setBorderPainted(false);
         add(btnBack);
 
-        btnSepedah.addActionListener(e -> handleOrder(app, customer, destination, location, distance, time, "Bicycle"));
+        btnSepedah.addActionListener(
+                e -> handleOrder(app, customer, destination, location, distance, time, "Motorcycle"));
 
         btnMontor.addActionListener(
-                e -> handleOrder(app, customer, destination, location, distance, time, "Motorcycle"));
+                e -> handleOrder(app, customer, destination, location, distance, time, "Car"));
 
         btnBack.addActionListener(e -> {
             if (onBack != null)

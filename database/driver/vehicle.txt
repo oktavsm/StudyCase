@@ -1,0 +1,5 @@
+Car,JMK 123,Ireng,Amba,14000.0
+nihha@gmail.com,Car,JMK 123,Ireng,Amba
+Car,JMK 123,Ireng,Amba,14000.0
+Car,JMK 123,Ireng,Amba,14000.0
+Car,JMK 123,Ireng,Amba,14000.0

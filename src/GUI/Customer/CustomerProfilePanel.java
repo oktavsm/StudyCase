@@ -70,15 +70,6 @@ public class CustomerProfilePanel extends JPanel {
         infoPanel.add(createInfoRow("Balance", "Rp" + customer.getBalance()), gbc);
 
         profilePanel.add(infoPanel);
-
-        JButton editProfileButton = new JButton("Edit Profile");
-        editProfileButton.setBounds(227, 500, 200, 40);
-        editProfileButton.setBackground(new Color(204, 102, 0));
-        editProfileButton.setForeground(Color.WHITE);
-        editProfileButton.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
-        editProfileButton.setFocusPainted(false);
-        editProfileButton.setBorderPainted(false);
-        profilePanel.add(editProfileButton);
     }
 
     private JPanel createInfoRow(String label, String value) {
