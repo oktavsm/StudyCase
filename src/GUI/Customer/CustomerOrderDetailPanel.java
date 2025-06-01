@@ -50,6 +50,16 @@ public class CustomerOrderDetailPanel extends JPanel {
         buildChatButton();
     }
 
+    public void refreshOrderDetail() {
+        // Clear existing components
+        removeAll();
+        revalidate();
+        repaint();
+
+        // Rebuild the order detail panel
+        buildOrderDetail();
+        buildChatButton();
+    }
     private void buildOrderDetail() {
         // Title Label
         JLabel titleLabel = new JLabel("Order Information", SwingConstants.CENTER);

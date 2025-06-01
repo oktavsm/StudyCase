@@ -31,6 +31,11 @@ public class CustomerMenuPanel extends CustomerDashboardPanel {
         this.rightPanel.setLayout(new BoxLayout(this.rightPanel, BoxLayout.Y_AXIS));
 
         this.rightPanel.add(new CustomerProfilePanel(customer));
+        //set default pressed button
+        this.nowPressed = createLeftButton("Profile", this::showProfilePanel);
+        setButtonPressed(nowPressed, null);
+
+
 
         add(leftPanel, BorderLayout.WEST);
         add(rightPanel, BorderLayout.CENTER);
@@ -122,7 +127,9 @@ public class CustomerMenuPanel extends CustomerDashboardPanel {
             return;
         }
 
-        JPanel orderInfoPanel = customer.getOrder().getOrderInfoPanel();
+        CustomerOrderDetailPanel orderInfoPanel = (CustomerOrderDetailPanel) customer.getOrder().getOrderInfoPanel();
+        //remove
+        orderInfoPanel.refreshOrderDetail();
         switchToRightPanel(orderInfoPanel);
     }
 
