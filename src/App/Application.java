@@ -36,7 +36,7 @@ public class Application implements Topup {
                 BufferedWriter.write(name + "," + email + "," + hashedPassword + "," + phoneNumber + "," + 0);
                 BufferedWriter.newLine();
                 BufferedWriter.close();
-                users.add(new Customer(name, email, password, phoneNumber, 0, this));
+                users.add(new Customer(name, email, hashedPassword, phoneNumber, 0, this));
                 System.out.println("Register successful");
             } catch (IOException e) {
                 System.out.println("Error writing to file: " + e.getMessage());
@@ -45,8 +45,8 @@ public class Application implements Topup {
     }
 
     public void addDriver(String email, String password, String name, String phoneNumber, Vehicle vehicle) {
+        String hashedPassword = HashPassword.hashPassword(password);
         try {
-            String hashedPassword = HashPassword.hashPassword(password);
             fileWriter = new FileWriter("database/driver/driver.txt", true);
             BufferedWriter = new BufferedWriter(fileWriter);
             BufferedWriter.write(email + "," + hashedPassword + "," + name + "," + phoneNumber);
@@ -56,7 +56,7 @@ public class Application implements Topup {
             System.out.println("Error writing to file: " + e.getMessage());
         }
 
-        users.add(new Driver(email, password, name, phoneNumber, vehicle, this));
+        users.add(new Driver(email,hashedPassword , name, phoneNumber, vehicle, this));
     }
 
     public Vehicle addVehicle(String email, String type, String plateNumber, String color, String brand) {
@@ -217,8 +217,10 @@ public class Application implements Topup {
     }
 
     public User validateEmailAndPassword(String email, String password) {
+        
         String hashedInput = HashPassword.hashPassword(password);
         for (User user : users) {
+            System.out.println(email+" "+user.getEmail()+" "+password + " " +user.getPassword()+" "+ hashedInput);
             if (user.getEmail().equals(email) && user.getPassword().equals(hashedInput)) {
                 return user;
             }
