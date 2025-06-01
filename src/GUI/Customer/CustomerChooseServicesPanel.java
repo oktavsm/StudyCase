@@ -3,109 +3,118 @@ package gui.customer;
 import javax.swing.*;
 import app.Application;
 import java.awt.*;
-import java.awt.event.*;
 import domain.order.*;
 import domain.user.*;
 import infra.maps.GoogleMap;
 
-public class CustomerChooseServicesPanel extends CustomerDashboardPanel {
-    String info[] = null;
-    ImageIcon mapImage = null;
-    JLabel labelMap = new JLabel();
+public class CustomerChooseServicesPanel extends JPanel {
+    private final Application app;
+    private final Customer customer;
+    private final String location;
+    private final String destination;
+    private final Runnable onBack;
+    private JLabel labelMap = new JLabel();
 
-    public CustomerChooseServicesPanel(Application app, CardLayout cardLayout, JPanel mainPanel, Customer customer,
-            String location,
-            String destination) {
-        super(app, cardLayout, mainPanel);
+    public CustomerChooseServicesPanel(Application app, Customer customer,
+            String location, String destination,
+            Runnable onBack) {
+        this.app = app;
+        this.customer = customer;
+        this.location = location;
+        this.destination = destination;
+        this.onBack = onBack;
+
         setLayout(null);
+        setPreferredSize(new Dimension(854, 834));
+        setBackground(new Color(30, 30, 30));
 
-        JLabel titleLabel = new JLabel("Choose Services", SwingConstants.CENTER);
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 16));
-        titleLabel.setBounds(0, 10, 400, 30);
+        buildChooseServicePanel();
+    }
+
+    private void buildChooseServicePanel() {
+        JLabel titleLabel = new JLabel("Choose Your Service", SwingConstants.CENTER);
+        titleLabel.setFont(new Font("Segoe UI Semibold", Font.BOLD, 24));
+        titleLabel.setForeground(Color.WHITE);
+        titleLabel.setBounds(277, 30, 300, 40);
+        add(titleLabel);
+
+        String[] info = null;
+        ImageIcon mapImage = null;
 
         try {
             info = GoogleMap.getRouteInfo(location, destination);
             mapImage = GoogleMap.getRouteMap(location, destination);
-
-            labelMap = new JLabel(mapImage);
-            labelMap.setBounds(10, 30, 340, 266);
-            add(labelMap);
-            JLabel labelInfo = new JLabel("Distance: " + info[0] + " | Estimated Time: " + info[1]);
-            labelInfo.setBounds(10, 306, 340, 30);
-            add(labelInfo);
-        } catch (Exception exc) {
-            exc.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error fetching route information. Please try again later.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error fetching route info.");
+            return;
         }
 
+        labelMap = new JLabel(mapImage);
+        labelMap.setBounds(277, 90, 300, 266);
+        add(labelMap);
+
+        JLabel labelInfo = new JLabel("Distance: " + info[0] + " | Estimated Time: " + info[1]);
+        labelInfo.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        labelInfo.setForeground(Color.LIGHT_GRAY);
+        labelInfo.setBounds(277, 366, 300, 25);
+        add(labelInfo);
+
+        double distance = Double.parseDouble(info[0].replace(" km", "").replace(",", "."));
         String time = info[1];
-        String distanceS = info[0].replace(" km", "").replace(",", ".");
-        double distance = Double.parseDouble(distanceS);
         double rateSepedah = 8000 * Math.max(1, distance);
         double rateMontor = 14000 * Math.max(1, distance);
 
-        String labelButtonSepedah = "Tetenger Sepedah Rp" + rateSepedah;
-
-        JButton btnSepedah = new JButton(labelButtonSepedah);
-        btnSepedah.setBounds(10, 346, 340, 50);
-        String labelButtonMontor = "Tetenger Montor Rp" + rateMontor;
-        JButton btnMontor = new JButton(labelButtonMontor);
-        btnMontor.setBounds(10, 406, 340, 50);
-        JButton btnBack = new JButton("Back to Menu");
-        btnBack.setBounds(10, 466, 340, 50);
-
+        JButton btnSepedah = new JButton("Tetenger Sepedah - Rp" + (int) rateSepedah);
+        btnSepedah.setBounds(277, 410, 300, 45);
+        btnSepedah.setBackground(new Color(204, 102, 0));
+        btnSepedah.setForeground(Color.WHITE);
+        btnSepedah.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
+        btnSepedah.setFocusPainted(false);
+        btnSepedah.setBorderPainted(false);
         add(btnSepedah);
+
+        JButton btnMontor = new JButton("Tetenger Montor - Rp" + (int) rateMontor);
+        btnMontor.setBounds(277, 470, 300, 45);
+        btnMontor.setBackground(new Color(204, 102, 0));
+        btnMontor.setForeground(Color.WHITE);
+        btnMontor.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
+        btnMontor.setFocusPainted(false);
+        btnMontor.setBorderPainted(false);
         add(btnMontor);
+
+        JButton btnBack = new JButton("Back");
+        btnBack.setBounds(277, 530, 300, 40);
+        btnBack.setBackground(new Color(80, 80, 80));
+        btnBack.setForeground(Color.WHITE);
+        btnBack.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
+        btnBack.setFocusPainted(false);
+        btnBack.setBorderPainted(false);
         add(btnBack);
 
-        btnBack.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JPanel customerMenuPanel = new CustomerMenuPanel(app, cardLayout, mainPanel, customer);
-                mainPanel.add(customerMenuPanel, "CustomerMenu");
-                cardLayout.show(mainPanel, "CustomerMenu");
-            }
-        });
+        btnSepedah.addActionListener(e -> handleOrder(app, customer, destination, location, distance, time, "Bicycle"));
 
-        btnSepedah.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Order order = customer.newOrder(destination, location, distance, time, "Motorcycle");
-                if (order != null) {
-                    order.processOrder();
-                    JPanel customerMenuPanel = new CustomerMenuPanel(app, cardLayout, mainPanel, customer);
-                    mainPanel.remove(customerMenuPanel);
-                    mainPanel.add(customerMenuPanel, "CustomerMenu");
-                    JPanel orderInfo = new CustomerOrderDetail(app, cardLayout, mainPanel, order, labelMap, customer);
-                    order.setOrderInfoPanel(orderInfo);
-                    order.initPanel(app, cardLayout, mainPanel);
-                } else {
-                    JPanel customerMenuPanel = new CustomerMenuPanel(app, cardLayout, mainPanel, customer);
-                    mainPanel.add(customerMenuPanel, "CustomerMenu");
-                    cardLayout.show(mainPanel, "CustomerMenu");
-                }
-            }
-        });
+        btnMontor.addActionListener(
+                e -> handleOrder(app, customer, destination, location, distance, time, "Motorcycle"));
 
-        btnMontor.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Order order = customer.newOrder(destination, location, distance, time, "Car");
-                if (order != null) {
-                    order.processOrder();
-                    JPanel customerMenuPanel = new CustomerMenuPanel(app, cardLayout, mainPanel, customer);
-                    mainPanel.remove(customerMenuPanel);
-                    mainPanel.add(customerMenuPanel, "CustomerMenu");
-                    JPanel orderInfo = new CustomerOrderDetail(app, cardLayout, mainPanel, order, labelMap, customer);
-                    order.setOrderInfoPanel(orderInfo);
-                    order.initPanel(app, cardLayout, mainPanel);
-                } else {
-                    JPanel customerMenuPanel = new CustomerMenuPanel(app, cardLayout, mainPanel, customer);
-                    mainPanel.add(customerMenuPanel, "CustomerMenu");
-                    cardLayout.show(mainPanel, "CustomerMenu");
-
-                }
-            }
+        btnBack.addActionListener(e -> {
+            if (onBack != null)
+                onBack.run();
         });
+    }
+
+    private void handleOrder(Application app, Customer customer,
+            String destination, String location,
+            double distance, String time, String type) {
+        Order order = customer.newOrder(destination, location, distance, time, type);
+        if (order != null) {
+            order.processOrder();
+
+            JPanel orderInfoPanel = new CustomerOrderDetail(app, null, null, order, labelMap, customer);
+            order.setOrderInfoPanel(orderInfoPanel);
+            order.initPanel(app, null, null);
+        } else {
+            JOptionPane.showMessageDialog(this, "Failed to create order.", "Order Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 }

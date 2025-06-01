@@ -31,7 +31,7 @@ public class Application implements Topup {
             try {
                 fileWriter = new FileWriter("database/customer/customer.txt", true);
                 BufferedWriter = new BufferedWriter(fileWriter);
-                BufferedWriter.write(name + "," + email + "," + password + "," + phoneNumber);
+                BufferedWriter.write(name + "," + email + "," + password + "," + phoneNumber + "," + 0);
                 BufferedWriter.newLine();
                 BufferedWriter.close();
                 users.add(new Customer(name, email, password, phoneNumber, 0, this));
@@ -133,7 +133,7 @@ public class Application implements Topup {
 
         while (data != null) {
             String[] check = data.split(",");
-            users.add(new Customer(check[0], check[1], check[2], check[3], 0, this));
+            users.add(new Customer(check[0], check[1], check[2], check[3], Double.parseDouble(check[4]), this));
             data = bufferedReader.readLine();
         }
 
@@ -262,6 +262,34 @@ public class Application implements Topup {
     public void topupBalance(double amount, Customer customer) {
         customer.setBalance(customer.getBalance() + amount);
 
+        try {
+            File inputFile = new File("database/customer/customer.txt");
+            File tempFile = new File("database/customer/temp_customer.txt");
+
+            BufferedReader reader = new BufferedReader(new FileReader(inputFile));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                String[] data = line.split(",");
+                if (data[1].equals(customer.getEmail())) {
+                    line = data[0] + "," + data[1] + "," + data[2] + "," + data[3] + "," + customer.getBalance();
+                }
+                writer.write(line);
+                writer.newLine();
+            }
+
+            writer.close();
+            reader.close();
+
+            if (inputFile.delete()) {
+                tempFile.renameTo(inputFile);
+            }
+
+        } catch (IOException e) {
+            System.out.println("Error updating balance: " + e.getMessage());
+        }
     }
 
     public String createPayment(int choice, Customer customer, int amount) {

@@ -3,128 +3,164 @@ package gui.customer;
 import javax.swing.*;
 import app.Application;
 import java.awt.*;
-import java.awt.event.*;
 import domain.user.*;
 
 public class CustomerMenuPanel extends CustomerDashboardPanel {
+    private final Application app;
+    private final CardLayout cardLayout;
+    private final JPanel mainPanel;
+    private final Customer customer;
+    private final JPanel leftPanel;
+    private JPanel rightPanel;
+
     public CustomerMenuPanel(Application app, CardLayout cardLayout, JPanel mainPanel, Customer customer) {
         super(app, cardLayout, mainPanel);
-        setLayout(new GridLayout(5, 1));
-        JLabel welcomeLabel = new JLabel("Welcome, " + customer.getName(), SwingConstants.CENTER);
-        welcomeLabel.setFont(new Font("Arial", Font.BOLD, 16));
-        JLabel balanceLabel = new JLabel("Balance: Rp. " + customer.getBalance(), SwingConstants.CENTER);
-        balanceLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        this.app = app;
+        this.cardLayout = cardLayout;
+        this.mainPanel = mainPanel;
+        this.customer = customer;
 
-        JButton btnTopUp = new JButton("Top Up Balance");
-        JButton btnOrder = new JButton("Tetenger Services");
-        JButton btnOrderDetail = new JButton("Order Info");
-        JButton btnLogout = new JButton("Logout");
-        JButton btnProfile = new JButton("Profile");
+        setLayout(new BorderLayout());
+        setPreferredSize(new Dimension(1243, 834));
 
-        add(welcomeLabel);
-        add(balanceLabel);
-        add(btnTopUp);
-        add(btnOrder);
-        add(btnOrderDetail);
-        add(btnProfile);
-        add(btnLogout);
+        this.leftPanel = buildLeftPanel();
+        this.rightPanel = new JPanel();
+        this.rightPanel.setPreferredSize(new Dimension(854, 834));
+        this.rightPanel.setBackground(new Color(30, 30, 30));
+        this.rightPanel.setLayout(new BoxLayout(this.rightPanel, BoxLayout.Y_AXIS));
 
+        this.rightPanel.add(new CustomerProfilePanel(customer));
+
+        add(leftPanel, BorderLayout.WEST);
+        add(rightPanel, BorderLayout.CENTER);
+
+        handleRatingIfAvailable();
+    }
+
+    private JPanel buildLeftPanel() {
+        JPanel leftPanel = new JPanel();
+        leftPanel.setPreferredSize(new Dimension(389, 834));
+        leftPanel.setBackground(new Color(44, 44, 44));
+        leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
+
+        JLabel titleLabel = new JLabel("Welcome", SwingConstants.CENTER);
+        titleLabel.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 24));
+        titleLabel.setForeground(Color.WHITE);
+        titleLabel.setBackground(new Color(64, 64, 64));
+        titleLabel.setOpaque(true);
+        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        titleLabel.setMaximumSize(new Dimension(389, 57));
+
+        JButton btnTopUp = createLeftButton("Top Up Balance", this::showTopUpPanel);
+        JButton btnOrder = createLeftButton("Tetenger Services", this::showOrderPanel);
+        JButton btnOrderDetail = createLeftButton("Order Info", this::showOrderInfoPanel);
+        JButton btnProfile = createLeftButton("Profile", this::showProfilePanel);
+        JButton btnLogout = createLeftButton("Logout", this::logout);
+
+        leftPanel.add(titleLabel);
+        leftPanel.add(Box.createRigidArea(new Dimension(0, 140)));
+        leftPanel.add(btnTopUp);
+        leftPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        leftPanel.add(btnOrder);
+        leftPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        leftPanel.add(btnOrderDetail);
+        leftPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        leftPanel.add(btnProfile);
+        leftPanel.add(Box.createVerticalGlue());
+        leftPanel.add(btnLogout);
+        leftPanel.add(Box.createRigidArea(new Dimension(0, 30)));
+
+        return leftPanel;
+    }
+
+    private JButton createLeftButton(String text, Runnable action) {
+        JButton button = new JButton(text);
+        button.setAlignmentX(Component.CENTER_ALIGNMENT);
+        button.setMaximumSize(new Dimension(287, 50));
+        button.setPreferredSize(new Dimension(287, 50));
+        button.setBackground(new Color(77, 120, 204));
+        button.setForeground(Color.WHITE);
+        button.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 18));
+        button.setFocusPainted(false);
+        button.setBorderPainted(false);
+        button.addActionListener(e -> action.run());
+        return button;
+    }
+
+    private void switchToRightPanel(JPanel newPanel) {
+        rightPanel.removeAll();
+        rightPanel.add(newPanel);
+        rightPanel.revalidate();
+        rightPanel.repaint();
+    }
+
+    private void showTopUpPanel() {
+        JPanel topUpPanel = new CustomerTopupPanel(app, cardLayout, customer);
+        switchToRightPanel(topUpPanel);
+    }
+
+    private void showOrderPanel() {
+        JPanel orderPanel = new CustomerOrderPanel(app, customer);
+        switchToRightPanel(orderPanel);
+    }
+
+    private void showOrderInfoPanel() {
+        if (!customer.isOrdering()) {
+            JOptionPane.showMessageDialog(null, "You are not ordering any service!");
+            return;
+        }
+
+        JPanel orderInfoPanel = customer.getOrder().getOrderInfoPanel();
+
+        for (Component comp : orderInfoPanel.getComponents()) {
+            if (comp instanceof JButton) {
+                JButton button = (JButton) comp;
+                String text = button.getText();
+                if (text.equals("Chat with Customer") || text.equals("Back") || text.equals("Drop Off")) {
+                    orderInfoPanel.remove(button);
+                }
+            }
+        }
+
+        JButton chatButton = new JButton("Chat with Driver");
+        chatButton.setBounds(120, 586, 150, 30);
+        chatButton.addActionListener(e -> customer.getOrder().showChat(customer));
+        orderInfoPanel.add(chatButton);
+
+        JButton backButton = new JButton("Back");
+        backButton.setBounds(10, 586, 100, 30);
+        backButton.addActionListener(e -> {
+            customer.getOrder().closeChat();
+            cardLayout.show(mainPanel, "CustomerMenu");
+        });
+        orderInfoPanel.add(backButton);
+
+        orderInfoPanel.revalidate();
+        orderInfoPanel.repaint();
+
+        customer.getOrder().setOrderInfoPanel(orderInfoPanel);
+        customer.getOrder().initPanel(app, cardLayout, mainPanel);
+    }
+
+    private void showProfilePanel() {
+        JPanel profilePanel = new CustomerProfilePanel(customer);
+        switchToRightPanel(profilePanel);
+    }
+
+    private void logout() {
+        int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to logout?", "Logout",
+                JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            cardLayout.show(mainPanel, "MainMenu");
+        }
+    }
+
+    private void handleRatingIfAvailable() {
         if (customer.isOrdering() && customer.getOrder().isDrop()) {
             JPanel ratePanel = new CustomerRatingPanel(app, cardLayout, mainPanel, customer.getOrder());
             mainPanel.remove(ratePanel);
             mainPanel.add(ratePanel, "RatingUtil");
             cardLayout.show(mainPanel, "RatingUtil");
         }
-
-        btnOrder.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JPanel orderPanel = new CustomerOrderPanel(app, cardLayout, mainPanel, customer);
-                mainPanel.add(orderPanel, "CustomerOrderPanel");
-                cardLayout.show(mainPanel, "CustomerOrderPanel");
-            }
-        });
-
-        btnTopUp.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JPanel topUpPanel = new CustomerTopup(app, cardLayout, mainPanel, customer);
-                mainPanel.add(topUpPanel, "TopUpCustomer");
-                cardLayout.show(mainPanel, "TopUpCustomer");
-            }
-        });
-
-        btnLogout.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to logout?", "Logout",
-                        JOptionPane.YES_NO_OPTION);
-                if (confirm == JOptionPane.YES_OPTION) {
-                    cardLayout.show(mainPanel, "MainMenu");
-                }
-            }
-        });
-
-        btnOrderDetail.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (!customer.isOrdering()) {
-                    JOptionPane.showMessageDialog(null, "You are not ordering any service!");
-                    return;
-                }
-
-                JPanel orderInfoPanel = customer.getOrder().getOrderInfoPanel();
-                for (Component comp : orderInfoPanel.getComponents()) {
-                    if (comp instanceof JButton) {
-                        JButton button = (JButton) comp;
-                        if (button.getText().equals("Chat with Customer")) {
-                            orderInfoPanel.remove(button);
-                        }
-                        if (button.getText().equals("Back")) {
-                            orderInfoPanel.remove(button);
-                        }
-                        if (button.getText().equals("Drop Off")) {
-                            orderInfoPanel.remove(button);
-                        }
-                    }
-                }
-
-                JButton chatButton = new JButton("Chat with Driver");
-                chatButton.setBounds(120, 586, 150, 30);
-                chatButton.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        customer.getOrder().showChat((User) customer);
-                    }
-                });
-                orderInfoPanel.add(chatButton);
-                JButton backButton = new JButton("Back");
-                backButton.setBounds(10, 586, 100, 30);
-                backButton.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-
-                        customer.getOrder().closeChat();
-                        cardLayout.show(mainPanel, "CustomerMenu");
-                    }
-                });
-                orderInfoPanel.add(backButton);
-                orderInfoPanel.revalidate();
-                orderInfoPanel.repaint();
-
-                customer.getOrder().setOrderInfoPanel(orderInfoPanel);
-                customer.getOrder().initPanel(app, cardLayout, mainPanel);
-            }
-        });
-
-        btnProfile.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JPanel profilePanel = new CustomerProfilePanel(app, cardLayout, mainPanel, customer);
-                mainPanel.add(profilePanel, "ProfileCustomer");
-                cardLayout.show(mainPanel, "ProfileCustomer");
-            }
-        });
     }
-
 }

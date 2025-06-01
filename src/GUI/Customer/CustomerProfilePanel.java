@@ -2,39 +2,118 @@ package gui.customer;
 
 import domain.user.*;
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
-import app.*;
+import java.awt.geom.Ellipse2D;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import utils.ImageUtils;
 
-public class CustomerProfilePanel extends CustomerDashboardPanel {
-    public CustomerProfilePanel(Application app, CardLayout cardLayout, JPanel mainPanel, Customer customer) {
-        super(app, cardLayout, mainPanel);
-        setLayout(null);
+public class CustomerProfilePanel extends JPanel {
+    private final Customer customer;
+    private JPanel profilePanel;
 
-        JLabel titleLabel = new JLabel("=== Customer Profile ===", SwingConstants.CENTER);
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 16));
-        JLabel nameLabel = new JLabel("Name: " + customer.getName());
-        JLabel emailLabel = new JLabel("Email: " + customer.getEmail());
-        JLabel phoneLabel = new JLabel("Phone: " + customer.getPhone());
-        JButton backButton = new JButton("Back");
+    public CustomerProfilePanel(Customer customer) {
+        this.customer = customer;
 
-        titleLabel.setBounds(30, 20, 300, 30);
-        nameLabel.setBounds(30, 60, 300, 30);
-        emailLabel.setBounds(30, 100, 300, 30);
-        phoneLabel.setBounds(30, 140, 300, 30);
-        backButton.setBounds(30, 200, 150, 30);
+        setLayout(new BorderLayout());
+        setPreferredSize(new Dimension(854, 834));
+        setBackground(new Color(30, 30, 30));
 
-        add(titleLabel);
-        add(nameLabel);
-        add(emailLabel);
-        add(phoneLabel);
-        add(backButton);
+        buildProfilePanel();
+        add(profilePanel, BorderLayout.CENTER);
+    }
 
-        backButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cardLayout.show(mainPanel, "CustomerMenu");
-            }
-        });
+    private void buildProfilePanel() {
+        profilePanel = new JPanel(null);
+        profilePanel.setPreferredSize(new Dimension(854, 834));
+        profilePanel.setBackground(new Color(30, 30, 30));
+
+        JLabel titleLabel = new JLabel("Your Profile", SwingConstants.CENTER);
+        titleLabel.setFont(new Font("Segoe UI Semibold", Font.BOLD, 24));
+        titleLabel.setForeground(Color.WHITE);
+        titleLabel.setBounds(277, 30, 300, 40);
+        profilePanel.add(titleLabel);
+
+        try {
+            BufferedImage originalImage = ImageIO
+                    .read(getClass().getResource("/resources/assets/profile/profile_photo.png"));
+            BufferedImage circleImage = ImageUtils.getCircleImage(originalImage, 150);
+
+            JLabel imageLabel = new JLabel(new ImageIcon(circleImage));
+            imageLabel.setBounds(352, 90, 150, 150);
+            profilePanel.add(imageLabel);
+        } catch (IOException | IllegalArgumentException e) {
+            JLabel fallbackLabel = new JLabel("No Image", SwingConstants.CENTER);
+            fallbackLabel.setBounds(352, 90, 150, 150);
+            fallbackLabel.setForeground(Color.GRAY);
+            fallbackLabel.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+            profilePanel.add(fallbackLabel);
+        }
+
+        JPanel infoPanel = new JPanel(new GridBagLayout());
+        infoPanel.setBounds(227, 270, 400, 200);
+        infoPanel.setOpaque(false);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 0, 5, 0);
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+
+        infoPanel.add(createInfoRow("Name", customer.getName()), gbc);
+        gbc.gridy++;
+        infoPanel.add(createInfoRow("Email", customer.getEmail()), gbc);
+        gbc.gridy++;
+        infoPanel.add(createInfoRow("Phone", customer.getPhone()), gbc);
+        gbc.gridy++;
+        infoPanel.add(createInfoRow("Balance", "Rp" + customer.getBalance()), gbc);
+
+        profilePanel.add(infoPanel);
+
+        JButton editProfileButton = new JButton("Edit Profile");
+        editProfileButton.setBounds(227, 500, 200, 40);
+        editProfileButton.setBackground(new Color(204, 102, 0));
+        editProfileButton.setForeground(Color.WHITE);
+        editProfileButton.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
+        editProfileButton.setFocusPainted(false);
+        editProfileButton.setBorderPainted(false);
+        profilePanel.add(editProfileButton);
+    }
+
+    private JPanel createInfoRow(String label, String value) {
+        JPanel rowPanel = new JPanel(new BorderLayout());
+        rowPanel.setOpaque(false);
+        rowPanel.setPreferredSize(new Dimension(400, 40));
+
+        JLabel labelComponent = new JLabel(label);
+        labelComponent.setFont(new Font("Segoe UI", Font.BOLD, 16));
+        labelComponent.setForeground(new Color(200, 200, 200));
+        labelComponent.setPreferredSize(new Dimension(80, 30));
+
+        JLabel colonLabel = new JLabel(":");
+        colonLabel.setFont(new Font("Segoe UI", Font.BOLD, 16));
+        colonLabel.setForeground(new Color(200, 200, 200));
+        colonLabel.setPreferredSize(new Dimension(10, 30));
+
+        JTextField valueField = new JTextField(value);
+        valueField.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        valueField.setForeground(Color.WHITE);
+        valueField.setBackground(new Color(50, 50, 50));
+        valueField.setEditable(false);
+        valueField.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
+        valueField.setPreferredSize(new Dimension(280, 30));
+
+        JPanel leftPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        leftPanel.setOpaque(false);
+        leftPanel.setPreferredSize(new Dimension(90, 30));
+        leftPanel.add(labelComponent);
+        leftPanel.add(colonLabel);
+
+        rowPanel.add(leftPanel, BorderLayout.WEST);
+        rowPanel.add(valueField, BorderLayout.CENTER);
+
+        return rowPanel;
     }
 }
