@@ -3,7 +3,6 @@ package gui.customer;
 import domain.user.*;
 import java.awt.*;
 import javax.swing.*;
-import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
