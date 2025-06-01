@@ -1,25 +1,23 @@
 package domain.order;
 
 import java.util.*;
-import app.Application;
 import domain.user.*;
 import gui.common.ChatPanel;
 import interfaces.*;
 import javax.swing.*;
-import java.awt.*;
 
 public class Order implements Chat, Payment, Review {
     private ArrayList<String> chatHistory = new ArrayList<String>();
-    Driver driver;
-    Customer customer;
-    String location;
-    String destination;
-    double distance;
-    double rate;
-    boolean donePayment = false;
-    boolean isDrop = false;
-    JPanel orderInfoPanel;
-    String time;
+    private Driver driver;
+    private Customer customer;
+    private String location;
+    private String destination;
+    private double distance;
+    private double rate;
+    private boolean donePayment = false;
+    private boolean isDrop = false;
+    private JPanel orderInfoPanel;
+    private String time;
     private ChatPanel chatUI;
 
     public void giveReview(double rating) {
