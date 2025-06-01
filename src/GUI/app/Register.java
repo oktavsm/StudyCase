@@ -222,7 +222,9 @@ public class Register extends javax.swing.JPanel {
                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE,
                                         javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(92, Short.MAX_VALUE)));
-    }// </editor-fold>//GEN-END:initComponents
+
+        setCustomer(); // Set default choice to Customer
+                            }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -283,10 +285,16 @@ public class Register extends javax.swing.JPanel {
         } else if (phone.isBlank()) {
             JOptionPane.showMessageDialog(this, "Phone number is required");
         } else {
+            if (main.app.validateEmailCustomer(email)||main.app.validateEmailDriver(email)) {
+                JOptionPane.showMessageDialog(null, "Email already exists!");
+                return;
+            }
             resetInput();
             if (choice.equals("Customer")) {
+                
                 main.app.addCustomer(email,name, password, phone);
                 JOptionPane.showMessageDialog(this, "Customer registered successfully!");
+
                 User user = main.app.validateEmailAndPassword(email, password);
                 if (user != null) {
                     main.setCustomerMenu((Customer) user);
