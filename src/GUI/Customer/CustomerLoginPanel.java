@@ -47,7 +47,7 @@ public class CustomerLoginPanel extends CustomerDashboardPanel {
                     return;
                 }
 
-                Customer customer = (Customer) app.validateEmailAndPassword(email, password, "Customer");
+                Customer customer = (Customer) app.validateEmailAndPassword(email, password);
                 if (customer == null) {
                     JOptionPane.showMessageDialog(null, "Email or password is wrong!");
                     System.out.println("email: " + email);

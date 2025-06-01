@@ -14,7 +14,7 @@ public class AppGUI extends JFrame {
     public AppGUI(Application app) {
         this.app = app;
         setTitle("Tetenger Dalan");
-        setSize(370, 640);
+        setSize(1243, 858);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -28,7 +28,8 @@ public class AppGUI extends JFrame {
         mainPanel.add(new CustomerLoginPanel(this.app, cardLayout, mainPanel), "LoginCustomer");
         mainPanel.add(new DriverRegisterPanel(this.app, cardLayout, mainPanel), "RegisterDriver");
         mainPanel.add(new DriverLoginPanel(this.app, cardLayout, mainPanel), "LoginDriver");
+        mainPanel.add(new MainFrame(this.app, cardLayout, mainPanel), "MainFrame");
 
-        cardLayout.show(mainPanel, "MainMenu");
+        cardLayout.show(mainPanel, "MainFrame");
     }
 }

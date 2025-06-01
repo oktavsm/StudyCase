@@ -7,10 +7,13 @@ import app.Application;
 public class Main {
     public static void main(String[] args) throws IOException {
         try {
-            UIManager.setLookAndFeel(new FlatLightLaf());
+            UIManager.setLookAndFeel(new FlatDarkLaf());
         } catch (Exception e) {
             System.out.println("Failed to initialize LaF: " + e.getMessage());
         }
+
+        
+
 
         EnvLoader.loadEnv(".env");
         Application app = new Application();

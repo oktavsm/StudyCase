@@ -151,7 +151,7 @@ public class CustomerMenuPanel extends CustomerDashboardPanel {
         int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to logout?", "Logout",
                 JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
-            cardLayout.show(mainPanel, "MainMenu");
+            cardLayout.show(mainPanel, "MainFrame");
         }
     }
 

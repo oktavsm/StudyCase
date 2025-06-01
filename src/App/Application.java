@@ -22,6 +22,9 @@ public class Application implements Topup {
     public void showMenu() throws IOException {
         AppGUI appGUI = new AppGUI(this);
         appGUI.setVisible(true);
+        for (User user : users){
+            System.out.println(user.getEmail() + " - " + user.getPassword());
+        }
     }
 
     public void addCustomer(String email, String name, String password, String phoneNumber) {
@@ -215,11 +218,10 @@ public class Application implements Topup {
         return UUID.randomUUID().toString();
     }
 
-    public User validateEmailAndPassword(String email, String password, String type) {
-        String hashedInput = HashPassword.hashPassword(password);
+    public User validateEmailAndPassword(String email, String password) {
+        // String hashedInput = HashPassword.hashPassword(password);
         for (User user : users) {
-            if (user.getEmail().equals(email) && user.getPassword().equals(hashedInput)
-                    && user.getClass().getSimpleName().equals(type)) {
+            if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
                 return user;
             }
         }
