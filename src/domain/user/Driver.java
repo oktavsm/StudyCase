@@ -101,21 +101,4 @@ public class Driver extends User {
         this.rating = (this.rating * this.orderCount + rating) / (this.orderCount + 1);
         this.orderCount++;
     }
-
-    @Override
-    public void showProfile() {
-        System.out.println("--- Driver Profile ---");
-        System.out.println("ID          : " + super.getId());
-        System.out.println("Name        : " + super.getName());
-        System.out.println("Email       : " + super.getEmail());
-        System.out.print("Password    : " + super.getPassword());
-        System.out.println();
-        System.out.println("Phone       : " + super.getPhone());
-        System.out.println("Vehicle   : ");
-        this.vehicle.showVehicle();
-        System.out.println("Availability: " + this.isAvailable);
-        System.out.println("Rating      : " + this.rating);
-        System.out.println("Order Count : " + this.orderCount);
-        System.out.println("Balance     : " + this.balance);
-    }
 }

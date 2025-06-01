@@ -40,6 +40,4 @@ public abstract class User {
     }
 
     public abstract double getBalance();
-
-    public abstract void showProfile();
 }

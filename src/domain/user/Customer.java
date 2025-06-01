@@ -74,16 +74,4 @@ public class Customer extends User {
         System.out.println("Driver  : " + order.getDriver().getName());
         System.out.println("Amount  : " + order.getPayment());
     }
-
-    @Override
-    public void showProfile() {
-        System.out.println("--- Customer Profile ---");
-        System.out.println("ID       : " + super.getId());
-        System.out.println("Name     : " + super.getName());
-        System.out.println("Email    : " + super.getEmail());
-        System.out.println("Password : " + super.getPassword());
-        System.out.println();
-        System.out.println("Phone    : " + super.getPhone());
-        System.out.println("Balance  : " + this.balance);
-    }
 }
