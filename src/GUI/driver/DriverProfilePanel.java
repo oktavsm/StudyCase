@@ -36,7 +36,7 @@ public class DriverProfilePanel extends JPanel {
 
         try {
             BufferedImage originalImage = ImageIO
-                    .read(getClass().getResource("/resources/assets/profile/profile_photo.png")); // Ganti sesuai resource driver
+                    .read(getClass().getResource("/resources/assets/profile/profile_photo.png"));
             BufferedImage circleImage = ImageUtils.getCircleImage(originalImage, 150);
 
             JLabel imageLabel = new JLabel(new ImageIcon(circleImage));
@@ -67,11 +67,13 @@ public class DriverProfilePanel extends JPanel {
         gbc.gridy++;
         infoPanel.add(createInfoRow("Phone", driver.getPhone()), gbc);
         gbc.gridy++;
-        infoPanel.add(createInfoRow("Vehicle", driver.getVehicle().getBrand() + " - " + driver.getVehicle().getPlateNumber()), gbc);
+        infoPanel.add(
+                createInfoRow("Vehicle", driver.getVehicle().getBrand() + " - " + driver.getVehicle().getPlateNumber()),
+                gbc);
         gbc.gridy++;
-        infoPanel.add(createInfoRow("Balance", "Rp" + driver.getBalance()), gbc);JLabel balanceLabel = new JLabel("Balance: Rp. " + driver.getBalance(), SwingConstants.CENTER);
+        infoPanel.add(createInfoRow("Balance", "Rp" + driver.getBalance()), gbc);
         gbc.gridy++;
-         infoPanel.add(createInfoRow("Rating", String.valueOf(driver.getRating())), gbc);
+        infoPanel.add(createInfoRow("Rating", String.valueOf(driver.getRating())), gbc);
     }
 
     private JPanel createInfoRow(String label, String value) {

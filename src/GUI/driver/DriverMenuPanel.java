@@ -107,16 +107,6 @@ public class DriverMenuPanel extends DriverDashboardPanel {
 
         JPanel orderInfoPanel = driver.getOrder().getOrderInfoPanel();
 
-        for (Component comp : orderInfoPanel.getComponents()) {
-            if (comp instanceof JButton) {
-                JButton button = (JButton) comp;
-                String text = button.getText();
-                if (text.equals("Chat with Driver") || text.equals("Back") || text.equals("Drop Off")) {
-                    orderInfoPanel.remove(button);
-                }
-            }
-        }
-
         JButton chatButton = new JButton("Chat with Customer");
         chatButton.setBounds(100, 586, 150, 30);
         chatButton.addActionListener(e -> driver.getOrder().showChat(driver));
@@ -125,7 +115,7 @@ public class DriverMenuPanel extends DriverDashboardPanel {
         JButton backButton = new JButton("Back");
         backButton.setBounds(10, 586, 80, 30);
         backButton.addActionListener(e -> {
-            cardLayout.show(mainPanel, "DriverMenu");
+            switchToRightPanel(new DriverProfilePanel(driver));
             driver.getOrder().closeChat();
         });
         orderInfoPanel.add(backButton);
@@ -135,10 +125,12 @@ public class DriverMenuPanel extends DriverDashboardPanel {
         dropOffButton.addActionListener(e -> {
             driver.getOrder().dropOff();
             JOptionPane.showMessageDialog(null, "Order Completed");
-            JPanel updatedPanel = new DriverMenuPanel(app, cardLayout, mainPanel, driver);
+
+            DriverMenuPanel newMenu = new DriverMenuPanel(app, cardLayout, mainPanel, driver);
             mainPanel.remove(this);
-            mainPanel.add(updatedPanel, "DriverMenu");
+            mainPanel.add(newMenu, "DriverMenu");
             cardLayout.show(mainPanel, "DriverMenu");
+
             driver.getOrder().closeChat();
         });
         orderInfoPanel.add(dropOffButton);
@@ -146,7 +138,6 @@ public class DriverMenuPanel extends DriverDashboardPanel {
         orderInfoPanel.revalidate();
         orderInfoPanel.repaint();
 
-        driver.getOrder().setOrderInfoPanel(orderInfoPanel);
-        driver.getOrder().initPanel(app, cardLayout, mainPanel);
+        switchToRightPanel(orderInfoPanel);
     }
 }

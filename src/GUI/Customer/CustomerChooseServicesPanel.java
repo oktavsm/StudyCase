@@ -14,15 +14,17 @@ public class CustomerChooseServicesPanel extends JPanel {
     private final String destination;
     private final Runnable onBack;
     private JLabel labelMap = new JLabel();
+    private final Runnable onOrderCreated;
 
     public CustomerChooseServicesPanel(Application app, Customer customer,
             String location, String destination,
-            Runnable onBack) {
+            Runnable onBack, Runnable onOrderCreated) {
         this.app = app;
         this.customer = customer;
         this.location = location;
         this.destination = destination;
         this.onBack = onBack;
+        this.onOrderCreated = onOrderCreated;
 
         setLayout(null);
         setPreferredSize(new Dimension(854, 834));
@@ -51,13 +53,13 @@ public class CustomerChooseServicesPanel extends JPanel {
         }
 
         labelMap = new JLabel(mapImage);
-        labelMap.setBounds(277, 90, 300, 266);
+        labelMap.setBounds(277, 90, 340, 226);
         add(labelMap);
 
         JLabel labelInfo = new JLabel("Distance: " + info[0] + " | Estimated Time: " + info[1]);
         labelInfo.setFont(new Font("Segoe UI", Font.PLAIN, 14));
         labelInfo.setForeground(Color.LIGHT_GRAY);
-        labelInfo.setBounds(277, 366, 300, 25);
+        labelInfo.setBounds(277, 366, 340, 25);
         add(labelInfo);
 
         double distance = Double.parseDouble(info[0].replace(" km", "").replace(",", "."));
@@ -110,10 +112,11 @@ public class CustomerChooseServicesPanel extends JPanel {
         Order order = customer.newOrder(destination, location, distance, time, type);
         if (order != null) {
             order.processOrder();
-
-            JPanel orderInfoPanel = new CustomerOrderDetail(app, null, null, order, labelMap, customer);
+            JPanel orderInfoPanel = new CustomerOrderDetailPanel(app, order, labelMap, customer);
             order.setOrderInfoPanel(orderInfoPanel);
-            order.initPanel(app, null, null);
+
+            if (onOrderCreated != null)
+                onOrderCreated.run();
         } else {
             JOptionPane.showMessageDialog(this, "Failed to create order.", "Order Error", JOptionPane.ERROR_MESSAGE);
         }

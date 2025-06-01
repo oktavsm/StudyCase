@@ -32,14 +32,6 @@ public class Driver extends User {
         this.isAvailable = false;
     }
 
-    public void showOrder() {
-        if (this.nowOrder == null) {
-            System.out.println("No order");
-        } else {
-            this.nowOrder.showOrder();
-        }
-    }
-
     public Order getOrder() {
         return this.nowOrder;
     }
@@ -81,12 +73,6 @@ public class Driver extends User {
 
     public void setAvailability(boolean availability) {
         this.isAvailable = availability;
-    }
-
-    public void showOrderHistory() {
-        for (Order order : this.ordersHistory) {
-            order.showOrder();
-        }
     }
 
     public void setVehicle(Vehicle vehicle) {

@@ -10,17 +10,16 @@ import domain.vehicle.Vehicle;
 public class RegistVehicle extends javax.swing.JPanel {
 
     private final MainFrame main;
-    private String choice = "Motorcycle"; // default
+    private String choice = "Motorcycle";
     private Driver driver;
 
     public RegistVehicle(MainFrame main, Driver driver) {
         initComponents();
         this.main = main;
         this.driver = driver;
-        setDriver(); // default selection
+        setDriver();
     }
 
-    @SuppressWarnings("unchecked")
     private void initComponents() {
         choiceButton = new javax.swing.JPanel();
         jChoiceButtonDriver = new javax.swing.JButton();
@@ -102,46 +101,49 @@ public class RegistVehicle extends javax.swing.JPanel {
         this.setLayout(layout);
 
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(100)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                        .addComponent(jLabel1, 400, 400, 400)
-                        .addComponent(choiceButton, 400, 400, 400)
-                        .addComponent(jLabel2)
-                        .addComponent(jBrandField, 400, 400, 400)
-                        .addComponent(jLabel3)
-                        .addComponent(jPlateField, 400, 400, 400)
-                        .addComponent(jLabel4)
-                        .addComponent(jColorField, 400, 400, 400)
-                        .addComponent(jButtonRegister, 400, 400, 400))
-                    .addGap(100))
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(100)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                                        .addComponent(jLabel1, 400, 400, 400)
+                                        .addComponent(choiceButton, 400, 400, 400)
+                                        .addComponent(jLabel2)
+                                        .addComponent(jBrandField, 400, 400, 400)
+                                        .addComponent(jLabel3)
+                                        .addComponent(jPlateField, 400, 400, 400)
+                                        .addComponent(jLabel4)
+                                        .addComponent(jColorField, 400, 400, 400)
+                                        .addComponent(jButtonRegister, 400, 400, 400))
+                                .addGap(100)));
 
         layout.setVerticalGroup(
-            layout.createSequentialGroup()
-                .addGap(50)
-                .addComponent(jLabel1)
-                .addGap(20)
-                .addComponent(choiceButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20)
-                .addComponent(jLabel2)
-                .addComponent(jBrandField, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10)
-                .addComponent(jLabel3)
-                .addComponent(jPlateField, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10)
-                .addComponent(jLabel4)
-                .addComponent(jColorField, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20)
-                .addComponent(jButtonRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50)
-        );
+                layout.createSequentialGroup()
+                        .addGap(50)
+                        .addComponent(jLabel1)
+                        .addGap(20)
+                        .addComponent(choiceButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50,
+                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20)
+                        .addComponent(jLabel2)
+                        .addComponent(jBrandField, javax.swing.GroupLayout.PREFERRED_SIZE, 50,
+                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10)
+                        .addComponent(jLabel3)
+                        .addComponent(jPlateField, javax.swing.GroupLayout.PREFERRED_SIZE, 50,
+                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10)
+                        .addComponent(jLabel4)
+                        .addComponent(jColorField, javax.swing.GroupLayout.PREFERRED_SIZE, 50,
+                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20)
+                        .addComponent(jButtonRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 50,
+                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50));
     }
 
     private void register() {
 
-        String choice = this.choice; // "Motorcycle" or "Car"
+        String choice = this.choice;
         String brand = jBrandField.getText().trim();
         String plate = jPlateField.getText().trim();
         String color = jColorField.getText().trim();
@@ -160,28 +162,29 @@ public class RegistVehicle extends javax.swing.JPanel {
         }
 
         if (main.app.validateVehicleDriver(plate)) {
-                    JOptionPane.showMessageDialog(null, "Vehicle already exists!");
-                    return;
-                }
+            JOptionPane.showMessageDialog(null, "Vehicle already exists!");
+            return;
+        }
 
-                Vehicle vehicle = null;
-                if (choice.equals("Motorcycle")) {
-                    vehicle = new Motorcycle(plate, color, brand);
-                } else {
-                    vehicle = new Car(plate, color, brand);
-                }
+        Vehicle vehicle = null;
+        if (choice.equals("Motorcycle")) {
+            vehicle = new Motorcycle(plate, color, brand);
+        } else {
+            vehicle = new Car(plate, color, brand);
+        }
 
-                driver.setVehicle(vehicle);
-                Vehicle registeredVehicle = main.app.addVehicle(driver.getEmail(), choice, plate, color, brand);
+        driver.setVehicle(vehicle);
+        Vehicle registeredVehicle = main.app.addVehicle(driver.getEmail(), choice, plate, color, brand);
 
-                main.app.addDriver(driver.getEmail(), driver.getPassword(), driver.getName(), driver.getPhoneNumber(), registeredVehicle);
-                User user = main.app.validateEmailAndPassword(driver.getEmail(), driver.getPassword());
+        main.app.addDriver(driver.getEmail(), driver.getPassword(), driver.getName(), driver.getPhoneNumber(),
+                registeredVehicle);
+        User user = main.app.validateEmailAndPassword(driver.getEmail(), driver.getPassword());
         if (user == null) {
             JOptionPane.showMessageDialog(null, "Failed to register driver!");
             return;
         }
         main.setDriverMenu((Driver) user);
-                JOptionPane.showMessageDialog(null, "Driver registered successfully!");
+        JOptionPane.showMessageDialog(null, "Driver registered successfully!");
 
         // Vehicle vehicle = new Vehicle(brand, plate, color, choice);
         // driver.setVehicle(vehicle);
@@ -203,7 +206,6 @@ public class RegistVehicle extends javax.swing.JPanel {
         SwingUtilities.updateComponentTreeUI(this);
     }
 
-    // Variables declaration
     private javax.swing.JPanel choiceButton;
     private javax.swing.JButton jChoiceButtonDriver;
     private javax.swing.JButton jChoiceButtonCustomer;
@@ -215,5 +217,4 @@ public class RegistVehicle extends javax.swing.JPanel {
     private javax.swing.JTextField jPlateField;
     private javax.swing.JTextField jColorField;
     private javax.swing.JButton jButtonRegister;
-    // End of variables declaration
 }

@@ -100,7 +100,10 @@ public class CustomerMenuPanel extends CustomerDashboardPanel {
     }
 
     private void showOrderPanel() {
-        JPanel orderPanel = new CustomerOrderPanel(app, customer);
+        JPanel orderPanel = new CustomerOrderPanel(app, customer, () -> {
+            JPanel orderInfoPanel = customer.getOrder().getOrderInfoPanel();
+            switchToRightPanel(orderInfoPanel);
+        });
         switchToRightPanel(orderPanel);
     }
 
@@ -111,35 +114,7 @@ public class CustomerMenuPanel extends CustomerDashboardPanel {
         }
 
         JPanel orderInfoPanel = customer.getOrder().getOrderInfoPanel();
-
-        for (Component comp : orderInfoPanel.getComponents()) {
-            if (comp instanceof JButton) {
-                JButton button = (JButton) comp;
-                String text = button.getText();
-                if (text.equals("Chat with Customer") || text.equals("Back") || text.equals("Drop Off")) {
-                    orderInfoPanel.remove(button);
-                }
-            }
-        }
-
-        JButton chatButton = new JButton("Chat with Driver");
-        chatButton.setBounds(120, 586, 150, 30);
-        chatButton.addActionListener(e -> customer.getOrder().showChat(customer));
-        orderInfoPanel.add(chatButton);
-
-        JButton backButton = new JButton("Back");
-        backButton.setBounds(10, 586, 100, 30);
-        backButton.addActionListener(e -> {
-            customer.getOrder().closeChat();
-            cardLayout.show(mainPanel, "CustomerMenu");
-        });
-        orderInfoPanel.add(backButton);
-
-        orderInfoPanel.revalidate();
-        orderInfoPanel.repaint();
-
-        customer.getOrder().setOrderInfoPanel(orderInfoPanel);
-        customer.getOrder().initPanel(app, cardLayout, mainPanel);
+        switchToRightPanel(orderInfoPanel);
     }
 
     private void showProfilePanel() {

@@ -22,7 +22,7 @@ public class Application implements Topup {
     public void showMenu() throws IOException {
         AppGUI appGUI = new AppGUI(this);
         appGUI.setVisible(true);
-       
+
     }
 
     public void addCustomer(String email, String name, String password, String phoneNumber) {
@@ -30,10 +30,10 @@ public class Application implements Topup {
             System.out.println("Register failed, email already registered");
         } else {
             try {
-                // String hashedPassword = HashPassword.hashPassword(password);
+                String hashedPassword = HashPassword.hashPassword(password);
                 fileWriter = new FileWriter("database/customer/customer.txt", true);
                 BufferedWriter = new BufferedWriter(fileWriter);
-                BufferedWriter.write(name + "," + email + "," + password + "," + phoneNumber + "," + 0);
+                BufferedWriter.write(name + "," + email + "," + hashedPassword + "," + phoneNumber + "," + 0);
                 BufferedWriter.newLine();
                 BufferedWriter.close();
                 users.add(new Customer(name, email, password, phoneNumber, 0, this));
@@ -217,13 +217,9 @@ public class Application implements Topup {
     }
 
     public User validateEmailAndPassword(String email, String password) {
-        // String hashedInput = HashPassword.hashPassword(password);
-        System.out.println(email + " - " + password);
-         for (User user : users){
-            System.out.println(user.getEmail() + " - " + user.getPassword());
-        }
+        String hashedInput = HashPassword.hashPassword(password);
         for (User user : users) {
-            if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
+            if (user.getEmail().equals(email) && user.getPassword().equals(hashedInput)) {
                 return user;
             }
         }

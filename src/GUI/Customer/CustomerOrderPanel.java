@@ -8,12 +8,14 @@ import app.Application;
 public class CustomerOrderPanel extends JPanel {
     private final Application app;
     private final Customer customer;
+    private final Runnable onOrderCreated;
     private JPanel orderPanel;
     private JPanel currentPanel;
 
-    public CustomerOrderPanel(Application app, Customer customer) {
+    public CustomerOrderPanel(Application app, Customer customer, Runnable onOrderCreated) {
         this.app = app;
         this.customer = customer;
+        this.onOrderCreated = onOrderCreated;
 
         setLayout(new BorderLayout());
         setPreferredSize(new Dimension(854, 834));
@@ -90,7 +92,8 @@ public class CustomerOrderPanel extends JPanel {
 
     private void showChooseServicesPanel(String pickup, String destination) {
         remove(currentPanel);
-        JPanel chooseServicesPanel = new CustomerChooseServicesPanel(app, customer, pickup, destination, this::goBack);
+        JPanel chooseServicesPanel = new CustomerChooseServicesPanel(app, customer, pickup, destination, this::goBack,
+                onOrderCreated);
         add(chooseServicesPanel, BorderLayout.CENTER);
         currentPanel = chooseServicesPanel;
         revalidate();

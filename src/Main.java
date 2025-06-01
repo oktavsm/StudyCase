@@ -12,9 +12,6 @@ public class Main {
             System.out.println("Failed to initialize LaF: " + e.getMessage());
         }
 
-        
-
-
         EnvLoader.loadEnv(".env");
         Application app = new Application();
         app.loadDatabase();

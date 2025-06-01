@@ -49,7 +49,6 @@ public class Order implements Chat, Payment, Review {
     public void closeChat() {
         this.chatUI.setVisible(false);
         this.chatUI.dispose();
-
     }
 
     public String getPickupLocation() {
@@ -144,28 +143,5 @@ public class Order implements Chat, Payment, Review {
 
     public void setOrderInfoPanel(JPanel orderInfoPanel) {
         this.orderInfoPanel = orderInfoPanel;
-    }
-
-    public void initPanel(Application app, CardLayout cardLayout, JPanel mainPanel) {
-        mainPanel.remove(this.orderInfoPanel);
-        mainPanel.add(this.orderInfoPanel, "OrderInfo");
-        cardLayout.show(mainPanel, "OrderInfo");
-    }
-
-    public void showOrder() {
-        System.out.println("--- Order Details ---");
-        System.out.println("Customer: " + this.customer.getName());
-        System.out.println("Driver  : " + this.driver.getName());
-        System.out.println("Vehicle : " + this.driver.getVehicle().getName());
-        System.out.println("From    : " + this.location);
-        System.out.println("To      : " + this.destination);
-        System.out.println("Distance: " + this.distance + " KM");
-        System.out.println("Rate    : " + this.rate);
-        String donePay = (getPaymentStatus()) ? "Done" : "Not Yet";
-        System.out.println("Payment : " + donePay);
-
-        if (this.donePayment) {
-            System.out.println("Review  : " + this.rate);
-        }
     }
 }
