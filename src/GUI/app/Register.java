@@ -302,6 +302,10 @@ public class Register extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(this, "Registration failed. Please try again.");
                 }
         } else {
+                Driver driver = new Driver(email,password,name,phone,null, main.app);
+                javax.swing.JPanel vehicleregist = new RegistVehicle(main,driver);
+                main.setPanel(vehicleregist);
+                JOptionPane.showMessageDialog(this, "Driver registered successfully! Please register your vehicle.");
 
         }
     }

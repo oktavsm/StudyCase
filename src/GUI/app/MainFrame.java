@@ -8,7 +8,9 @@ import javax.swing.JPanel;
 import java.awt.CardLayout;
 import app.Application;
 import domain.user.Customer;
+import domain.user.Driver;
 import gui.customer.CustomerMenuPanel;
+import gui.driver.DriverMenuPanel;
 
 
 public class MainFrame extends javax.swing.JPanel {
@@ -38,6 +40,12 @@ public class MainFrame extends javax.swing.JPanel {
         }
         jPanel2.removeAll();
         jPanel2.add(register);
+        SwingUtilities.updateComponentTreeUI(jPanel2);
+    }
+
+    public void setPanel(JPanel panel) {
+        jPanel2.removeAll();
+        jPanel2.add(panel);
         SwingUtilities.updateComponentTreeUI(jPanel2);
     }
     public MainFrame(Application app, CardLayout cardLayout, JPanel mainPanel) {
@@ -165,6 +173,12 @@ public class MainFrame extends javax.swing.JPanel {
         CustomerMenuPanel customerMenuPanel = new CustomerMenuPanel(app, cardLayout, mainPanel, customer);
         mainPanel.add(customerMenuPanel, "CustomerMenu");
         cardLayout.show(mainPanel, "CustomerMenu");
+     }
+
+     protected void setDriverMenu(Driver driver){
+        DriverMenuPanel driverMenuPanel = new DriverMenuPanel(app, cardLayout, mainPanel, driver);
+        mainPanel.add(driverMenuPanel, "DriverMenu");
+        cardLayout.show(mainPanel, "DriverMenu");
      }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

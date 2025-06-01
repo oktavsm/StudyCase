@@ -154,7 +154,7 @@ public class Login extends javax.swing.JPanel {
             if (user instanceof Customer){
                 main.setCustomerMenu((Customer) user);
             } else if (user instanceof Driver) {
-                // main.setDriverMenu((Driver) user);
+                main.setDriverMenu((Driver) user);
             }
         } else {
             JOptionPane.showMessageDialog(this, "Email or password is wrong!");
