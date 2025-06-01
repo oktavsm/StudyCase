@@ -34,5 +34,21 @@ Tidak terlihat ada override yang melanggar kontrak induk, seperti exception atau
 
 4. I -> interface review?
 
+Klien tidak boleh dipaksa untuk bergantung pada interface yang tidak mereka gunakan.
+
+Interface `Chat.java`, `Payment.java`, `Review.java`, dan `Topup.java` dirancang fokus dan spesifik
+
+Class-class seperti `Order` hanya mengimplementasikan interface yang relevan dengan fungsionalitasnya (misalnya, `Chat`, `Payment`, `Review`), dan `Application` hanya mengimplementasikan `Topup`.
+
+✅ ISP TERPENUHI: Interface sudah tersegregasi dengan baik, memastikan kelas hanya mengimplementasikan fungsionalitas yang mereka butuhkan.
 
 5. D -> 
+5.Dependency Inversion Principle(DIP)
+
+Modul tingkat tinggi tidak boleh bergantung pada modul tingkat rendah. Keduanya harus bergantung pada abstraksi. Abstraksi tidak boleh bergantung pada detail. Detail harus bergantung pada abstraksi.
+
+Class `User` (dan turunannya seperti `Customer`, `Driver`) bergantung pada abstraksi `Application` yang diinjeksikan melalui konstruktor. 
+
+Class `Order` mengimplementasikan beberapa interface (`Chat`, `Payment`, `Review`), yang menunjukkan bahwa ia bergantung pada abstraksi untuk fitur-fitur tersebut.
+
+✅ DIP TERPENUHI: Dependensi diarahkan ke abstraksi, memisahkan modul tingkat tinggi dari detail implementasi tingkat rendah, seperti terlihat pada injeksi dependensi `Application` ke `User`(Penggunaan super())
