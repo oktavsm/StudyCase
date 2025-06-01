@@ -69,9 +69,9 @@ public class DriverProfilePanel extends JPanel {
         gbc.gridy++;
         infoPanel.add(createInfoRow("Vehicle", driver.getVehicle().getBrand() + " - " + driver.getVehicle().getPlateNumber()), gbc);
         gbc.gridy++;
-        infoPanel.add(createInfoRow("Balance", "Rp" + driver.getBalance()), gbc);
-
-        profilePanel.add(infoPanel);
+        infoPanel.add(createInfoRow("Balance", "Rp" + driver.getBalance()), gbc);JLabel balanceLabel = new JLabel("Balance: Rp. " + driver.getBalance(), SwingConstants.CENTER);
+        gbc.gridy++;
+         infoPanel.add(createInfoRow("Rating", String.valueOf(driver.getRating())), gbc);
     }
 
     private JPanel createInfoRow(String label, String value) {

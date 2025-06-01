@@ -49,17 +49,6 @@ public class DriverMenuPanel extends DriverDashboardPanel {
         welcomeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         welcomeLabel.setMaximumSize(new Dimension(389, 57));
 
-        JLabel balanceLabel = new JLabel("Balance: Rp. " + driver.getBalance(), SwingConstants.CENTER);
-        balanceLabel.setForeground(Color.WHITE);
-        balanceLabel.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-        balanceLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-        JLabel ratingLabel = new JLabel("Rating: " + (driver.getRating() != 0 ? driver.getRating() : "No Review Yet"),
-                SwingConstants.CENTER);
-        ratingLabel.setForeground(Color.WHITE);
-        ratingLabel.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-        ratingLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-
         JButton btnOrderInfo = createLeftButton("Order Info", this::showOrderInfoPanel);
         JButton btnProfile = createLeftButton("Profile", this::showProfilePanel);
         JButton btnLogout = createLeftButton("Logout", this::logout);
