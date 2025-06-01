@@ -79,6 +79,14 @@ public class Login extends javax.swing.JPanel {
                 jButton1ActionPerformed(evt);
             }
         });
+        //enter listener
+        jButton1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+                    jButton1ActionPerformed(null);
+                }
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(41, 41, 41));
         jButton2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N

@@ -12,6 +12,7 @@ public class DriverMenuPanel extends DriverDashboardPanel {
     private final Driver driver;
     private final JPanel leftPanel;
     private JPanel rightPanel;
+    private JButton nowPressed;
 
     public DriverMenuPanel(Application app, CardLayout cardLayout, JPanel mainPanel, Driver driver) {
         super(app, cardLayout, mainPanel);
@@ -75,7 +76,16 @@ public class DriverMenuPanel extends DriverDashboardPanel {
         button.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 18));
         button.setFocusPainted(false);
         button.setBorderPainted(false);
-        button.addActionListener(e -> action.run());
+        button.addActionListener(e -> {
+            
+            if (nowPressed != null) {
+                setButtonPressed(button, nowPressed);
+            } else {
+                setButtonPressed(button, null);
+            }
+            nowPressed = button;
+            action.run();
+        });
         return button;
     }
 
@@ -98,7 +108,20 @@ public class DriverMenuPanel extends DriverDashboardPanel {
             cardLayout.show(mainPanel, "MainFrame");
         }
     }
+    private void setButtonPressed(JButton button, JButton previousButton) {
+        button.setBackground(new Color(117,133,163));
+        button.setForeground(Color.WHITE);
+        if (previousButton != null) {
+            previousButton.setBackground(new Color(77, 120, 204));
+            
+        }
+        //refresh
+        SwingUtilities.updateComponentTreeUI(button);
+        if (previousButton != null) {
+            SwingUtilities.updateComponentTreeUI(previousButton);
+        }
 
+    }
     private void showOrderInfoPanel() {
         if (!driver.isHaveOrder()) {
             JOptionPane.showMessageDialog(null, "You don't have any order yet");

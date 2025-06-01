@@ -1,0 +1,11 @@
+Motorcycle,KH 123,Biru,Vario 150,8000.0
+fatann@gmail.com,Motorcycle,KH 123,Biru,Vario 150
+Motorcycle,KH 123,Biru,Vario 150,8000.0
+Motorcycle,KH 123,Biru,Vario 150,8000.0
+Motorcycle,KH 123,Biru,Vario 150,8000.0
+Motorcycle,KH 123,Biru,Vario 150,8000.0
+Motorcycle,KH 123,Biru,Vario 150,8000.0
+Motorcycle,KH 123,Biru,Vario 150,8000.0
+Motorcycle,KH 123,Biru,Vario 150,8000.0
+Motorcycle,KH 123,Biru,Vario 150,8000.0
+Motorcycle,KH 123,Biru,Vario 150,8000.0

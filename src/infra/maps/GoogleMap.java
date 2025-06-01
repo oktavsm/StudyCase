@@ -14,7 +14,7 @@ public class GoogleMap {
     private static final String DATA_URL = System.getProperty("GOOGLE_DATA_URL");
     private static final String DIRECTION_URL = System.getProperty("GOOGLE_DIRECTION_URL");
     private static final String ROUTE_URL = System.getProperty("GOOGLE_ROUTE_URL");
-    private static final String MAP_SIZE = "340x226";
+    private static final String MAP_SIZE = "400x326";
 
     private static JSONObject getJsonResponseFromUrl(String url) throws Exception {
         HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();

@@ -12,6 +12,7 @@ public class CustomerMenuPanel extends CustomerDashboardPanel {
     private final Customer customer;
     private final JPanel leftPanel;
     private JPanel rightPanel;
+    private JButton nowPressed;
 
     public CustomerMenuPanel(Application app, CardLayout cardLayout, JPanel mainPanel, Customer customer) {
         super(app, cardLayout, mainPanel);
@@ -83,7 +84,15 @@ public class CustomerMenuPanel extends CustomerDashboardPanel {
         button.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 18));
         button.setFocusPainted(false);
         button.setBorderPainted(false);
-        button.addActionListener(e -> action.run());
+        button.addActionListener(e -> {
+            if (nowPressed != null) {
+                setButtonPressed(button, nowPressed);
+            } else {
+                setButtonPressed(button, null);
+            }
+            nowPressed = button;
+            action.run();
+        });
         return button;
     }
 
@@ -130,6 +139,21 @@ public class CustomerMenuPanel extends CustomerDashboardPanel {
         }
     }
 
+    // pressed button method (change color)
+    private void setButtonPressed(JButton button, JButton previousButton) {
+        button.setBackground(new Color(117,133,163));
+        button.setForeground(Color.WHITE);
+        if (previousButton != null) {
+            previousButton.setBackground(new Color(77, 120, 204));
+            
+        }
+        //refresh
+        SwingUtilities.updateComponentTreeUI(button);
+        if (previousButton != null) {
+            SwingUtilities.updateComponentTreeUI(previousButton);
+        }
+
+    }
     private void handleRatingIfAvailable() {
         if (customer.isOrdering() && customer.getOrder().isDrop()) {
             JPanel ratePanel = new CustomerRatingPanel(app, cardLayout, mainPanel, customer.getOrder());

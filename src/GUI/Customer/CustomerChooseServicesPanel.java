@@ -53,7 +53,7 @@ public class CustomerChooseServicesPanel extends JPanel {
         }
 
         labelMap = new JLabel(mapImage);
-        labelMap.setBounds(277, 90, 340, 226);
+        labelMap.setBounds(277, 90, 400, 326);
         add(labelMap);
 
         JLabel labelInfo = new JLabel("Distance: " + info[0] + " | Estimated Time: " + info[1]);
