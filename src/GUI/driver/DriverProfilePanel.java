@@ -51,7 +51,7 @@ public class DriverProfilePanel extends JPanel {
         }
 
         JPanel infoPanel = new JPanel(new GridBagLayout());
-        infoPanel.setBounds(227, 270, 400, 250);
+        infoPanel.setBounds(227, 270, 400, 350);
         infoPanel.setOpaque(false);
 
         GridBagConstraints gbc = new GridBagConstraints();
@@ -68,12 +68,14 @@ public class DriverProfilePanel extends JPanel {
         infoPanel.add(createInfoRow("Phone", driver.getPhone()), gbc);
         gbc.gridy++;
         infoPanel.add(
-                createInfoRow("Vehicle", driver.getVehicle().getBrand() + " - " + driver.getVehicle().getPlateNumber()),
+                createInfoRow("Vehicle",
+                        driver.getVehicle().getClass().getSimpleName() + " - " + driver.getVehicle().getPlateNumber()),
                 gbc);
         gbc.gridy++;
         infoPanel.add(createInfoRow("Balance", "Rp" + driver.getBalance()), gbc);
         gbc.gridy++;
-        infoPanel.add(createInfoRow("Rating", String.valueOf(driver.getRating())), gbc);
+        infoPanel.add(createInfoRow("Rating", String.valueOf(driver.getRating())),
+                gbc);
         profilePanel.add(infoPanel);
     }
 
