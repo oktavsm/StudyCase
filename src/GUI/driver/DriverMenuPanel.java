@@ -1,7 +1,6 @@
 package gui.driver;
 
 import app.Application;
-import domain.order.Order;
 import domain.user.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -172,21 +171,10 @@ public class DriverMenuPanel extends DriverDashboardPanel {
             orderInfoPanel.remove(comp);
         }
 
-        ActionListener buttonStyler = e -> {
-            JButton source = (JButton) e.getSource();
-            source.setBackground(new Color(100, 100, 100));
-            source.setForeground(Color.WHITE);
-            source.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 14));
-            source.setFocusPainted(false);
-            source.setBorderPainted(false);
-        };
-
         Font actionButtonFont = new Font("Segoe UI Semibold", Font.PLAIN, 14);
         Color actionButtonBg = new Color(60, 60, 60);
         Color actionButtonFg = Color.WHITE;
 
-        int buttonY = 680;
-        int buttonHeight = 35;
         int buttonSpacing = 10;
 
         JPanel buttonPanel = new JPanel();
