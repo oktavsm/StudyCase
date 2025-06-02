@@ -125,7 +125,6 @@ public class CustomerMenuPanel extends CustomerDashboardPanel {
         }
 
         CustomerOrderDetailPanel orderInfoPanel = (CustomerOrderDetailPanel) customer.getOrder().getOrderInfoPanel();
-        // remove
         orderInfoPanel.refreshOrderDetail();
         switchToRightPanel(orderInfoPanel);
     }
@@ -143,7 +142,6 @@ public class CustomerMenuPanel extends CustomerDashboardPanel {
         }
     }
 
-    // pressed button method (change color)
     private void setButtonPressed(JButton button, JButton previousButton) {
         button.setBackground(new Color(117, 133, 163));
         button.setForeground(Color.WHITE);
@@ -151,7 +149,7 @@ public class CustomerMenuPanel extends CustomerDashboardPanel {
             previousButton.setBackground(new Color(77, 120, 204));
 
         }
-        // refresh
+
         SwingUtilities.updateComponentTreeUI(button);
         if (previousButton != null) {
             SwingUtilities.updateComponentTreeUI(previousButton);
