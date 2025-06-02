@@ -70,9 +70,6 @@ public class Register extends javax.swing.JPanel {
                 jPhoneField = new javax.swing.JTextField();
                 jLabel5 = new javax.swing.JLabel();
                 jPasswordField2 = new javax.swing.JPasswordField();
-                jLabel6 = new javax.swing.JLabel();
-                jRadioButton1 = new javax.swing.JRadioButton();
-                jRadioButton2 = new javax.swing.JRadioButton();
                 jButton1 = new javax.swing.JButton();
                 jButton2 = new javax.swing.JButton();
 
@@ -105,18 +102,6 @@ public class Register extends javax.swing.JPanel {
 
                 jPasswordField2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
                 jPasswordField2.setPreferredSize(new java.awt.Dimension(0, 50));
-
-                jLabel6.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-                jLabel6.setText("Gender");
-
-                buttonGroup1.add(jRadioButton1);
-                jRadioButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-                jRadioButton1.setSelected(true);
-                jRadioButton1.setText("Male");
-
-                buttonGroup1.add(jRadioButton2);
-                jRadioButton2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-                jRadioButton2.setText("Female");
 
                 jButton1.setBackground(new java.awt.Color(204, 102, 0));
                 jButton1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
@@ -191,17 +176,6 @@ public class Register extends javax.swing.JPanel {
                                                                                                 javax.swing.GroupLayout.DEFAULT_SIZE,
                                                                                                 javax.swing.GroupLayout.DEFAULT_SIZE,
                                                                                                 Short.MAX_VALUE)
-                                                                                .addComponent(jLabel6,
-                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                                                Short.MAX_VALUE)
-                                                                                .addGroup(layout.createSequentialGroup()
-                                                                                                .addComponent(jRadioButton1)
-                                                                                                .addGap(18, 18, 18)
-                                                                                                .addComponent(jRadioButton2,
-                                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                                                                Short.MAX_VALUE))
                                                                                 .addComponent(jButton1,
                                                                                                 javax.swing.GroupLayout.DEFAULT_SIZE,
                                                                                                 javax.swing.GroupLayout.DEFAULT_SIZE,
@@ -258,13 +232,8 @@ public class Register extends javax.swing.JPanel {
                                                                                 javax.swing.GroupLayout.DEFAULT_SIZE,
                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                 .addGap(18, 18, 18)
-                                                                .addComponent(jLabel6)
                                                                 .addPreferredGap(
                                                                                 javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                .addGroup(layout.createParallelGroup(
-                                                                                javax.swing.GroupLayout.Alignment.BASELINE)
-                                                                                .addComponent(jRadioButton1)
-                                                                                .addComponent(jRadioButton2))
                                                                 .addGap(21, 21, 21)
                                                                 .addComponent(jButton1,
                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE,
@@ -314,11 +283,8 @@ public class Register extends javax.swing.JPanel {
         private javax.swing.JLabel jLabel3;
         private javax.swing.JLabel jLabel4;
         private javax.swing.JLabel jLabel5;
-        private javax.swing.JLabel jLabel6;
         private javax.swing.JTextField jPhoneField;
         private javax.swing.JPasswordField jPasswordField2;
-        private javax.swing.JRadioButton jRadioButton1;
-        private javax.swing.JRadioButton jRadioButton2;
         private javax.swing.JTextField jTextField1;
         private javax.swing.JTextField jTextField2;
         // End of variables declaration//GEN-END:variables
@@ -328,7 +294,6 @@ public class Register extends javax.swing.JPanel {
                 String email = jTextField2.getText();
                 String phone = String.valueOf(jPhoneField.getText());
                 String password = String.valueOf(jPasswordField2.getPassword());
-                String gender = jRadioButton1.isSelected() ? "MALE" : "FEMALE";
 
                 if (name.isEmpty()) {
                         JOptionPane.showMessageDialog(this, "Name is required");

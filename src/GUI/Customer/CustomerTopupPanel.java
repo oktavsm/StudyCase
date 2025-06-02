@@ -40,7 +40,7 @@ public class CustomerTopupPanel extends JPanel {
         paymentLabel.setBounds(277, 100, 300, 30);
         topupPanel.add(paymentLabel);
 
-        String[] paymentMethods = { "Bank Jawir", "Bank CBA" };
+        String[] paymentMethods = { "Bank Jatim", "Bank BCA" };
         JComboBox<String> paymentComboBox = new JComboBox<>(paymentMethods);
         paymentComboBox.setBounds(277, 130, 300, 35);
         paymentComboBox.setFont(new Font("Segoe UI", Font.PLAIN, 14));

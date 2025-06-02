@@ -28,7 +28,7 @@ public class CustomerProfilePanel extends JPanel {
         profilePanel.setPreferredSize(new Dimension(854, 834));
         profilePanel.setBackground(new Color(30, 30, 30));
 
-        JLabel titleLabel = new JLabel("Your Profile", SwingConstants.CENTER);
+        JLabel titleLabel = new JLabel("Customer Profile", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Segoe UI Semibold", Font.BOLD, 24));
         titleLabel.setForeground(Color.WHITE);
         titleLabel.setBounds(277, 30, 300, 40);

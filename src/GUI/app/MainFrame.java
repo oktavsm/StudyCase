@@ -78,7 +78,7 @@ public class MainFrame extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Welcome");
+        jLabel1.setText("Tetenger Dalan");
         jLabel1.setOpaque(true);
 
         jButton1.setBackground(new java.awt.Color(77, 120, 204));

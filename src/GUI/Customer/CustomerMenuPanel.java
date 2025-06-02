@@ -31,11 +31,8 @@ public class CustomerMenuPanel extends CustomerDashboardPanel {
         this.rightPanel.setLayout(new BoxLayout(this.rightPanel, BoxLayout.Y_AXIS));
 
         this.rightPanel.add(new CustomerProfilePanel(customer));
-        //set default pressed button
         this.nowPressed = createLeftButton("Profile", this::showProfilePanel);
         setButtonPressed(nowPressed, null);
-
-
 
         add(leftPanel, BorderLayout.WEST);
         add(rightPanel, BorderLayout.CENTER);
@@ -49,7 +46,7 @@ public class CustomerMenuPanel extends CustomerDashboardPanel {
         leftPanel.setBackground(new Color(44, 44, 44));
         leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
 
-        JLabel titleLabel = new JLabel("Welcome", SwingConstants.CENTER);
+        JLabel titleLabel = new JLabel("Tetenger Dalan");
         titleLabel.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 24));
         titleLabel.setForeground(Color.WHITE);
         titleLabel.setBackground(new Color(64, 64, 64));
@@ -128,7 +125,7 @@ public class CustomerMenuPanel extends CustomerDashboardPanel {
         }
 
         CustomerOrderDetailPanel orderInfoPanel = (CustomerOrderDetailPanel) customer.getOrder().getOrderInfoPanel();
-        //remove
+        // remove
         orderInfoPanel.refreshOrderDetail();
         switchToRightPanel(orderInfoPanel);
     }
@@ -148,19 +145,20 @@ public class CustomerMenuPanel extends CustomerDashboardPanel {
 
     // pressed button method (change color)
     private void setButtonPressed(JButton button, JButton previousButton) {
-        button.setBackground(new Color(117,133,163));
+        button.setBackground(new Color(117, 133, 163));
         button.setForeground(Color.WHITE);
         if (previousButton != null) {
             previousButton.setBackground(new Color(77, 120, 204));
-            
+
         }
-        //refresh
+        // refresh
         SwingUtilities.updateComponentTreeUI(button);
         if (previousButton != null) {
             SwingUtilities.updateComponentTreeUI(previousButton);
         }
 
     }
+
     private void handleRatingIfAvailable() {
         if (customer.isOrdering() && customer.getOrder().isDrop()) {
             JPanel ratePanel = new CustomerRatingPanel(app, cardLayout, mainPanel, customer.getOrder());

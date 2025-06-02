@@ -103,7 +103,7 @@ public class RegistVehicle extends javax.swing.JPanel {
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                         .addGroup(layout.createSequentialGroup()
-                                .addGap(100)
+                                .addGap(249)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                                         .addComponent(jLabel1, 400, 400, 400)
                                         .addComponent(choiceButton, 400, 400, 400)

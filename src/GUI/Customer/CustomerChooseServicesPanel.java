@@ -53,7 +53,7 @@ public class CustomerChooseServicesPanel extends JPanel {
         }
 
         labelMap = new JLabel(mapImage);
-        labelMap.setBounds(277, 90, 400, 326);
+        labelMap.setBounds(227, 90, 400, 326);
         add(labelMap);
 
         JLabel labelInfo = new JLabel("Distance: " + info[0] + " | Estimated Time: " + info[1]);
@@ -68,7 +68,7 @@ public class CustomerChooseServicesPanel extends JPanel {
         double rateMontor = 14000 * Math.max(1, distance);
 
         JButton btnSepedah = new JButton("Tetenger Sepedah - Rp" + (int) rateSepedah);
-        btnSepedah.setBounds(277, 410, 300, 45);
+        btnSepedah.setBounds(277, 435, 300, 45);
         btnSepedah.setBackground(new Color(204, 102, 0));
         btnSepedah.setForeground(Color.WHITE);
         btnSepedah.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
@@ -77,7 +77,7 @@ public class CustomerChooseServicesPanel extends JPanel {
         add(btnSepedah);
 
         JButton btnMontor = new JButton("Tetenger Montor - Rp" + (int) rateMontor);
-        btnMontor.setBounds(277, 470, 300, 45);
+        btnMontor.setBounds(277, 495, 300, 45);
         btnMontor.setBackground(new Color(204, 102, 0));
         btnMontor.setForeground(Color.WHITE);
         btnMontor.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
@@ -86,7 +86,7 @@ public class CustomerChooseServicesPanel extends JPanel {
         add(btnMontor);
 
         JButton btnBack = new JButton("Back");
-        btnBack.setBounds(277, 530, 300, 40);
+        btnBack.setBounds(277, 560, 300, 40);
         btnBack.setBackground(new Color(80, 80, 80));
         btnBack.setForeground(Color.WHITE);
         btnBack.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));

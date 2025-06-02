@@ -56,7 +56,7 @@ public class Application implements Topup {
             System.out.println("Error writing to file: " + e.getMessage());
         }
 
-        users.add(new Driver(email,hashedPassword , name, phoneNumber, vehicle, this));
+        users.add(new Driver(email, hashedPassword, name, phoneNumber, vehicle, this));
     }
 
     public Vehicle addVehicle(String email, String type, String plateNumber, String color, String brand) {
@@ -217,10 +217,11 @@ public class Application implements Topup {
     }
 
     public User validateEmailAndPassword(String email, String password) {
-        
+
         String hashedInput = HashPassword.hashPassword(password);
         for (User user : users) {
-            System.out.println(email+" "+user.getEmail()+" "+password + " " +user.getPassword()+" "+ hashedInput);
+            System.out.println(
+                    email + " " + user.getEmail() + " " + password + " " + user.getPassword() + " " + hashedInput);
             if (user.getEmail().equals(email) && user.getPassword().equals(hashedInput)) {
                 return user;
             }

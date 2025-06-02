@@ -1,19 +1,20 @@
-Motorcycle,KH 123,Biru,Vario 150,8000.0
-fatann@gmail.com,Motorcycle,KH 123,Biru,Vario 150
-Motorcycle,KH 123,Biru,Vario 150,8000.0
-Motorcycle,KH 123,Biru,Vario 150,8000.0
-Motorcycle,KH 123,Biru,Vario 150,8000.0
-Motorcycle,KH 123,Biru,Vario 150,8000.0
-Motorcycle,KH 123,Biru,Vario 150,8000.0
-Motorcycle,KH 123,Biru,Vario 150,8000.0
-Motorcycle,KH 123,Biru,Vario 150,8000.0
-Motorcycle,KH 123,Biru,Vario 150,8000.0
-Motorcycle,KH 123,Biru,Vario 150,8000.0
-Motorcycle,KH 123,Biru,Vario 150,8000.0
-Motorcycle,KH 123,Biru,Vario 150,8000.0
-Motorcycle,KH 123,Biru,Vario 150,8000.0
-Motorcycle,KH 123,Biru,Vario 150,8000.0
-Motorcycle,KH 123,Biru,Vario 150,8000.0
-Motorcycle,KH 123,Biru,Vario 150,8000.0
-Motorcycle,KH 123,Biru,Vario 150,8000.0
-Motorcycle,KH 123,Biru,Vario 150,8000.0
+Motorcycle,IKN 123,ireng,supra,8000.0
+erja@gmail.com,Motorcycle,IKN 123,ireng,supra
+Motorcycle,IKN 123,ireng,supra,8000.0
+Motorcycle,IKN 123,ireng,supra,8000.0
+Motorcycle,IKN 123,ireng,supra,8000.0
+Motorcycle,IKN 123,ireng,supra,8000.0
+Motorcycle,IKN 123,ireng,supra,8000.0
+Motorcycle,IKN 123,ireng,supra,8000.0
+Motorcycle,IKN 123,ireng,supra,8000.0
+Motorcycle,IKN 123,ireng,supra,8000.0
+Motorcycle,IKN 123,ireng,supra,8000.0
+Motorcycle,IKN 123,ireng,supra,8000.0
+Motorcycle,IKN 123,ireng,supra,8000.0
+Motorcycle,IKN 123,ireng,supra,8000.0
+Motorcycle,IKN 123,ireng,supra,8000.0
+Motorcycle,IKN 123,ireng,supra,8000.0
+Motorcycle,IKN 123,ireng,supra,8000.0
+Motorcycle,IKN 123,ireng,supra,8000.0
+Motorcycle,IKN 123,ireng,supra,8000.0
+Motorcycle,IKN 123,ireng,supra,8000.0
