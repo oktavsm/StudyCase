@@ -13,7 +13,6 @@ public abstract class Vehicle {
         this.color = color;
         this.brand = brand;
         this.baseRate = baseRate;
-        writeToFile();
     }
 
     private void writeToFile() {

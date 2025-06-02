@@ -52,11 +52,11 @@ public class Application implements Topup {
             BufferedWriter.write(email + "," + hashedPassword + "," + name + "," + phoneNumber);
             BufferedWriter.newLine();
             BufferedWriter.close();
+            users.add(new Driver(email, hashedPassword, name, phoneNumber, vehicle, this));
         } catch (IOException e) {
             System.out.println("Error writing to file: " + e.getMessage());
         }
 
-        users.add(new Driver(email, hashedPassword, name, phoneNumber, vehicle, this));
     }
 
     public Vehicle addVehicle(String email, String type, String plateNumber, String color, String brand) {
