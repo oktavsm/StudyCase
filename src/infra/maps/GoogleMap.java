@@ -38,7 +38,7 @@ public class GoogleMap {
 
         JSONArray results = json.getJSONArray("results");
         if (results == null || results.isEmpty()) {
-            throw new Exception("Alamat tidak ditemukan.");
+            throw new Exception("Address not found");
         }
 
         JSONObject location = results.getJSONObject(0)
@@ -63,7 +63,7 @@ public class GoogleMap {
 
         JSONArray routes = json.optJSONArray("routes");
         if (routes == null || routes.isEmpty()) {
-            throw new Exception("Rute tidak ditemukan.");
+            throw new Exception("Route not found");
         }
 
         JSONObject leg = routes.getJSONObject(0)
@@ -88,7 +88,7 @@ public class GoogleMap {
 
         JSONArray routes = json.optJSONArray("routes");
         if (routes == null || routes.isEmpty()) {
-            throw new Exception("Tidak dapat memuat rute untuk peta.");
+            throw new Exception("Can not load route for map");
         }
 
         String encodedPolyline = routes.getJSONObject(0)
