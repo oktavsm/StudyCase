@@ -1,13 +1,13 @@
-1. S -> main2?
-User.java — Berfungsi sebagai class dasar user (baik Driver maupun Customer). ✅
+1. S -> main
+User.java — Berfungsi sebagai class dasar user (baik Driver maupun Customer). 
 
-Customer.java dan Driver.java — Turunan dari User, menambah atribut sesuai peran masing-masing. ✅
+Customer.java dan Driver.java — Turunan dari User, menambah atribut sesuai peran masing-masing. 
 
-Vehicle.java, Car.java, Motorcycle.java — Masing-masing fokus merepresentasikan kendaraan. ✅
+Vehicle.java, Car.java, Motorcycle.java — Masing-masing fokus merepresentasikan kendaraan. 
 
-Payment.java — Menangani proses pembayaran. ✅
+Payment.java — Menangani proses pembayaran. 
 
-✅ SRP TERPENUHI: Setiap class punya satu tanggung jawab.
+ SRP TERPENUHI: Setiap class punya satu tanggung jawab.
 
 2. O -> interface payment?
 Apakah kita bisa menambah fitur baru tanpa mengubah kode lama?
@@ -18,7 +18,7 @@ Car dan Motorcycle adalah class turunan.
 
 Menambahkan jenis kendaraan baru (misal: ElectricScooter) cukup membuat subclass baru dari Vehicle, tanpa mengubah Car atau Motorcycle.
 
-✅ OCP TERPENUHI: Struktur class mendukung perluasan tanpa mengubah kode lama.
+ OCP TERPENUHI: Struktur class mendukung perluasan tanpa mengubah kode lama.
 
 3. L -> 
 3. Liskov Substitution Principle (LSP)
@@ -30,9 +30,9 @@ Customer dan Driver bisa digunakan sebagai User.
 
 Tidak terlihat ada override yang melanggar kontrak induk, seperti exception atau behavior yang tidak sesuai.
 
-✅ LSP TERPENUHI: Subclass dapat menggantikan superclass dengan aman.
+ LSP TERPENUHI: Subclass dapat menggantikan superclass dengan aman.
 
-4. I -> interface review?
+4. I -> interface review
 
 Klien tidak boleh dipaksa untuk bergantung pada interface yang tidak mereka gunakan.
 
@@ -40,7 +40,7 @@ Interface `Chat.java`, `Payment.java`, `Review.java`, dan `Topup.java` dirancang
 
 Class-class seperti `Order` hanya mengimplementasikan interface yang relevan dengan fungsionalitasnya (misalnya, `Chat`, `Payment`, `Review`), dan `Application` hanya mengimplementasikan `Topup`.
 
-✅ ISP TERPENUHI: Interface sudah tersegregasi dengan baik, memastikan kelas hanya mengimplementasikan fungsionalitas yang mereka butuhkan.
+ ISP TERPENUHI: Interface sudah tersegregasi dengan baik, memastikan kelas hanya mengimplementasikan fungsionalitas yang mereka butuhkan.
 
 5. D -> 
 5.Dependency Inversion Principle(DIP)
@@ -51,4 +51,4 @@ Class `User` (dan turunannya seperti `Customer`, `Driver`) bergantung pada abstr
 
 Class `Order` mengimplementasikan beberapa interface (`Chat`, `Payment`, `Review`), yang menunjukkan bahwa ia bergantung pada abstraksi untuk fitur-fitur tersebut.
 
-✅ DIP TERPENUHI: Dependensi diarahkan ke abstraksi, memisahkan modul tingkat tinggi dari detail implementasi tingkat rendah, seperti terlihat pada injeksi dependensi `Application` ke `User`(Penggunaan super())
+ DIP TERPENUHI: Dependensi diarahkan ke abstraksi, memisahkan modul tingkat tinggi dari detail implementasi tingkat rendah, seperti terlihat pada injeksi dependensi `Application` ke `User`(Penggunaan super())
