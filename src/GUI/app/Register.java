@@ -341,5 +341,4 @@ public class Register extends javax.swing.JPanel {
         javax.swing.JPanel choiceButton = new javax.swing.JPanel();
         javax.swing.JButton jChoiceButtonCustomer = new javax.swing.JButton();
         javax.swing.JButton jChoiceButtonDriver = new javax.swing.JButton();
-
 }

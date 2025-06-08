@@ -22,7 +22,6 @@ public class Application implements Topup {
     public void showMenu() throws IOException {
         AppGUI appGUI = new AppGUI(this);
         appGUI.setVisible(true);
-
     }
 
     public void addCustomer(String email, String name, String password, String phoneNumber) {
